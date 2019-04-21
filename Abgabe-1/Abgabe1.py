@@ -59,14 +59,33 @@ def dsdO(theta):
 def dsdO_num(theta):
     return alpha**2/s*(2+np.sin(theta)**2)/(1/gamma**2+beta**2*np.sin(theta)**2)
 
-pl=np.linspace(0,np.pi/180000,1000)
+pl_0=np.linspace(-np.pi/1800000,np.pi/1800000,1000) #Im Bereich um theta=0°
+pl_pi_2=np.linspace(np.pi/2-np.pi/1800000,np.pi/2+np.pi/1800000,1000) #Im Bereich um theta=90°
+pl_pi=np.linspace(np.pi-np.pi/1800000,np.pi+np.pi/1800000,1000) #Im Bereich um theta=180°
 
-plt.subplot(121)
-plt.plot(pl/2/np.pi*360000,dsdO(pl)*10**6,'b-')
+#plt.plot(pl/2/np.pi*360,-dsdO(pl)*10**12+dsdO_num(pl)*10**12,'b-')
+plt.subplot(321)
+plt.plot(pl_0/2/np.pi*360000,dsdO(pl_0)*10**6,'b-')
+#plt.xlabel(r'$\theta/\si{\milli\degree}$')
+#plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
+plt.subplot(322)
+plt.plot(pl_0/2/np.pi*360000,dsdO_num(pl_0)*10**6,'r-')
+#plt.xlabel(r'$\theta/\si{\milli\degree}$')
+#plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
+plt.subplot(323)
+plt.plot(pl_pi_2/2/np.pi*360000,dsdO(pl_pi_2)*10**6,'b-')
+#plt.xlabel(r'$\theta/\si{\milli\degree}$')
+#plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
+plt.subplot(324)
+plt.plot(pl_pi_2/2/np.pi*360000,dsdO_num(pl_pi_2)*10**6,'r-')
+#plt.xlabel(r'$\theta/\si{\milli\degree}$')
+#plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
+plt.subplot(325)
+plt.plot(pl_pi/2/np.pi*360000,dsdO(pl_pi)*10**6,'b-')
+#plt.xlabel(r'$\theta/\si{\milli\degree}$')
+#plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
+plt.subplot(326)
+plt.plot(pl_pi/2/np.pi*360000,dsdO_num(pl_pi)*10**6,'r-')
 plt.xlabel(r'$\theta/\si{\milli\degree}$')
 plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
-plt.subplot(122)
-plt.plot(pl/2/np.pi*360000,dsdO_num(pl)*10**6,'r-')
-plt.xlabel(r'$\theta/\si{\milli\degree}$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
-            
+plt.savefig('plots.pdf')            
