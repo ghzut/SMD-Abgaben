@@ -1,8 +1,14 @@
 import numpy as np
 import scipy.constants as const
-import matplotlib as mpl
+import matplotlib
+matplotlib.use('pgf')
 import matplotlib.pyplot as plt
-#matplotlib.use('TKAgg')
+matplotlib.rcParams.update({
+    'font.family': 'serif',
+    'text.usetex': True,
+    'pgf.rcfonts': False,
+    'pgf.texsystem': 'lualatex',
+    'pgf.preamble': r'\input{header-matplotlib.tex}',})
 
 #Aufgabe 1
 def f(x):
@@ -30,6 +36,9 @@ xplot=np.linspace(int(x_min),int(x_max),int(x_max)-int(x_min)+1)
 plt.plot(xplot, np.abs(f(xplot)*3/2-1)*100,'r.')
 plt.xlabel('x')
 plt.ylabel(r'Fehler in $\%$')
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.savefig('build/FehlerF.pdf')
+plt.clf()
 
 # Logarithmische Überprüfung des (positiven) Bereichs
 xplotlog=np.logspace(-8,4.615793,1000000)
@@ -38,6 +47,8 @@ plt.plot(xplotlog, np.abs(f(xplotlog)*3/2-1)*100,'b-')
 plt.xlabel('x')
 plt.ylabel(r'Fehler in $\%$')
 plt.xscale('log')
+plt.savefig('build/FehlerFlog.pdf')
+plt.clf()
 
 #Überprüfung von g(x)
 x_value_g=np.logspace(-6,1,100000)
@@ -48,6 +59,15 @@ for i in x_value_g:
             x_min_g=i
 print("Für x-Werte", x_min_g, "< x ist der Fehler der Formel g(x) kleiner als 1 Prozent")
 print("Für Zahlen x <", ns_g, "ist g(x)=0")
+
+xplotlog=np.logspace(np.log(x_min_g),np.log(x_max),1000000)
+#print(np.abs(f(xplotlog)*3/2-1)*100)
+plt.plot(xplotlog, np.abs(f(xplotlog)*3/2-1)*100,'b-')
+plt.xlabel('x')
+plt.ylabel(r'Fehler in $\%$')
+plt.xscale('log')
+plt.savefig('build/FehlerGlog.pdf')
+plt.clf()
 
 #Aufgabe 2
 alpha=const.alpha
@@ -98,6 +118,6 @@ plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/mm^2$')
 plt.subplot(122)
 plt.plot(pl_pi/2/np.pi*360000,dsdO_num(pl_pi)*10**6,'r-')
 plt.xlabel(r'$\theta/10^{-3}°$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/mm^2$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
 plt.tight_layout()
-f3.savefig('plot3.pdf')
+f3.savefig('build/plots.pdf')
