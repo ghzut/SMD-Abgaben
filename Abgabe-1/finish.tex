@@ -6,19 +6,58 @@
 
 \section{Numerische Stabiltät}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{build/FehlerF.pdf}
-  \caption{Fehler von $f(x)$}
-  \label{fig:FehlerF}
-\end{figure}
+\begin{gather}
+  f(x)=\left(x^3+\frac{1}{3}\right)-\left(x^3-\frac{1}{3}\right)\label{eqn:f}\\
+  g(x)=\frac{\left(3+\frac{x^3}{3}\right)-\left(3-\frac{x^3}{3}\right)}{x^3}\label{eqn:g}
+\end{gather}
+
+Für Formel \eqref{eqn:f} ist der Fehler kleiner als $1\%$ für x-Werte im Bereich von $-41285 \sim 41285$.
+Für Zahlen $|x|>165141$ ist die Gleichung numerisch $=0$.
 
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{build/FehlerFlog.pdf}
-  \caption{Fehler von $f(x)$ im positiven Bereich (logarithmisch)}
+  \caption{Relativer Fehler von $f(x)$ im positiven Bereich (logarithmisch)}
   \label{fig:FehlerFlog}
 \end{figure}
 
+Für Werte $x>4.01269392415 \cdot 10^{-5}$ ist der numerische Fehler der Formel \eqref{eqn:g} kleiner $1\%$.
+Für Zahlen $x<8.73291858992 \cdot 10^{-6}$ ist die Gleichung numerisch $=0$.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{build/FehlerGlog.pdf}
+  \caption{Relativer Fehler von $g(x)$ im positiven Bereich (logarithmisch)}
+  \label{fig:FehlerGlog}
+\end{figure}
+
+\section{\texorpdfstring{$\symup{e}^-\symup{e}^+\rightarrow\gamma \gamma$}{Paarvernichtung}}
+
+\begin{gather}
+    \frac{\symup{d}\sigma}{\symup{d}\Omega} = \frac{\alpha^2}{s} \left(\frac{2+\text{sin}(\Theta)}{1-\beta^2 \text{cos}(\Theta)}\right)^2\label{eqn:WQStandard}\\
+    \frac{\symup{d}\sigma}{\symup{d}\Omega} =  \frac{\alpha^2}{s} \frac{2+\text{sin}^2(\Theta)}{\frac{1}{\gamma^2}+\beta^2 \text{sin}^2(\Theta)}\label{eqn:WQModifiziert}
+\end{gather}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{build/plot1.pdf}
+  \caption{\eqref{eqn:WQStandard} und \eqref{eqn:WQModifiziert} um $\theta = 0$}
+  \label{fig:t0}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{build/plot2.pdf}
+  \caption{\eqref{eqn:WQStandard} und \eqref{eqn:WQModifiziert} um $\theta = \frac{\pi}{2}$}
+  \label{fig:tpi2}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{build/plots.pdf}
+  \caption{\eqref{eqn:WQStandard} und \eqref{eqn:WQModifiziert} um $\theta = \pi$}
+  \label{fig:tpi}
+\end{figure}
 
 \end{document}
