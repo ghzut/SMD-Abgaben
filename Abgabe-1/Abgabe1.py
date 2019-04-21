@@ -1,8 +1,8 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import scipy.constants as const
-import matplotlib
-matplotlib.use('TKAgg')
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+#matplotlib.use('TKAgg')
 
 #Aufgabe 1
 def f(x):
@@ -65,29 +65,39 @@ pl_0=np.linspace(-np.pi/1800000,np.pi/1800000,1000) #Im Bereich um theta=0°
 pl_pi_2=np.linspace(np.pi/2-np.pi/1800000,np.pi/2+np.pi/1800000,1000) #Im Bereich um theta=90°
 pl_pi=np.linspace(np.pi-np.pi/1800000,np.pi+np.pi/1800000,1000) #Im Bereich um theta=180°
 
-#plt.plot(pl/2/np.pi*360,-dsdO(pl)*10**12+dsdO_num(pl)*10**12,'b-')
-plt.subplot(321)
+# @Jasmin/Yascha Es wäre schön, wenn ihr hier versucht die Achsenbeschriftung schöner zu machen mit LaTeX (\si), das will bei mir nicht
+f1=plt.figure()
+plt.subplot(121)
 plt.plot(pl_0/2/np.pi*360000,dsdO(pl_0)*10**6,'b-')
-#plt.xlabel(r'$\theta/\si{\milli\degree}$')
-#plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
-plt.subplot(322)
+plt.xlabel(r'$\theta/10^{-3}°$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/mm^2$')
+plt.subplot(122)
 plt.plot(pl_0/2/np.pi*360000,dsdO_num(pl_0)*10**6,'r-')
-#plt.xlabel(r'$\theta/\si{\milli\degree}$')
-#plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
-plt.subplot(323)
+plt.xlabel(r'$\theta/10^{-3}°$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/mm^2$')
+plt.tight_layout()
+f1.savefig('plot1.pdf')
+
+f2=plt.figure()
+plt.subplot(121)
 plt.plot(pl_pi_2/2/np.pi*360000,dsdO(pl_pi_2)*10**6,'b-')
-#plt.xlabel(r'$\theta/\si{\milli\degree}$')
-#plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
-plt.subplot(324)
+plt.xlabel(r'$\theta/10^{-3}°$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/mm^2$')
+plt.subplot(122)
 plt.plot(pl_pi_2/2/np.pi*360000,dsdO_num(pl_pi_2)*10**6,'r-')
-#plt.xlabel(r'$\theta/\si{\milli\degree}$')
-#plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
-plt.subplot(325)
+plt.xlabel(r'$\theta/10^{-3}°$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/mm^2$')
+plt.tight_layout()
+f2.savefig('plot2.pdf')
+
+f3=plt.figure()
+plt.subplot(121)
 plt.plot(pl_pi/2/np.pi*360000,dsdO(pl_pi)*10**6,'b-')
-#plt.xlabel(r'$\theta/\si{\milli\degree}$')
-#plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
-plt.subplot(326)
+plt.xlabel(r'$\theta/10^{-3}°$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/mm^2$')
+plt.subplot(122)
 plt.plot(pl_pi/2/np.pi*360000,dsdO_num(pl_pi)*10**6,'r-')
-plt.xlabel(r'$\theta/\si{\milli\degree}$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
-plt.savefig('plots.pdf')
+plt.xlabel(r'$\theta/10^{-3}°$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/mm^2$')
+plt.tight_layout()
+f3.savefig('plot3.pdf')
