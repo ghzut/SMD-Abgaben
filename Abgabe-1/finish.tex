@@ -11,7 +11,7 @@
   g(x)=\frac{\left(3+\frac{x^3}{3}\right)-\left(3-\frac{x^3}{3}\right)}{x^3}\label{eqn:g}
 \end{gather}
 
-Für Formel \eqref{eqn:f} ist der Fehler kleiner als $1\%$ für x-Werte im Bereich von $-41285 \sim 41285$.
+\noindent Für Formel \eqref{eqn:f} ist der Fehler kleiner als $1\%$ für x-Werte im Bereich von $-41285 \sim 41285$.
 Für Zahlen $|x|>165141$ ist die Gleichung numerisch $=0$.
 
 \begin{figure}
@@ -21,7 +21,7 @@ Für Zahlen $|x|>165141$ ist die Gleichung numerisch $=0$.
   \label{fig:FehlerFlog}
 \end{figure}
 
-Für Werte $x>4.01269392415 \cdot 10^{-5}$ ist der numerische Fehler der Formel \eqref{eqn:g} kleiner $1\%$.
+\noindent Für Werte $x>4.01269392415 \cdot 10^{-5}$ ist der numerische Fehler der Formel \eqref{eqn:g} kleiner $1\%$.
 Für Zahlen $x<8.73291858992 \cdot 10^{-6}$ ist die Gleichung numerisch $=0$.
 
 \begin{figure}
@@ -33,10 +33,11 @@ Für Zahlen $x<8.73291858992 \cdot 10^{-6}$ ist die Gleichung numerisch $=0$.
 
 \section{\texorpdfstring{$\symup{e}^-\symup{e}^+\rightarrow\gamma \gamma$}{Paarvernichtung}}
 
-\begin{gather}
-    \frac{\symup{d}\sigma}{\symup{d}\Omega} = \frac{\alpha^2}{s} \left(\frac{2+\text{sin}(\Theta)}{1-\beta^2 \text{cos}(\Theta)}\right)^2\label{eqn:WQStandard}\\
-    \frac{\symup{d}\sigma}{\symup{d}\Omega} =  \frac{\alpha^2}{s} \frac{2+\text{sin}^2(\Theta)}{\frac{1}{\gamma^2}+\beta^2 \text{sin}^2(\Theta)}\label{eqn:WQModifiziert}
-\end{gather}
+\begin{align}
+    \frac{\mathrm{d}\sigma}{\mathrm{d}\Omega} &= \frac{\alpha^2}{s} \left(\frac{2+\sin(\Theta)}{1-\beta^2 \cos(\Theta)}\right)^2\label{eqn:WQStandard}\\
+&= \frac{\alpha^2}{s} \frac{2+\sin^2(\Theta)}{\frac{1}{\gamma^2}+\beta^2 \text{sin}^2(\Theta)}\\
+&= \frac{\alpha^2}{s}\frac{2+\sin^2(\Theta)}{\frac{1}{\gamma^2}\cos^2(\Theta)+\sin^2(\Theta)}\label{eqn:WQModifiziert}
+\end{align}
 
 
 \begin{figure}
@@ -61,3 +62,7 @@ Für Zahlen $x<8.73291858992 \cdot 10^{-6}$ ist die Gleichung numerisch $=0$.
 \end{figure}
 
 \end{document}
+
+
+
+%☺
