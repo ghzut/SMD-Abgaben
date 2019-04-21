@@ -41,9 +41,8 @@ plt.tight_layout()
 plt.savefig('build/FehlerF.pdf')
 plt.clf()
 
-# Logarithmische Überprüfung des (positiven) Bereichs
+# Logarithmische Überprüfung des (positiven) Bereichs; ist das gefragt?
 xplotlog=np.logspace(-8,4.615793,1000000)
-#print(np.abs(f(xplotlog)*3/2-1)*100)
 plt.plot(xplotlog, np.abs(f(xplotlog)*3/2-1)*100,'b-')
 plt.xlabel('x')
 plt.ylabel(r'Fehler in $\%$')
@@ -62,7 +61,6 @@ print("Für x-Werte", x_min_g, "< x ist der Fehler der Formel g(x) kleiner als 1
 print("Für Zahlen x <", ns_g, "ist g(x)=0")
 
 xplotlog=np.logspace(np.log(x_min_g),np.log(x_max),1000000)
-#print(np.abs(f(xplotlog)*3/2-1)*100)
 plt.plot(xplotlog, np.abs(f(xplotlog)*3/2-1)*100,'b-')
 plt.xlabel('x')
 plt.ylabel(r'Fehler in $\%$')
@@ -71,54 +69,64 @@ plt.savefig('build/FehlerGlog.pdf')
 plt.clf()
 
 #Aufgabe 2
+
+
 alpha=const.alpha
-m_e=const.physical_constants["electron mass energy equivalent in MeV"][0]
-E_e=50000 #Alle Energien in MeV
+m_e=const.physical_constants["electron mass energy equivalent in MeV"][0]/1000
+E_e=50 #Alle Energien in GeV
 gamma=E_e/m_e
 beta=np.sqrt(1-1/gamma**2)
 s=(2*E_e)**2
 def dsdO(theta):
     return alpha**2/s*(2+np.sin(theta)**2)/(1-beta**2*np.cos(theta)**2)
 def dsdO_num(theta):
-    return alpha**2/s*(2+np.sin(theta)**2)/(1/gamma**2+beta**2*np.sin(theta)**2)
+    return alpha**2/s*(2+np.sin(theta)**2)/(1/gamma**2*np.cos(theta)**2+np.sin(theta)**2)
 
-pl_0=np.linspace(-np.pi/1800000,np.pi/1800000,1000) #Im Bereich um theta=0°
-pl_pi_2=np.linspace(np.pi/2-np.pi/1800000,np.pi/2+np.pi/1800000,1000) #Im Bereich um theta=90°
-pl_pi=np.linspace(np.pi-np.pi/1800000,np.pi+np.pi/1800000,1000) #Im Bereich um theta=180°
+pl_0=np.linspace(-np.pi/1800000,np.pi/1800000,1000) #Im Bereich um θ=0°
+pl_pi_2=np.linspace(np.pi/2-np.pi/1800000,np.pi/2+np.pi/1800000,1000) #Im Bereich um θ=90°
+pl_pi=np.linspace(np.pi-np.pi/1800000,np.pi+np.pi/1800000,1000) #Im Bereich um θ=180°
 
-# @Jasmin/Yascha Es wäre schön, wenn ihr hier versucht die Achsenbeschriftung schöner zu machen mit LaTeX (\si), das will bei mir nicht
 f1=plt.figure()
 plt.subplot(121)
 plt.plot(pl_0/2/np.pi*360000,dsdO(pl_0)*10**6,'b-')
-plt.xlabel(r'$\theta/10^{-3}°$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/mm^2$')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/10^{-6}\si{\giga\eV^{-2}}$')
 plt.subplot(122)
 plt.plot(pl_0/2/np.pi*360000,dsdO_num(pl_0)*10**6,'r-')
-plt.xlabel(r'$\theta/10^{-3}°$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/mm^2$')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/10^{-6}\si{\giga\eV^{-2}}$')
 plt.tight_layout()
-f1.savefig('plot1.pdf')
+f1.savefig('build/plot1.pdf')
 
 f2=plt.figure()
 plt.subplot(121)
 plt.plot(pl_pi_2/2/np.pi*360000,dsdO(pl_pi_2)*10**6,'b-')
-plt.xlabel(r'$\theta/10^{-3}°$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/mm^2$')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/10^{-6}\si{\giga\eV^{-2}}$')
 plt.subplot(122)
 plt.plot(pl_pi_2/2/np.pi*360000,dsdO_num(pl_pi_2)*10**6,'r-')
-plt.xlabel(r'$\theta/10^{-3}°$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/mm^2$')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/10^{-6}\si{\giga\eV^{-2}}$')
 plt.tight_layout()
-f2.savefig('plot2.pdf')
+f2.savefig('build/plot2.pdf')
 
 f3=plt.figure()
 plt.subplot(121)
 plt.plot(pl_pi/2/np.pi*360000,dsdO(pl_pi)*10**6,'b-')
-plt.xlabel(r'$\theta/10^{-3}°$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/mm^2$')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/10^{-6}\si{\giga\eV^{-2}}$')
 plt.subplot(122)
 plt.plot(pl_pi/2/np.pi*360000,dsdO_num(pl_pi)*10**6,'r-')
-plt.xlabel(r'$\theta/10^{-3}°$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/10^{-6}\si{\giga\eV^{-2}}$')
 plt.tight_layout()
-f3.savefig('build/plots.pdf')
+f3.savefig('build/plot3.pdf')
+
+#Konditionszahl K, x bezeichnet hier den Winkel theta
+def K(x):
+    return x * np.abs((2*np.sin(x)*np.cos(x)*(1-3*beta**2))/(2+np.sin(x)**2)/(1-beta**2*np.cos(x)**2))
+theta_plot=np.linspace(0,np.pi,1000)
+plt.plot(theta_plot/2/np.pi*360,K(theta_plot),'b-')
+plt.xlabel(r'$\Theta/\si{\degree}$')
+plt.ylabel(r'$K(\Theta)$')
+plt.savefig('build/kondition.pdf')
