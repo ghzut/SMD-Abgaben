@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.constants as const
+import matplotlib
+matplotlib.use('TKAgg')
 
 #Aufgabe 1
 def f(x):
@@ -53,7 +55,7 @@ m_e=const.physical_constants["electron mass energy equivalent in MeV"][0]
 E_e=50000 #Alle Energien in MeV
 gamma=E_e/m_e
 beta=np.sqrt(1-1/gamma**2)
-s=(2*E_e)**2 
+s=(2*E_e)**2
 def dsdO(theta):
     return alpha**2/s*(2+np.sin(theta)**2)/(1-beta**2*np.cos(theta)**2)
 def dsdO_num(theta):
@@ -88,4 +90,4 @@ plt.subplot(326)
 plt.plot(pl_pi/2/np.pi*360000,dsdO_num(pl_pi)*10**6,'r-')
 plt.xlabel(r'$\theta/\si{\milli\degree}$')
 plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\milli\meter\squared}$')
-plt.savefig('plots.pdf')            
+plt.savefig('plots.pdf')
