@@ -37,8 +37,7 @@ plt.plot(xplot, np.abs(f(xplot)*3/2-1)*100,'r.')
 plt.xlabel('x')
 plt.ylabel(r'Fehler in $\%$')
 plt.tight_layout()
-#plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
-plt.savefig('build/FehlerF.pdf')
+plt.savefig('build/A1_1.pdf')
 plt.clf()
 
 # Logarithmische Überprüfung des (positiven) Bereichs; ist das gefragt?
@@ -47,7 +46,7 @@ plt.plot(xplotlog, np.abs(f(xplotlog)*3/2-1)*100,'b-')
 plt.xlabel('x')
 plt.ylabel(r'Fehler in $\%$')
 plt.xscale('log')
-plt.savefig('build/FehlerFlog.pdf')
+plt.savefig('build/A1_12.pdf')
 plt.clf()
 
 #Überprüfung von g(x)
@@ -61,11 +60,11 @@ print("Für x-Werte", x_min_g, "< x ist der Fehler der Formel g(x) kleiner als 1
 print("Für Zahlen x <", ns_g, "ist g(x)=0")
 
 xplotlog=np.logspace(np.log(x_min_g),np.log(x_max),1000000)
-plt.plot(xplotlog, np.abs(f(xplotlog)*3/2-1)*100,'b-')
+plt.plot(xplotlog, np.abs(g(xplotlog)*3/2-1)*100,'b-')
 plt.xlabel('x')
 plt.ylabel(r'Fehler in $\%$')
 plt.xscale('log')
-plt.savefig('build/FehlerGlog.pdf')
+plt.savefig('build/A1_2.pdf')
 plt.clf()
 
 #Aufgabe 2
@@ -122,6 +121,7 @@ plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/10^{-6}\si{\giga\eV^{-2}
 plt.tight_layout()
 f3.savefig('build/plot3.pdf')
 
+plt.clf()
 #Konditionszahl K, x bezeichnet hier den Winkel theta
 def K(x):
     return x * np.abs((2*np.sin(x)*np.cos(x)*(1-3*beta**2))/(2+np.sin(x)**2)/(1-beta**2*np.cos(x)**2))
