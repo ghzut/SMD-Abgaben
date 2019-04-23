@@ -14,7 +14,7 @@ matplotlib.rcParams.update({
 def f(x):
     return (x**3+1/3)-(x**3-1/3)
 def g(x):
-    return ((3+x**3/3)-(3-x**3/3))/x**3 #Hier sieht man schon das x=0 ausgeschlossen ist.
+    return ((3+x**3/3)-(3-x**3/3))/x**3 #Hier sieht man schon das x=0 ausgeschlossen ist -> logarithmische Darstellung sinnvoll.
 
 #Überprüfung des ganzzahligen Bereichs zur Bestimmung der Grenze
 x_value = np.linspace(-175000,175000,350001)
@@ -40,8 +40,8 @@ plt.tight_layout()
 plt.savefig('build/A1_1.pdf')
 plt.clf()
 
-# Logarithmische Überprüfung des (positiven) Bereichs; ist das gefragt?
-xplotlog=np.logspace(-8,4.615793,1000000)
+# Logarithmische Überprüfung des (positiven) Bereichs;
+xplotlog=np.logspace(-8,4.615793,1000000) #Die obere Grenze wurde empirisch bestimmt, sodass der oberste Wert ziemlich genau bei der zuvor ermittelten Grenze liegt
 plt.plot(xplotlog, np.abs(f(xplotlog)*3/2-1)*100,'b-')
 plt.xlabel('x')
 plt.ylabel(r'Fehler in $\%$')
@@ -71,7 +71,7 @@ plt.clf()
 
 
 alpha=const.alpha
-m_e=const.physical_constants["electron mass energy equivalent in MeV"][0]/1000
+m_e=const.physical_constants["electron mass energy equivalent in MeV"][0]/1000 #Alle Energien in GeV
 E_e=50 #Alle Energien in GeV
 gamma=E_e/m_e
 beta=np.sqrt(1-1/gamma**2)
@@ -81,46 +81,60 @@ def dsdO(theta):
 def dsdO_num(theta):
     return alpha**2/s*(2+np.sin(theta)**2)/(1/gamma**2*np.cos(theta)**2+np.sin(theta)**2)
 
+pl=np.linspace(0,2*np.pi,1000)
 pl_0=np.linspace(-np.pi/1800000,np.pi/1800000,1000) #Im Bereich um θ=0°
 pl_pi_2=np.linspace(np.pi/2-np.pi/1800000,np.pi/2+np.pi/1800000,1000) #Im Bereich um θ=90°
 pl_pi=np.linspace(np.pi-np.pi/1800000,np.pi+np.pi/1800000,1000) #Im Bereich um θ=180°
 
 f1=plt.figure()
 plt.subplot(121)
-plt.plot(pl_0/2/np.pi*360000,dsdO(pl_0)*10**6,'b-')
+plt.plot(pl_0/2/np.pi*360000,dsdO(pl_0),'b-')
 plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/10^{-6}\si{\giga\eV^{-2}}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\giga\eV^{-2}}$')
 plt.subplot(122)
-plt.plot(pl_0/2/np.pi*360000,dsdO_num(pl_0)*10**6,'r-')
+plt.plot(pl_0/2/np.pi*360000,dsdO_num(pl_0),'r-')
 plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/10^{-6}\si{\giga\eV^{-2}}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\giga\eV^{-2}}$')
 plt.tight_layout()
 f1.savefig('build/plot1.pdf')
 
 f2=plt.figure()
 plt.subplot(121)
-plt.plot(pl_pi_2/2/np.pi*360000,dsdO(pl_pi_2)*10**6,'b-')
+plt.plot(pl_pi_2/2/np.pi*360000,dsdO(pl_pi_2),'b-')
 plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/10^{-6}\si{\giga\eV^{-2}}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\giga\eV^{-2}}$')
 plt.subplot(122)
-plt.plot(pl_pi_2/2/np.pi*360000,dsdO_num(pl_pi_2)*10**6,'r-')
+plt.plot(pl_pi_2/2/np.pi*360000,dsdO_num(pl_pi_2),'r-')
 plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/10^{-6}\si{\giga\eV^{-2}}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\giga\eV^{-2}}$')
 plt.tight_layout()
 f2.savefig('build/plot2.pdf')
 
 f3=plt.figure()
 plt.subplot(121)
-plt.plot(pl_pi/2/np.pi*360000,dsdO(pl_pi)*10**6,'b-')
+plt.plot(pl_pi/2/np.pi*360000,dsdO(pl_pi),'b-')
 plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/10^{-6}\si{\giga\eV^{-2}}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\giga\eV^{-2}}$')
 plt.subplot(122)
-plt.plot(pl_pi/2/np.pi*360000,dsdO_num(pl_pi)*10**6,'r-')
+plt.plot(pl_pi/2/np.pi*360000,dsdO_num(pl_pi),'r-')
 plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
-plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/10^{-6}\si{\giga\eV^{-2}}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\giga\eV^{-2}}$')
 plt.tight_layout()
 f3.savefig('build/plot3.pdf')
 
+plt.clf()
+
+f4=plt.figure()
+plt.subplot(121)
+plt.plot(pl_pi/2/np.pi*360000,dsdO(pl_pi),'b-')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\giga\eV^{-2}}$')
+plt.subplot(122)
+plt.plot(pl_pi/2/np.pi*360000,dsdO_num(pl_pi),'r-')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\giga\eV^{-2}}$')
+plt.tight_layout()
+f4.savefig('build/Differenz.pdf')
 plt.clf()
 #Konditionszahl K, x bezeichnet hier den Winkel theta
 def K(x):

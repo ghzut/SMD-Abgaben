@@ -12,16 +12,27 @@ Die beiden Funktionen
 \end{gather}
 sind beide $=2/3$.
 
-\noindent Für Formel \eqref{eqn:f} lässt sich mittels der Zeilen $21-32$ in der Python-Datei bestimmen, dass der Fehler kleiner als $1\%$ ist für $-41285 \leq x \leq 41285$.
+\subsection{Untersuchung von Gleichung \eqref{eqn:f}}
+\noindent Für Formel \eqref{eqn:f} lässt sich mittels der Zeilen $21-32$ in der Python-Datei bestimmen, dass der Fehler kleiner als $1\%$ ist für $-41285 \leq x \leq 41285$. Die Darstellung des relativen Fehlers ist dabei in Abbildung \ref{fig:FehlerF}, eine logarithmische Darstellung des positiven Bereichs in Abbildung \ref{fig:FehlerFlog} zu sehen.\\
 Für Zahlen $|x|>165141$ ist die Gleichung numerisch $=0$.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{build/A1_1.pdf}
+  \caption{Relativer Fehler von $f(x)$ im Bereich $-41285 \leq x \leq 41285$}
+  \label{fig:FehlerF}
+\end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{build/A1_12.pdf}
   \caption{Relativer Fehler von $f(x)$ im Bereich $-41285 \leq x \leq 41285$}
-  \label{fig:FehlerF}
+  \label{fig:FehlerFlog}
 \end{figure}
 
+\newpage
+
+\subsection{Untersuchung von Gleichung \eqref{eqn:g}}
 \noindent Mittels der Zeilen $53-58$ ist ermittelbar, daas für Werte $x>4.01269392415 \cdot 10^{-5}$ der numerische Fehler der Formel \eqref{eqn:g} kleiner als $1\%$ ist.
 Für Zahlen $x<8.73291858992 \cdot 10^{-6}$ ist die Gleichung numerisch $=0$.
 
@@ -32,28 +43,31 @@ Für Zahlen $x<8.73291858992 \cdot 10^{-6}$ ist die Gleichung numerisch $=0$.
   \label{fig:FehlerGlog}
 \end{figure}
 
+\newpage
+
 \section{\texorpdfstring{$\symup{e}^-\symup{e}^+\rightarrow\gamma \gamma$}{Paarvernichtung}}
 \subsection{Wirkungsquerschnitt}
-Die Formel für den Wirkungsquerschnitt \eqref{eqn:WQStandard} lässt sich mit den Beziehungen
+Für große Werte von $\gamma=\frac{E_.e}{m_.ec^2}$ und damit $\beta\approx 1$ ist die Formel für den Wirkungsquerschnitt \eqref{eqn:WQStandard} im Bereich um $\Theta=0$ instabil, da im Nenner die Gefahr einer Auslöschung besteht. Generell ist der Nenner, da er für $\Theta\leq \frac{\pi}{2}$ immer $<1$ ist, eine Gefahr für Instabilität, weil so durch eine kleine Zahl geteilt wird.\\
+Beheben lässt sich dies durch Umformungen mit den Beziehungen
 
 \begin{gather}
   1-\beta^2=\frac{1}{\gamma^2}\nonumber\\
   1=\sin^2(\Theta)+\cos^2(\Theta)\nonumber
 \end{gather}
-auf die Formel \eqref{eqn:WQModifiziert} umformen.
+zu Formel \eqref{eqn:WQModifiziert}.
 
 \begin{align}
     \frac{\mathrm{d}\sigma}{\mathrm{d}\Omega} &= \frac{\alpha^2}{s} \left(\frac{2+\sin(\Theta)}{1-\beta^2 \cos(\Theta)}\right)^2\label{eqn:WQStandard}\\
 &= \frac{\alpha^2}{s}\frac{2+\sin^2(\Theta)}{\frac{1}{\gamma^2}\cos^2(\Theta)+\sin^2(\Theta)}\label{eqn:WQModifiziert}
 \end{align}
-Hierbei sind
+Hierbei ist
 
 \begin{gather}
-  s=(2E_e)^2 \;\;(E_e \text{ ist die Energie der Teilchen im Schwerpunktssystem})\nonumber\\
-  \beta=\sqrt{1-\gamma^{-2}}\nonumber\\
-  \gamma=\frac{E_e}{m_e}\;\; (m_e=50\si{\kilo\electronvolt}) \nonumber
+  s=(2E_\text{e})^2 \;\;(E_\text{e} \text{ ist die Energie der Teilchen im Schwerpunktssystem})\text{.}\nonumber
 \end{gather}
 
+\noindent In den Abbildungen \ref{fig:t0} bis \ref{fig:tpi}, die im Code über die Zeilen $74$-$122$ erzeugt werden, sind die Bereiche um $\Theta=0$, $\Theta=\frac{\pi}{2}$ und $\Theta=\pi$ zu sehen.
+Daran lassen sich kaum Unterschiede ablesen, auch weil der Nenner nach wie vor sehr klein ist. Trägt man allerdings in Abbildung \ref{fig:Abweichung} die Differenz zwischen den beiden Versionen gegen $\Theta$ auf, lässt sich erkennen, das diese sich für Werte um $\Theta=0$ bzw. $2\pi$ deutlich unterscheiden.
 
 \begin{figure}
   \centering
@@ -75,7 +89,15 @@ Hierbei sind
   \caption{\eqref{eqn:WQStandard} und \eqref{eqn:WQModifiziert} um $\Theta = \pi$}
   \label{fig:tpi}
 \end{figure}
-\noindent Anhand der Graphen \ref{fig:t0}, \ref{fig:tpi2} und \ref{fig:tpi} lässt sich erkennen, dass sich im Rahmen der Genauigkeit an den kritischen die beiden Formen der Funktionen nicht voneinander unterscheiden.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{build/Differenz.pdf}
+  \caption{\eqref{Die Differenz von eqn:WQStandard} und \eqref{eqn:WQModifiziert} im Bereich $0 \leq \Theta \leq 2\pi$}
+  \label{fig:Abweichung}
+\end{figure}
+
+\newpage
 
 \subsection{Konditionszahl}
 Aus der Beziehung für die Konditionszahl
@@ -93,11 +115,11 @@ ergibt sich die Formel \eqref{eqn:K} und damit den Graphen \ref{fig:kondition}.
   \caption{Konditionszahl in Abhängigkeit des Winkels}
   \label{fig:kondition}
 \end{figure}
-\noindent Aus dem Plot \ref{fig:kondition} ist erkennbar, dass das Problem im Bereich um $180\si{\degree}$ schlecht konditioniert ist.
+\noindent Aus dem Plot \ref{fig:kondition}, der in den Zeilen $140$-$146$ erzeugt wird, ist erkennbar, dass das Problem im Bereich um $180\si{\degree}$ schlecht konditioniert ist.
 Überall sonst ist es sehr gut konditioniert.
 
 \end{document}
 
 
 
-%☺
+%☺¶
