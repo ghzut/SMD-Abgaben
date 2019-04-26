@@ -82,13 +82,13 @@ def dsdO_num(theta):
     return alpha**2/s*(2+np.sin(theta)**2)/(1/gamma**2*np.cos(theta)**2+np.sin(theta)**2)
 
 pl=np.linspace(0,2*np.pi,1000)
-pl_0=np.linspace(-np.pi/1800000,np.pi/1800000,1000) #Im Bereich um θ=0°
+pl_0=np.linspace(-np.pi/1800000000,np.pi/1800000,1000) #Im Bereich um θ=0°
 pl_pi_2=np.linspace(np.pi/2-np.pi/1800000,np.pi/2+np.pi/1800000,1000) #Im Bereich um θ=90°
 pl_pi=np.linspace(np.pi-np.pi/1800000,np.pi+np.pi/1800000,1000) #Im Bereich um θ=180°
 
 f1=plt.figure()
 plt.subplot(121)
-plt.plot(pl_0/2/np.pi*360000,dsdO(pl_0),'b-')
+plt.plot(pl_0/2/np.pi*360000000,dsdO(pl_0),'b-')
 plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
 plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\giga\eV^{-2}}$')
 plt.subplot(122)
