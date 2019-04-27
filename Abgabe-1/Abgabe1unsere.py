@@ -11,24 +11,13 @@ matplotlib.rcParams.update({
     'pgf.preamble': r'\input{header-matplotlib.tex}',})
 
 #Aufgabe 1
-
-def error(func):
-    return np.abs(func * 3.0/2.0 - 1)
-
 def f(x):
-    return (x**3+1.0/3.0)-(x**3-1.0/3.0)
+    return (x**3+1/3)-(x**3-1/3)
 def g(x):
-    return ((3.0+x**3/3.0)-(3-x**3/3.0))/x**3 #Hier sieht man schon das x=0 ausgeschlossen ist -> logarithmische Darstellung sinnvoll.
+    return ((3+x**3/3)-(3-x**3/3))/x**3 #Hier sieht man schon das x=0 ausgeschlossen ist -> logarithmische Darstellung sinnvoll.
 
 #Überprüfung des ganzzahligen Bereichs zur Bestimmung der Grenze
-x_value = np.logspace(3.0,9.0, 1000)
-f_x=f(x_value)
-error_f=error(f_x)
-x_max=x_value[error_f-0.01>0][0]
-print('Für |x|<',x_max,'ist der Fehler von f(x) kleiner als 1%')
-ns=x_value[f_x==0][0]
-print('Bei |x|>',ns,'ist f(x)=0')
-'''
+x_value = np.linspace(-175000,175000,350001)
 for i in x_value:
     if np.abs(f(i))==0:
         ns = i
@@ -43,9 +32,8 @@ for i in x_value:
             break
         elif i==175000:
             print("175000 ist keine Grenze")
-
 xplot=np.linspace(int(x_min),int(x_max),int(x_max)-int(x_min)+1)
-plt.plot(xplot, np.abs(f(xplot)*3/2-1)*100,rasterized=True)
+plt.plot(xplot, np.abs(f(xplot)*3/2-1)*100,'r.')
 plt.xlabel('x')
 plt.ylabel(r'Fehler in $\%$')
 plt.tight_layout()
@@ -53,8 +41,8 @@ plt.savefig('build/A1_1.pdf')
 plt.clf()
 
 # Logarithmische Überprüfung des (positiven) Bereichs;
-'''
-plt.plot(x_value, error_f*100,'b-',rasterized=True)
+xplotlog=np.logspace(-8,4.615793,1000000) #Die obere Grenze wurde empirisch bestimmt, sodass der oberste Wert ziemlich genau bei der zuvor ermittelten Grenze liegt
+plt.plot(xplotlog, np.abs(f(xplotlog)*3/2-1)*100,'b-')
 plt.xlabel('x')
 plt.ylabel(r'Fehler in $\%$')
 plt.xscale('log')
@@ -62,28 +50,17 @@ plt.savefig('build/A1_12.pdf')
 plt.clf()
 
 #Überprüfung von g(x)
-x_value_g=np.logspace(-8,1,2000)
-g_x=g(x_value_g)
-error_g=error(g_x)
-x_max_g=x_value_g[error_g-0.01<=0][0]
-print('Für x < ',x_max_g,'ist der Fehler von g(x) kleiner als 1%')
-ns_g=x_value_g[g_x!=0][0]
-print('Bei x < ',ns_g,'ist g(x)=0')
-'''
+x_value_g=np.logspace(-6,1,100000)
 for i in x_value_g:
     if np.abs(g(i))==0:
         ns_g = i
     if np.abs(g(i)*3/2-1)>0.01:
             x_min_g=i
-
-
 print("Für x-Werte", x_min_g, "< x ist der Fehler der Formel g(x) kleiner als 1 Prozent")
 print("Für Zahlen x <", ns_g, "ist g(x)=0")
 
-xplotlog=np.logspace(np.log(x_min_g),np.log(x_max),1000)
-'''
-
-plt.plot(x_value_g, error_g * 100, rasterized=True)
+xplotlog=np.logspace(np.log(x_min_g),np.log(x_max),1000000)
+plt.plot(xplotlog, np.abs(g(xplotlog)*3/2-1)*100,'b-')
 plt.xlabel('x')
 plt.ylabel(r'Fehler in $\%$')
 plt.xscale('log')
@@ -105,47 +82,60 @@ def dsdO_num(theta):
     return alpha**2/s*(2+np.sin(theta)**2)/(1/gamma**2*np.cos(theta)**2+np.sin(theta)**2)
 
 pl=np.linspace(0,2*np.pi,1000)
-pl_0=np.linspace(-np.pi/180000000,np.pi/180000000,2000) #Im Bereich um θ=0°
-pl_pi_2=np.linspace(np.pi/2-np.pi/180000000,np.pi/2+np.pi/180000000,2000) #Im Bereich um θ=90°
-pl_pi=np.linspace(np.pi-np.pi/180000000,np.pi+np.pi/180000000,2000) #Im Bereich um θ=180°
+pl_0=np.linspace(-np.pi/1800000000,np.pi/1800000,1000) #Im Bereich um θ=0°
+pl_pi_2=np.linspace(np.pi/2-np.pi/1800000,np.pi/2+np.pi/1800000,1000) #Im Bereich um θ=90°
+pl_pi=np.linspace(np.pi-np.pi/1800000,np.pi+np.pi/1800000,1000) #Im Bereich um θ=180°
 
 f1=plt.figure()
-plt.plot(pl_0/2/np.pi*360000000,dsdO(pl_0),rasterized=True)
-plt.plot(pl_0/2/np.pi*360000000,dsdO_num(pl_0),'r-',rasterized=True)
-plt.xlabel(r'$\Theta/10^{-8}\si{\degree}$')
+plt.subplot(121)
+plt.plot(pl_0/2/np.pi*360000000,dsdO(pl_0),'b-')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
 plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\giga\eV^{-2}}$')
+plt.subplot(122)
+plt.plot(pl_0/2/np.pi*360000,dsdO_num(pl_0),'r-')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}_\text{stab}/\si{\giga\eV^{-2}}$')
 plt.tight_layout()
 f1.savefig('build/plot1.pdf')
 
 f2=plt.figure()
-plt.plot(pl_pi_2/2/np.pi*360000000,dsdO(pl_pi_2),'b-',rasterized=True)
-plt.plot(pl_pi_2/2/np.pi*360000000,dsdO_num(pl_pi_2),'r-',rasterized=True)
-plt.xlabel(r'$\Theta/10^{-8}\si{\degree}$')
+plt.subplot(121)
+plt.plot(pl_pi_2/2/np.pi*360000,dsdO(pl_pi_2),'b-')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
 plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\giga\eV^{-2}}$')
+plt.subplot(122)
+plt.plot(pl_pi_2/2/np.pi*360000,dsdO_num(pl_pi_2),'r-')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}_\text{stab}/\si{\giga\eV^{-2}}$')
 plt.tight_layout()
 f2.savefig('build/plot2.pdf')
 
 f3=plt.figure()
-plt.plot(pl_pi/2/np.pi*360000000,dsdO(pl_pi),'b-',rasterized=True)
-plt.plot(pl_pi/2/np.pi*360000000,dsdO_num(pl_pi),'r-',rasterized=True)
-plt.xlabel(r'$\Theta/10^{-8}\si{\degree}$')
+plt.subplot(121)
+plt.plot(pl_pi/2/np.pi*360000,dsdO(pl_pi),'b-')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
 plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\giga\eV^{-2}}$')
+plt.subplot(122)
+plt.plot(pl_pi/2/np.pi*360000,dsdO_num(pl_pi),'r-')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
+plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}_\text{stab}/\si{\giga\eV^{-2}}$')
 plt.tight_layout()
 f3.savefig('build/plot3.pdf')
 
+plt.clf()
+
 f4=plt.figure()
-plt.plot(pl/2/np.pi*360,dsdO_num(pl)-dsdO(pl),'b-',rasterized=True)
-plt.xlabel(r'$\Theta/\si{\degree}$')
+plt.plot(pl/2/np.pi*360,dsdO_num(pl)-dsdO(pl),'b-')
+plt.xlabel(r'$\Theta/10^{-3}\si{\degree}$')
 plt.ylabel(r'$\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}_\text{stab}-\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}/\si{\giga\eV^{-2}}$')
 plt.tight_layout()
 f4.savefig('build/Differenz.pdf')
 plt.clf()
 #Konditionszahl K, x bezeichnet hier den Winkel theta
 def K(x):
-    return np.abs(x * (2 * np.sin(x) * np.cos(x) * (1 - 3 * beta**2))/(2 + np.sin(x)**2)/(1 - beta**2 * np.cos(x)**2))
+    return x * np.abs((2*np.sin(x)*np.cos(x)*(1-3*beta**2))/(2+np.sin(x)**2)/(1-beta**2*np.cos(x)**2))
 theta_plot=np.linspace(0,np.pi,1000)
 plt.plot(theta_plot/2/np.pi*360,K(theta_plot),'b-')
 plt.xlabel(r'$\Theta/\si{\degree}$')
 plt.ylabel(r'$K(\Theta)$')
-plt.yscale('log')
 plt.savefig('build/kondition.pdf')
