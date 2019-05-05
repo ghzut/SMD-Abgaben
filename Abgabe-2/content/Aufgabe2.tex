@@ -1,2 +1,68 @@
 \section{Aufgabe 2}
 \label{sec:Aufgabe2}
+
+\begin{equation}
+  f(v)=N\cdot 4\pi v^2 \cdot \text{exp}\left(-\frac{mv^2}{2k_BT}\right)
+\end{equation}
+\begin{equation}
+  \int^{\infty}_{0} f(v) \text{d}v = \left(\frac{2\pi k_B T}{m}\right)^{\frac{3}{2}}\cdot N
+\end{equation}
+\begin{equation}
+  N= \left(\frac{m}{2\pi k_B T}\right)^{\frac{3}{2}}
+\end{equation}
+
+\begin{equation}
+  f(v)=\left(\frac{m}{2\pi k_B T}\right)^{\frac{3}{2}}\cdot 4\pi v^2 \cdot \text{exp}\left(-\frac{mv^2}{2k_BT}\right)
+\end{equation}
+
+\subsection{a)}
+
+\begin{equation}
+  f'(v) = \left(\frac{m}{2\pi k_B T}\right)^{\frac{3}{2}}\cdot 8\pi v \cdot \text{exp}\left(-\frac{mv^2}{2k_BT}\right)\frac{k_BT-\frac{mv^2}{2}}{k_BT}
+\end{equation}
+
+\begin{equation}
+  f'(v_m)=0
+\end{equation}
+
+\begin{equation}
+  v_m = \sqrt{\frac{2k_BT}{m}}
+\end{equation}
+
+
+\subsection{b)}
+
+\begin{equation}
+  \langle v \rangle = \int^{\infty}_{0} v f(v) \text{d}v = \frac{2}{\sqrt{\pi}}\sqrt{\frac{2k_BT}{m}}
+\end{equation}
+
+\subsection{c)}
+
+\begin{equation}
+  \tilde{v} = v \sqrt{\frac{m}{2k_BT}}
+\end{equation}
+
+\begin{equation}
+  f\left(\tilde{v}\right) \text{d}\tilde{v} = \frac{4}{\sqrt{\pi}}\tilde{v}^2 e^{-\tilde{v}^2} \text{d}\tilde{v}
+\end{equation}
+
+\begin{equation}
+  \frac{1}{2}=\int^{\tilde{v}_{0,5}}_{0} \frac{4}{\sqrt{\pi}}\tilde{v}^2 e^{-\tilde{v}^2} \text{d}\tilde{v}
+\end{equation}
+
+\subsection{d)}
+
+\begin{equation}
+  f(x_{1/2})=\frac{f(v_m)}{2}
+\end{equation}
+
+
+\subsection{e)}
+
+\begin{equation}
+  \sigma^2_v=\int^{\infty}_{0} \left(v-\langle v \rangle \right)^2 f(v) \text{d}v
+\end{equation}
+
+\begin{equation}
+  \sigma_v = \left(\left( \frac{3}{2}- \frac{6}{\pi}\right) \frac{2k_BT}{m}             \right)^{\frac{1}{2}}
+\end{equation}
