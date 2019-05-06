@@ -11,6 +11,7 @@ from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 import uncertainties.unumpy as unp
 import scipy.constants as const
+from scipy import integrate
 
 # BackwardsVNominal = []
 # BackwardsVStd = []
@@ -111,3 +112,38 @@ print("G",g)
 
 
 #Aufgabe 2
+
+#c)
+
+def f(v):
+    return 4/(const.pi)**(1/2) *v**2 *np.exp(-v**2)
+
+def Aufgabe2(x):                         #Funktion die Null werden soll (siehe Pdf)
+    return integrate.quad(f,0,x)[0] - 1/2
+
+
+
+def Newton(f1,f2,x,m):
+    xk1=x-f1(x)/f2(x)
+    if(abs(x-xk1)<10**(-m)): return xk1
+    else: return Newton(f1,f2,xk1,m)
+
+V05=Newton(Aufgabe2,f,1,6)
+
+print("2c",V05)
+
+#d)
+def ff(v):                                     #Funktion, die Null werden soll (siehe Pdf, etwas anders gechrieben, da faul beim texen)
+    return f(v)-2/(const.pi)**(1/2)/np.exp(1)
+
+def fff(v):
+    return -8*np.exp(-v**2)*v*(v**2-1)/(const.pi)**(1/2)
+
+V1=Newton(ff,fff,0.5,6)    #links vom Maximum
+V2=Newton(ff,fff,1.5,6)    #rechts vom Maximum
+deltaV=V2-V1
+
+print("2d")
+print("V1", V1)
+print("V2", V2)
+print("Delta V", deltaV)

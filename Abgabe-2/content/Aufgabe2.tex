@@ -50,12 +50,38 @@
   \frac{1}{2}=\int^{\tilde{v}_{0,5}}_{0} \frac{4}{\sqrt{\pi}}\tilde{v}^2 e^{-\tilde{v}^2} \text{d}\tilde{v}
 \end{equation}
 
+\begin{equation}
+  0=\frac{1}{2} - \int^{\tilde{v}_{0,5}}_{0} \frac{4}{\sqrt{\pi}}\tilde{v}^2 e^{-\tilde{v}^2} \text{d}\tilde{v}
+\end{equation}
+ergibt sich mit dem Newton-Verfahren
+\begin{equation}
+  x_{k+1}=x_k - \frac{f(x_k)}{f'(x_k)}
+  \label{eqn:Newton}
+\end{equation}
+
+\begin{equation}
+  \tilde{v}_{0,5}=1,08765203176
+\end{equation}
+
 \subsection{d)}
 
 \begin{equation}
-  f(x_{1/2})=\frac{f(v_m)}{2}
+  f(\tilde{v}_{1/2})=\frac{f(\tilde{v}_m)}{2}
 \end{equation}
 
+\begin{equation}
+  0=2\tilde{v}^2_{1/2}e^{-\tilde{v}^2_{1/2}}- e^{-1}
+\end{equation}
+
+\begin{equation}
+  f'(\tilde{v})=-\frac{8 e^{-\tilde{v}^2}\tilde{v}(\tilde{v}^2-1)}{\sqrt{\pi}}
+\end{equation}
+
+\begin{gather}
+  \tilde{v}_1=0,481623247971\\
+  \tilde{v}_2=1,63656560822\\
+  \tilde{v}_{FWHM}=1,15494236025
+\end{gather}
 
 \subsection{e)}
 
