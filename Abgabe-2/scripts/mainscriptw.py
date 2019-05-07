@@ -102,14 +102,13 @@ f=W9_oder_groesser_rot4 = W1(N9_oder_groesser_rot4)
 N5blau_rot4 = 1                #Anzahl der Möglichkeiten für rot=4 und blau=5
 g=W5blau_rot4 = W1(N5blau_rot4)
 
-print("A",a)
-print("B",b)
-print("C",c)
-print("D",d)
-print("E",e)
-print("F",f)
-print("G",g)
-
+print("Die Wahrscheinlichkeit, dass die Gesamtaugenzahl genau 9 ist, beträgt ", a*100,"%")
+print("Die Wahrscheinlichkeit, dass die Gesamtaugenzahl 9 oder mehr ist, beträgt ", b*100,"%")
+print("Die Wahrscheinlichkeit, dass der eine Würfel 4 und der andere 5 zeigt, beträgt ", c*100,"%")
+print("Die Wahrscheinlichkeit, dass der rote Würfel 4 und der blaue 5 zeigt, beträgt ", d*100,"%")
+print("Die Wahrscheinlichkeit, dass, wenn der rote Würfel 4 zeigt, die Gesamtaugenzahl genau 9 ist, beträgt ", e*100,"%")
+print("Die Wahrscheinlichkeit, dass, wenn der rote Würfel 4 zeigt, die Gesamtaugenzahl 9 oder mehr ist, beträgt ", f*100,"%")
+print("Die Wahrscheinlichkeit, dass, wenn der rote Würfel 4 zeigt, der blaue 5 zeigt, beträgt ", g*100,"%")
 
 #Aufgabe 2
 

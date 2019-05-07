@@ -1,94 +1,94 @@
 \section{Aufgabe 2}
 \label{sec:Aufgabe2}
-
+Die Maxwell'sche Geschwindigkeitsverteilung ist gegeben durch:
 \begin{equation}
-  f(v)=N\cdot 4\pi v^2 \cdot \text{exp}\left(-\frac{mv^2}{2k_BT}\right)
+  f(v)=N\cdot 4\pi v^2 \cdot \text{exp}\left(-\frac{mv^2}{2k_BT}\right)\label{eq:MWG}
 \end{equation}
+Die Normierungskonstante $N$ kann dadurch bestimmt werden, dass das Integral über alle Wahrscheinlichkeiten gleich 1 sein muss:
 \begin{equation}
-  \int^{\infty}_{0} f(v) \text{d}v = \left(\frac{2\pi k_B T}{m}\right)^{\frac{3}{2}}\cdot N
+  \int^{\infty}_.{0} f(v) \text{d}v = \left(\frac{2\pi k_.B T}{m}\right)^{\frac{3}{2}}\cdot N
 \end{equation}
+Damit ergibt sich
 \begin{equation}
-  N= \left(\frac{m}{2\pi k_B T}\right)^{\frac{3}{2}}
+  N(m,T)= \left(\frac{m}{2\pi k_.B T}\right)^{\frac{3}{2}}
 \end{equation}
-
+und einsetzen in \eqref{eq:MWG}:
 \begin{equation}
-  f(v)=\left(\frac{m}{2\pi k_B T}\right)^{\frac{3}{2}}\cdot 4\pi v^2 \cdot \text{exp}\left(-\frac{mv^2}{2k_BT}\right)
-\end{equation}
-
-\subsection{a)}
-
-\begin{equation}
-  f'(v) = \left(\frac{m}{2\pi k_B T}\right)^{\frac{3}{2}}\cdot 8\pi v \cdot \text{exp}\left(-\frac{mv^2}{2k_BT}\right)\frac{k_BT-\frac{mv^2}{2}}{k_BT}
+  f(v)=\left(\frac{m}{2\pi k_.B T}\right)^{\frac{3}{2}}\cdot 4\pi v^2 \cdot \text{exp}\left(-\frac{mv^2}{2k_.BT}\right)
 \end{equation}
 
+\subsection*{a)}
+
+Die wahrscheinlichste Geschwindigkeit $v_.m$ erhält man daraus, dass diese Das Maximum der Verteilung beschreibt und somit für die Ableitung gelten muss $f'(v_.m)=0$. 
+\begin{align*}
+  f'(v) &= \left(\frac{m}{2\pi k_.B T}\right)^{\frac{3}{2}}\cdot 8\pi v \cdot \text{exp}\left(-\frac{mv^2}{2k_.BT}\right)\frac{k_.BT-\frac{mv^2}{2}}{k_.BT}\\
+\Rightarrow v_.m &= \sqrt{\frac{2k_.BT}{m}}
+\end{align*}
+
+
+\subsection*{b)}
+Der Mittelwert der Geschwindigkeit bestimmt sich über
 \begin{equation}
-  f'(v_m)=0
+  \langle v \rangle = \int^{\infty}_.{0} v f(v) \text{d}v = \frac{2}{\sqrt{\pi}}\sqrt{\frac{2k_.BT}{m}} = \frac{2}{\sqrt{\pi}} v_.m
 \end{equation}
 
+\subsection*{c)}
+Zur Bestimmung des Geschwindigkeitsmedians wird zunächst die auf $v_.m$ normierte Geschwindigkeit
 \begin{equation}
-  v_m = \sqrt{\frac{2k_BT}{m}}
+  \tilde{v} = \frac{v}{v_.m}
 \end{equation}
-
-
-\subsection{b)}
-
+verwendet.
+Er bestimmt sich dadurch, dass die Integration über alle $\tilde{v}\leq \tilde{v_.{0,5}}$ genau $\frac{1}{2}$ ergibt.
+\begin{align*}
+  f\left(\tilde{v}\right) \text{d}\tilde{v} &= \frac{4}{\sqrt{\pi}}\tilde{v}^2 e^{-\tilde{v}^2} \text{d}\tilde{v}\\
+  \frac{1}{2} &= \int^{\tilde{v}_.{0,5}}_.{0} \frac{4}{\sqrt{\pi}}\tilde{v}^2 e^{-\tilde{v}^2} \text{d}\tilde{v}
+\end{align*}
+\noindent Dies kann zu einem Nullstellenproblem umgeformt werden
 \begin{equation}
-  \langle v \rangle = \int^{\infty}_{0} v f(v) \text{d}v = \frac{2}{\sqrt{\pi}}\sqrt{\frac{2k_BT}{m}}
+  0=\frac{1}{2} - \int^{\tilde{v}_.{0,5}}_.{0} \frac{4}{\sqrt{\pi}}\tilde{v}^2 e^{-\tilde{v}^2} \text{d}\tilde{v},
 \end{equation}
-
-\subsection{c)}
-
+sodass das Newton-Verfahren
 \begin{equation}
-  \tilde{v} = v \sqrt{\frac{m}{2k_BT}}
-\end{equation}
-
-\begin{equation}
-  f\left(\tilde{v}\right) \text{d}\tilde{v} = \frac{4}{\sqrt{\pi}}\tilde{v}^2 e^{-\tilde{v}^2} \text{d}\tilde{v}
-\end{equation}
-
-\begin{equation}
-  \frac{1}{2}=\int^{\tilde{v}_{0,5}}_{0} \frac{4}{\sqrt{\pi}}\tilde{v}^2 e^{-\tilde{v}^2} \text{d}\tilde{v}
-\end{equation}
-
-\begin{equation}
-  0=\frac{1}{2} - \int^{\tilde{v}_{0,5}}_{0} \frac{4}{\sqrt{\pi}}\tilde{v}^2 e^{-\tilde{v}^2} \text{d}\tilde{v}
-\end{equation}
-ergibt sich mit dem Newton-Verfahren
-\begin{equation}
-  x_{k+1}=x_k - \frac{f(x_k)}{f'(x_k)}
+  x_.{k+1}=x_.k - \frac{f(x_.k)}{f'(x_.k)}
   \label{eqn:Newton}
 \end{equation}
-
+angewendet werden kann.\\
+Damit ergibt sich mit den Zeilen 117-132 der Python-Datei:
 \begin{equation}
-  \tilde{v}_{0,5}=1,08765203176
+  \tilde{v}_.{0,5}=1,08765203176
 \end{equation}
 
-\subsection{d)}
 
+\subsection*{d)}
+Die Halbwertsbreite ist durch die normierte Geschwindigkeit $\tilde{v}_.{1/2}$ gegeben bei der $f$ auf die Hälfte seines Maximums abgesunken ist:
 \begin{equation}
-  f(\tilde{v}_{1/2})=\frac{f(\tilde{v}_m)}{2}
+  f(\tilde{v}_.{1/2})=\frac{f(1)}{2}
 \end{equation}
-
+Durch das Umformen zu einem Nullstellenproblem
 \begin{equation}
-  0=2\tilde{v}^2_{1/2}e^{-\tilde{v}^2_{1/2}}- e^{-1}
+  0=2\tilde{v}^2_.{1/2}e^{-\tilde{v}^2_.{1/2}}- e^{-1}
 \end{equation}
-
+lässt sich wieder \eqref{eqn:Newton} verwenden.
+Die Ableitung ist dabei gegeben durch:
 \begin{equation}
   f'(\tilde{v})=-\frac{8 e^{-\tilde{v}^2}\tilde{v}(\tilde{v}^2-1)}{\sqrt{\pi}}
 \end{equation}
-
+Es ergeben sich über die Zeilen 135-148 der Python-Datei:
 \begin{gather}
-  \tilde{v}_1=0,481623247971\\
-  \tilde{v}_2=1,63656560822\\
-  \tilde{v}_{FWHM}=1,15494236025
+  \tilde{v}_.1=0,481623247971\\
+  \tilde{v}_.2=1,63656560822\\
+  \tilde{v}_.{FWHM}=1,15494236025
 \end{gather}
 
-\subsection{e)}
-
+\subsection*{e)}
+Die Standardabweichung berechnet sich über:
 \begin{equation}
-  \sigma^2_v=\int^{\infty}_{0} \left(v-\langle v \rangle \right)^2 f(v) \text{d}v
+  \sigma^2_.v=\int^{\infty}_.{0} \left(v-\langle v \rangle \right)^2 f(v) \text{d}v
+\end{equation}
+Somit ergibt sich:
+\begin{equation}
+  \sigma_.v = \left(\left( \frac{3}{2}- \frac{6}{\pi}\right) \frac{2k_.BT}{m}\right)^{\frac{1}{2}}=\left( \frac{3}{2}- \frac{6}{\pi}\right)^{\frac{1}{2}}\cdot v_.m
 \end{equation}
 
-\begin{equation}
-  \sigma_v = \left(\left( \frac{3}{2}- \frac{6}{\pi}\right) \frac{2k_BT}{m}             \right)^{\frac{1}{2}}
-\end{equation}
+
+%↓
