@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import uncertainties.unumpy as unp
 import scipy.constants as const
 from scipy import integrate
+import pandas as pd
 
 # BackwardsVNominal = []
 # BackwardsVStd = []
@@ -100,7 +101,7 @@ def Empirisch():                #Ergibt die Zufalls-Zahlen
 dim_emp=100
 
 random_emp=np.arange(dim_emp)*0.0
-for i in range(1,dim_emp):
+for i in range(0,dim_emp):
     random_emp[i]=Empirisch()        # Zufalls-Zahlen (kriegen wir aufgrund von Dimensionsproblemen nicht anders hin)
 
 print(random_emp)
@@ -147,3 +148,79 @@ x_0=0
 
 for a in range(50):
     plt.plot(a,period(LKG(a,b,m,x_0,anzahl)),'b.',rasterized=True)
+
+
+
+#Aufgabe 4
+sx0=3.5
+ux0=0
+sy0=2.6
+uy0=3
+rho=0.9
+cov_0=[[sx0**2,rho*sx0*sy0],[rho*sx0*sy0,sy0**2]]
+mean_0=(ux0,uy0)
+
+P0x,P0y=random.multivariate_normal(mean_0,cov_0,10000).T
+
+a=-0.5
+b=0.6
+ux1=6
+sx1=3.5
+corxy1=np.sign(a)
+uy1=a*ux1+b
+sy1=1
+cov_1=[[sx1**2,corxy1],[corxy1,sy1**2]]
+mean_1=(ux1,uy1)
+
+P1x,P1y=random.multivariate_normal(mean_1,cov_1,10000).T
+
+plt.clf()
+
+plt.scatter(P0x,P0y,lw=0,s=1,label=r'$P_0$')
+plt.scatter(P1x,P1y,lw=0,s=1,label=r'$P_1$',color='green')
+plt.legend(loc='best')
+plt.savefig('build/Aufgabe_3_a.pdf')
+
+Mittel_Stich_0=np.array([np.mean(P0x),np.mean(P0y)])
+Varianz_Stich_0=np.array([np.mean((P0x-Mittel_Stich_0[0])**2),np.mean((P0y-Mittel_Stich_0[1])**2)])**(1/2)
+Vxy0=np.mean(P0x*P0y)-Mittel_Stich_0[0]*Mittel_Stich_0[1]
+Cov_Stich_0=[[Varianz_Stich_0[0]**2,Vxy0],[Vxy0,Varianz_Stich_0[1]]]
+Korrelationskoeffizient_0=Vxy0/(Varianz_Stich_0[0]*Varianz_Stich_0[1])
+
+#print(Mittel_Stich_0)
+#print(Varianz_Stich_0)
+#print(Cov_Stich_0)
+#print(Korrelationskoeffizient_0)
+
+Mittel_Stich_1=np.array([np.mean(P1x),np.mean(P1y)])
+Varianz_Stich_1=np.array([np.mean((P1x-Mittel_Stich_1[0])**2),np.mean((P1y-Mittel_Stich_1[1])**2)])**(1/2)
+Vxy1=np.mean(P1x*P1y)-Mittel_Stich_1[0]*Mittel_Stich_1[1]
+Cov_Stich_1=[[Varianz_Stich_1[0]**2,Vxy1],[Vxy1,Varianz_Stich_1[1]]]
+Korrelationskoeffizient_1=Vxy1/(Varianz_Stich_1[0]*Varianz_Stich_1[1])
+
+#print(Mittel_Stich_1)
+#print(Varianz_Stich_1)
+#print(Cov_Stich_1)
+#print(Korrelationskoeffizient_1)
+
+P_Ges_x=np.append(P0x,P1x)
+P_Ges_y=np.append(P0y,P1y)
+
+Mittel_Stich_Ges=np.array([np.mean(P_Ges_x),np.mean(P_Ges_y)])
+Varianz_Stich_Ges=np.array([np.mean((P_Ges_x-Mittel_Stich_Ges[0])**2),np.mean((P_Ges_y-Mittel_Stich_Ges[1])**2)])**(1/2)
+VxyGes=np.mean(P_Ges_x*P_Ges_y)-Mittel_Stich_Ges[0]*Mittel_Stich_Ges[1]
+Cov_Stich_Ges=[[Varianz_Stich_Ges[0]**2,VxyGes],[VxyGes,Varianz_Stich_Ges[1]]]
+Korrelationskoeffizient_Ges=VxyGes/(Varianz_Stich_Ges[0]*Varianz_Stich_Ges[1])
+
+#print(Mittel_Stich_Ges)
+#print(Varianz_Stich_Ges)
+#print(Cov_Stich_Ges)
+#print(Korrelationskoeffizient_Ges)
+
+#c)
+df0= pd.DataFrame({'P_0_x':P0x,'P_0_y':P0y})
+df0.to_hdf('build/Populationen.h5',key='P0',mode='w')
+df1= pd.DataFrame({'P_1_x':P1x,'P_1_y':P1y})
+df1.to_hdf('build/Populationen.h5',key='P1')
+dfGes= pd.DataFrame({'P_Ges_x':P_Ges_x,'P_Ges_y':P_Ges_y})
+dfGes.to_hdf('build/Populationen.h5',key='PGes')
