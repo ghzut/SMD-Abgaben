@@ -1,2 +1,90 @@
 \section{Aufgabe 1}
 \label{sec:Aufgabe1}
+\subsection{a)}
+
+\subsection{b)}
+
+\begin{equation}
+  f(t)=Ne^{-t/\tau}
+\end{equation}
+
+\begin{equation}
+  \int f(t)\text{d}t=F(t)=-\frac{N}{\tau}e^{-t/\tau}+c
+\end{equation}
+
+\begin{align}
+  \int_0^{\infty}f(t)\text{d}t&=1\\
+  \Rightarrow N&=\tau
+\end{align}
+
+\begin{align}
+  F(0)&=0\\
+  \Rightarrow c&=1\\
+  F(t)&=1-e^{-t/\tau}
+\end{align}
+
+\begin{equation}
+  \text{Zuffalszahl}=Y=F(t)
+\end{equation}
+und bestimme $t$
+
+\begin{equation}
+  t=-\tau \text{ln}(1-Y)
+\end{equation}
+
+\subsection{c)}
+
+\begin{equation}
+  f(x)=Nx^{-n}
+\end{equation}
+$n\geq 2$
+
+\begin{equation}
+  \int f(x)\text{d}x=F(x)=-Nnx^{-n-1}+c
+\end{equation}
+
+\begin{align}
+  \int_{x_{min}}^{x_{max}}f(x)\text{d}x&=1\\
+  \Rightarrow N&=\frac{1}{n}\left(x_{min}^{-n-1}-x_{max}^{-n-1}\right)^{-1}
+\end{align}
+
+\begin{align}
+  F(0)&=0\\
+  \Rightarrow c&=\frac{1}{1-\left(\frac{x_{min}}{x_{max}}\right)^{n+1}}  \\
+  F(x)&=\frac{1- \left(\frac{x_{min}}{x}\right)^{n+1}}{1-\left(\frac{x_{min}}{x_{max}}\right)^{n+1}}
+\end{align}
+
+\begin{equation}
+  \text{Zuffalszahl}=Y=F(x)
+\end{equation}
+und bestimme $x$
+
+\begin{equation}
+  x=\frac{x_{min}}{\left(1-Y\left(1-\left(\frac{x_{min}}{x_{max}}\right)^{n+1}\right)\right)^{\frac{1}{n+1}}}
+\end{equation}
+
+\subsection{d)}
+
+
+\begin{equation}
+  f(x)=\frac{1}{\pi(1+x^2)}
+\end{equation}
+
+\begin{equation}
+  \int f(x)\text{d}x=F(x)=\frac{\text{arctan}(x)}{\pi}+c
+\end{equation}
+
+
+\begin{align}
+  F(0)&=0\\
+  \Rightarrow c&=0
+\end{align}
+
+\begin{equation}
+  \text{Zuffalszahl}=Y=F(x)
+\end{equation}
+und bestimme $x$
+
+\begin{equation}
+  x=\text{tan}(Y\pi)
+\end{equation}

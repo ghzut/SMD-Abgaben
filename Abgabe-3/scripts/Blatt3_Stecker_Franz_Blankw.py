@@ -50,6 +50,60 @@ from scipy import integrate
 # makeNewTable([convert((r'$c_\text{1}$',r'$c_\text{2}$',r'$T_{\text{A}1}$',r'$T_{\text{A}2}$',r'$\alpha$',r'$D_1$',r'$D_2$',r'$A_1$',r'$A_2$',r'$A_3$',r'$A_4$'),strFormat),convert(np.array([paramsGes2[0],paramsGes1[0],deltat2*10**6,deltat1*10**6,-paramsDaempfung[0]*2,4.48*10**-6 *paramsGes1[0]/2*10**3, 7.26*10**-6 *paramsGes1[0]/2*10**3, (VierteMessung-2*deltat2*10**6)[0]*10**-6 *1410 /2*10**3, unp.uarray((VierteMessung[1]-VierteMessung[0])*10**-6 *1410 /2*10**3, 0), unp.uarray((VierteMessung[2]-VierteMessung[1])*10**-6 *2500 /2*10**3, 0),unp.uarray((VierteMessung[3]-VierteMessung[2])*10**-6 *1410 /2*10**3, 0)]),unpFormat,[[r'\meter\per\second',"",True],[r'\meter\per\second',"",True],[r'\micro\second',"",True],[r'\micro\second',"",True],[r'\per\meter',"",True],[r'\milli\meter',"",True],[r'\milli\meter',"",True],[r'\milli\meter',"",True],[r'\milli\meter',r'1.3f',True],[r'\milli\meter',r'1.3f',True],[r'\milli\meter',r'2.2f',True]]),convert(np.array([2730,2730]),floatFormat,[r'\meter\per\second','1.0f',True])+convert((r'-',r'-'),strFormat)+convert(unp.uarray([57,6.05,9.9],[2.5,0,0]),unpFormat,[[r'\per\meter',"",True],[r'\milli\meter',r'1.2f',True],[r'\milli\meter',r'1.2f',True]])+convert((r'-',r'-',r'-',r'-'),strFormat),convert(np.array([(2730-paramsGes2[0])/2730*100,(2730-paramsGes1[0])/2730*100]),unpFormat,[r'\percent','',True])+convert((r'-',r'-'),strFormat)+convert(np.array([(-paramsDaempfung[0]*2-unp.uarray(57,2.5))/unp.uarray(57,2.5)*100,(4.48*10**-6 *paramsGes1[0]/2*10**3-6.05)/6.05*100, (-7.26*10**-6 *paramsGes1[0]/2*10**3+9.90)/9.90*100]),unpFormat,[r'\percent','',True])+convert((r'-',r'-',r'-',r'-'),strFormat)],r'{Wert}&{gemessen}&{Literaturwert\cite{cAcryl},\cite{alphaAcryl}}&{Abweichung}','Ergebnisse', ['c ','c',r'c','c'])
 
 #Aufgabe 1
+import numpy.random as random  #gegebene zufällige gleichverteilung von 0 bis 1 ist rand.random_sample()
+random.seed(431)
+#a)
+def Von_x_bis_y(x_min,x_max,dim=1):
+    return (x_max-x_min) * random.random_sample(dim) + x_min
+#random=Von_x_bis_y(0,3,10)
+#print(random)
+
+#b)
+def Exponential(tau,dim=1):
+    return -tau*np.log(1-random.random_sample(dim))
+
+#random_exp=Exponential(10,100)
+#print(random_exp)
+
+#c)
+def Potenz(n,x_min,x_max,dim=1):
+    assert n>=2
+    return x_min / (1-random.random_sample(dim)* (1-(x_min/x_max)**(n+1)))**(1/(n+1))
+
+#random_potenz=Potenz(2,1,10,100)
+#print(random_potenz)
+
+#d)
+
+def Cauchy(dim=1):
+    return np.tan(random.random_sample(dim)*const.pi)
+
+#random_cauchy=Cauchy(100)
+#print(random_cauchy)
+
+#e)
+x,y=np.genfromtxt('empirisches_histogramm.csv', delimiter=',', unpack=True)
+
+def Intg(xx):
+    bereich=(x<=xx)
+    return integrate.trapz(y[bereich],x=x[bereich])
+y=y/Intg(1)         #Normierung
+Y=y*0
+for i in range(0,y.size):
+    Y[i]=Intg(x[i])        #Werte-Array des Integrals (kriegen wir aufgrund von Dimensionsproblemen nicht anders hin)
+#print(Y)
+
+def Empirisch():                #Ergibt die Zufalls-Zahlen
+    Ran=random.random_sample(1)
+    return (x[Y<=Ran])[-1]
+
+dim_emp=100
+
+random_emp=np.arange(dim_emp)*0.0
+for i in range(1,dim_emp):
+    random_emp[i]=Empirisch()        # Zufalls-Zahlen (kriegen wir aufgrund von Dimensionsproblemen nicht anders hin)
+
+print(random_emp)
 
 #Aufgabe 2 mit viel for oder mit weniger
 def LKG(a,b,m,x,anzahl):
@@ -90,5 +144,6 @@ b=3
 m=1024
 anzahl=2
 x_0=0
+
 for a in range(50):
     plt.plot(a,period(LKG(a,b,m,x_0,anzahl)),'b.',rasterized=True)
