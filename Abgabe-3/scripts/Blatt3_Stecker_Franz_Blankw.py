@@ -83,7 +83,7 @@ def Cauchy(dim=1):
 #print(random_cauchy)
 
 #e)
-x,y=np.genfromtxt('empirisches_histogramm.csv', delimiter=',', unpack=True)
+x,y=np.genfromtxt('empirisches_histogramm.csv', delimiter=',', unpack=True,skip_header=1)
 
 def Intg(xx):
     bereich=(x<=xx)
@@ -179,7 +179,7 @@ plt.clf()
 plt.scatter(P0x,P0y,lw=0,s=1,label=r'$P_0$')
 plt.scatter(P1x,P1y,lw=0,s=1,label=r'$P_1$',color='green')
 plt.legend(loc='best')
-plt.savefig('build/Aufgabe_3_a.pdf')
+plt.savefig('build/Aufgabe_4_a.pdf')
 
 Mittel_Stich_0=np.array([np.mean(P0x),np.mean(P0y)])
 Varianz_Stich_0=np.array([np.mean((P0x-Mittel_Stich_0[0])**2),np.mean((P0y-Mittel_Stich_0[1])**2)])**(1/2)
