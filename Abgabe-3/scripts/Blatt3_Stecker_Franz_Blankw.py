@@ -169,7 +169,7 @@ a=-0.5
 b=0.6
 ux1=6
 sx1=3.5
-corxy1=np.sign(a)
+corxy1=np.sign(b)
 uy1=a*ux1+b
 sy1=1
 cov_1=[[sx1**2,corxy1],[corxy1,sy1**2]]
@@ -189,22 +189,24 @@ Varianz_Stich_0=np.array([np.mean((P0x-Mittel_Stich_0[0])**2),np.mean((P0y-Mitte
 Vxy0=np.mean(P0x*P0y)-Mittel_Stich_0[0]*Mittel_Stich_0[1]
 Cov_Stich_0=[[Varianz_Stich_0[0]**2,Vxy0],[Vxy0,Varianz_Stich_0[1]]]
 Korrelationskoeffizient_0=Vxy0/(Varianz_Stich_0[0]*Varianz_Stich_0[1])
-
-#print(Mittel_Stich_0)
-#print(Varianz_Stich_0)
-#print(Cov_Stich_0)
-#print(Korrelationskoeffizient_0)
+print("P0")
+print(Mittel_Stich_0)
+print(Varianz_Stich_0)
+print(Vxy0)
+print(Cov_Stich_0)
+print(Korrelationskoeffizient_0)
 
 Mittel_Stich_1=np.array([np.mean(P1x),np.mean(P1y)])
 Varianz_Stich_1=np.array([np.mean((P1x-Mittel_Stich_1[0])**2),np.mean((P1y-Mittel_Stich_1[1])**2)])**(1/2)
 Vxy1=np.mean(P1x*P1y)-Mittel_Stich_1[0]*Mittel_Stich_1[1]
 Cov_Stich_1=[[Varianz_Stich_1[0]**2,Vxy1],[Vxy1,Varianz_Stich_1[1]]]
 Korrelationskoeffizient_1=Vxy1/(Varianz_Stich_1[0]*Varianz_Stich_1[1])
-
-#print(Mittel_Stich_1)
-#print(Varianz_Stich_1)
-#print(Cov_Stich_1)
-#print(Korrelationskoeffizient_1)
+print("P1")
+print(Mittel_Stich_1)
+print(Varianz_Stich_1)
+print(Vxy1)
+print(Cov_Stich_1)
+print(Korrelationskoeffizient_1)
 
 P_Ges_x=np.append(P0x,P1x)
 P_Ges_y=np.append(P0y,P1y)
@@ -214,11 +216,12 @@ Varianz_Stich_Ges=np.array([np.mean((P_Ges_x-Mittel_Stich_Ges[0])**2),np.mean((P
 VxyGes=np.mean(P_Ges_x*P_Ges_y)-Mittel_Stich_Ges[0]*Mittel_Stich_Ges[1]
 Cov_Stich_Ges=[[Varianz_Stich_Ges[0]**2,VxyGes],[VxyGes,Varianz_Stich_Ges[1]]]
 Korrelationskoeffizient_Ges=VxyGes/(Varianz_Stich_Ges[0]*Varianz_Stich_Ges[1])
-
-#print(Mittel_Stich_Ges)
-#print(Varianz_Stich_Ges)
-#print(Cov_Stich_Ges)
-#print(Korrelationskoeffizient_Ges)
+print("P_Ges")
+print(Mittel_Stich_Ges)
+print(Varianz_Stich_Ges)
+print(VxyGes)
+print(Cov_Stich_Ges)
+print(Korrelationskoeffizient_Ges)
 
 #c)
 df0= pd.DataFrame({'P_0_x':P0x,'P_0_y':P0y})
