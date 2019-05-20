@@ -151,7 +151,118 @@ for a in range(50):
     plt.ylabel("Periodendauer")
 plt.savefig("build/Periodendauer.pdf")
 
+a=1601
+b=3456
+m=10000
 
+#b)
+plt.clf()
+plt.cla()
+for x_val in range(4):
+    if x_val < 2:
+        plt.subplot(2,2,x_val+1)
+        plt.hist(LKG(a,b,m,x_val,1),density=True,bins=25)
+        plt.xlabel("Zufallszahl")
+        plt.ylabel("Wahrscheinlichkeit")
+    else:
+        plt.subplot(2,2,x_val+1)
+        plt.hist(LKG(a,b,m,x_val,1),density=True,bins=25)
+        plt.xlabel("Zufallszahl")
+        plt.ylabel("Wahrscheinlichkeit")
+plt.savefig("build/Wahrschkeit.pdf")
+
+#c) Plot ist noch hässlich überlappend
+def pair(x,i):
+    j = i % len(x)
+    y=x[j:] + x[:j]
+    return y
+
+x=LKG(a,b,m,x_0,1)
+y=pair(x,1)
+z=pair(x,2)
+plt.clf()
+plt.cla()
+plt.scatter(x, y)
+plt.xlabel(r'$x_{i}$')
+plt.ylabel(r'$x_{i+1}$')
+plt.savefig("build/2D-Scatter-Plot.pdf")
+
+#plt.clf()
+#plt.cla()
+
+f=plt.figure()
+ax=Axes3D(f)
+ax.scatter(x, y, z)
+ax.set_xlabel(r'$x_{i}$')
+ax.set_ylabel(r'$x_{i+1}$')
+ax.set_zlabel(r'$x_{i+2}$')
+plt.show()
+
+x=[None]
+for i in range(10000):
+    x_val=np.random.uniform()
+    x[i]=x_val
+    x+=[None]
+
+#Histogramm np.random.uniform()
+for i in range(4):
+    if i < 2:
+        plt.subplot(2,2,i+1)
+        plt.hist(LKG(a,b,m,x[i],1),density=True,bins=25)
+        plt.xlabel("Zufallszahl")
+        plt.ylabel("Wahrscheinlichkeit")
+    else:
+        plt.subplot(2,2,i+1)
+        plt.hist(LKG(a,b,m,x[i],1),density=True,bins=25)
+        plt.xlabel("Zufallszahl")
+        plt.ylabel("Wahrscheinlichkeit")
+plt.savefig("build/Wahrschkeit_uniform.pdf")
+
+
+#2D-Scatter np.radnom.uniform()
+y=pair(x,1)
+z=pair(x,2)
+plt.clf()
+plt.cla()
+plt.scatter(x, y)
+plt.xlabel(r'$x_{i}$')
+plt.ylabel(r'$x_{i+1}$')
+plt.savefig("build/2D-Scatter-Plot-Uniform.pdf")
+
+plt.clf()
+plt.cla()
+#3D-Scatter np.random.uniform()
+f2=plt.figure()
+ax2=Axes3D(f2)
+ax2.scatter(x, y, z)
+ax2.set_xlabel(r'$x_{i}$')
+ax2.set_ylabel(r'$x_{i+1}$')
+ax2.set_zlabel(r'$x_{i+2}$')
+plt.savefig("build/3D-Scatter-Plot-Uniform.pdf")
+
+#Ganzzahlige Überprüfung der x-Startwerte ob der LKG 1/2 liefert
+m=4
+x_data=LKG(a,b,m,x_0,1)
+b=3
+a=5
+m=1024
+for j in x_data:
+    x_neu = LKG(a,b,m,j,1)
+    counter=0
+    for i in range(len(x_neu)):
+        if x_neu[i]==1/2:
+            counter += 1
+    print("Für einen ganzzahligen Startwert liefert der LKG ",counter,"mal den Wert 1/2") #ergibt 0 logisch da nur ganzzahlig
+
+#Nichtganzzahlige Überprüfung
+x_data_dezimal=np.random.uniform(size=4)
+for j in x_data_dezimal:
+    x_neu = LKG(a,b,m,j,1)
+    counter=0
+    for i in range(len(x_neu)):
+        if x_neu[i]==1/2:
+            counter += 1
+    print("Für einen nicht ganzzahligen Startwert liefert der LKG ",counter,"mal den Wert 1/2")#sollte laut Lars 16 liefern tut es aber nicht ->nochmal angucken, mit Startwert x_0=0.5 geht es auch nicht 
 
 
 #Aufgabe 4
