@@ -29,24 +29,12 @@ In Worten gefasst ist es für einen wahren Zufallszahlengenerator nahezu unmögl
 \subsection{c)}
 Da ein Bit nur zwei Werte annehmen kann (und wir eine Mantissenlänge von $23$ annehmen), ergibt sich die trivial
 \begin{equation}
-  P(\text{Mantisse richtig bei gegebenem Exponent})=P(M|E)=2^{-23}
-\end{equation}
-Ebenso ergibt sich aus der Länge des Exponent trivial die Beziehung
-\begin{equation}
-  P(\text{Exponent richtig bei gegebener Mantisse})=P(E|M)=2^{-x}
-\end{equation}
-Nach kurzer Überlegung, dass pro Exponent nur eine Mantisse richtig ist, ergibt sich die Anzahl der übereinstimmenden Mantissen und Exponenten als
-\begin{equation}
-  N_{EM}=x
-\end{equation}
-und damit die gesamte Wahrscheinlichkeit, die gesuchte Zahl darzustellen als
-\begin{equation}
-  P(\text{Zahl richtig})=P(Z)=P(M|E)\cdot P(E|M)\cdot N_{EM}=2^{-(23+x)}x
+  P(\text{Mantisse richtig})=P(M)=2^{-23}=1,19\cdot10^{-7}
 \end{equation}
 Da $\frac{1}{2}$ durch eine endliche Anzahl von Nachkommastellen dargestellt werden kann, kann sie auch von dem Zufallszahlengenerator mit der eben errechneten Wahrscheinlichkeit geliefert werden.
 
 \subsection{d)}
-Die Zahl $\frac{2}{3}$ kann nur approximiert werden und damit auch niemals exakt vom Zufallszahlengenerator erzeugt werden. Ihre Approximation des Computers kann aber erzeugt werden. Hierbei muss aber wieder beachtet werden, dass ein Computer Zahlen immer normalisiert approximiert. Das heisst, dass hier nur ein richtiger Exponent zur Erzeugung der Zahl existiert und damit $N_{EM}=1$. Dadurch ergibt sich die Wahrscheinlichkeit als
+Die Zahl $\frac{2}{3}$ kann nur approximiert werden und damit auch niemals exakt vom Zufallszahlengenerator erzeugt werden. Ihre Approximation des Computers kann aber erzeugt werden. Dabei ergibt sich die Wahrscheinlichkeit ebenfalls als
 \begin{equation}
-  P\left(\frac{2}{3}\right)=P(M|E)\cdot P(E|M)=2^{-(23+x)}
+  P\left(\frac{2}{3}\right)=1,19\cdot10{-7}
 \end{equation}
