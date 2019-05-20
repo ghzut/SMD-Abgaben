@@ -13,7 +13,6 @@ import uncertainties.unumpy as unp
 import scipy.constants as const
 from scipy import integrate
 import pandas as pd
-np.random.seed(5)
 # BackwardsVNominal = []
 # BackwardsVStd = []
 # for value in BackwardsV:
@@ -51,7 +50,6 @@ np.random.seed(5)
 # makeNewTable([convert((r'$c_\text{1}$',r'$c_\text{2}$',r'$T_{\text{A}1}$',r'$T_{\text{A}2}$',r'$\alpha$',r'$D_1$',r'$D_2$',r'$A_1$',r'$A_2$',r'$A_3$',r'$A_4$'),strFormat),convert(np.array([paramsGes2[0],paramsGes1[0],deltat2*10**6,deltat1*10**6,-paramsDaempfung[0]*2,4.48*10**-6 *paramsGes1[0]/2*10**3, 7.26*10**-6 *paramsGes1[0]/2*10**3, (VierteMessung-2*deltat2*10**6)[0]*10**-6 *1410 /2*10**3, unp.uarray((VierteMessung[1]-VierteMessung[0])*10**-6 *1410 /2*10**3, 0), unp.uarray((VierteMessung[2]-VierteMessung[1])*10**-6 *2500 /2*10**3, 0),unp.uarray((VierteMessung[3]-VierteMessung[2])*10**-6 *1410 /2*10**3, 0)]),unpFormat,[[r'\meter\per\second',"",True],[r'\meter\per\second',"",True],[r'\micro\second',"",True],[r'\micro\second',"",True],[r'\per\meter',"",True],[r'\milli\meter',"",True],[r'\milli\meter',"",True],[r'\milli\meter',"",True],[r'\milli\meter',r'1.3f',True],[r'\milli\meter',r'1.3f',True],[r'\milli\meter',r'2.2f',True]]),convert(np.array([2730,2730]),floatFormat,[r'\meter\per\second','1.0f',True])+convert((r'-',r'-'),strFormat)+convert(unp.uarray([57,6.05,9.9],[2.5,0,0]),unpFormat,[[r'\per\meter',"",True],[r'\milli\meter',r'1.2f',True],[r'\milli\meter',r'1.2f',True]])+convert((r'-',r'-',r'-',r'-'),strFormat),convert(np.array([(2730-paramsGes2[0])/2730*100,(2730-paramsGes1[0])/2730*100]),unpFormat,[r'\percent','',True])+convert((r'-',r'-'),strFormat)+convert(np.array([(-paramsDaempfung[0]*2-unp.uarray(57,2.5))/unp.uarray(57,2.5)*100,(4.48*10**-6 *paramsGes1[0]/2*10**3-6.05)/6.05*100, (-7.26*10**-6 *paramsGes1[0]/2*10**3+9.90)/9.90*100]),unpFormat,[r'\percent','',True])+convert((r'-',r'-',r'-',r'-'),strFormat)],r'{Wert}&{gemessen}&{Literaturwert\cite{cAcryl},\cite{alphaAcryl}}&{Abweichung}','Ergebnisse', ['c ','c',r'c','c'])
 
 #Aufgabe 1
-<<<<<<< HEAD
 import numpy.random as random  #gegebene zufällige gleichverteilung von 0 bis 1 ist rand.random_sample()
 random.seed(431)
 #a)
@@ -107,10 +105,7 @@ for i in range(0,dim_emp):
 
 print(random_emp)
 
-||||||| merged common ancestors
 
-=======
->>>>>>> ?
 #Aufgabe 2 mit viel for oder mit weniger
 def LKG(a,b,m,x,anzahl):
     random=[None]
@@ -152,7 +147,10 @@ x_0=0
 
 for a in range(50):
     plt.plot(a,period(LKG(a,b,m,x_0,anzahl)),'b.',rasterized=True)
-<<<<<<< HEAD
+    plt.xlabel("a")
+    plt.ylabel("Periodendauer")
+plt.savefig("build/Periodendauer.pdf")
+
 
 
 
@@ -229,9 +227,3 @@ df1= pd.DataFrame({'P_1_x':P1x,'P_1_y':P1y})
 df1.to_hdf('build/Populationen.h5',key='P1')
 dfGes= pd.DataFrame({'P_Ges_x':P_Ges_x,'P_Ges_y':P_Ges_y})
 dfGes.to_hdf('build/Populationen.h5',key='PGes')
-||||||| merged common ancestors
-=======
-    plt.xlabel("a")
-    plt.ylabel("Periodendauer")
-plt.savefig("build/Periodendauer.pdf")
->>>>>>> ?
