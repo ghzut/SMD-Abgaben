@@ -77,7 +77,7 @@ def Potenz(n,x_min,x_max,dim=1):
 #d)
 
 def Cauchy(dim=1):
-    return np.tan(random.random_sample(dim)*const.pi)
+    return np.tan((random.random_sample(dim)-1/2)*const.pi)
 
 #random_cauchy=Cauchy(100)
 #print(random_cauchy)

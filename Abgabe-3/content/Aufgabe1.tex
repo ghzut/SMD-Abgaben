@@ -1,90 +1,120 @@
 \section{Aufgabe 1}
 \label{sec:Aufgabe1}
+Gegeben ist eine Gleichverteilung im Intervall $[0,1]$.
 \subsection{a)}
-
+Eine Gleichverteilung auf einem Intervall $[a,b]$ ergibt sich als
+\begin{equation}
+  f(x)=
+  \begin{cases}
+    c&x\in[a,b]\\
+    0&sonst
+  \end{cases}
+\end{equation}
+Die dazugehörige Verteilungsfunktion lässt sich aus dem Integral
+\begin{equation}
+  \int f(x)\text{d}x=F(x)=cx+d
+\end{equation}
+bestimmen.
+Diese kann dann normiert werden
+\begin{align}
+  \int_a^{b}f(x)\text{d}t&=1\\
+  \Rightarrow c&=(b-a)^{-1}
+\end{align}
+und mit den Randwerten (bzw. einem der Randwerte) eindeutig definiert werden
+\begin{align}
+  F(a)&=0\\
+  \Rightarrow d&=-\frac{a}{b-a}\\
+  F(x)&=\frac{x-a}{b-a}
+\end{align}
+Um nun eine Zufalls-Zahl nach dieser Verteilung zu generieren, setzt man
+\begin{equation}
+  \text{Zufallszahl}[0,1]=Y=F(x)
+\end{equation}
+und bestimmt $x$.
+\begin{equation}
+  x=(b-a)Y+a
+\end{equation}
 \subsection{b)}
-
+Die gegebene Verteilung
 \begin{equation}
   f(t)=Ne^{-t/\tau}
 \end{equation}
-
+auf dem Intervall $[0,\infty)$ ergibt mittels Integration die Verteilungsfunktion
 \begin{equation}
   \int f(t)\text{d}t=F(t)=-\frac{N}{\tau}e^{-t/\tau}+c
 \end{equation}
-
+Die Bestimmung der Normierungskonstante ergibt
 \begin{align}
   \int_0^{\infty}f(t)\text{d}t&=1\\
   \Rightarrow N&=\tau
 \end{align}
-
+und die Randwertbetrachung liefert
 \begin{align}
   F(0)&=0\\
   \Rightarrow c&=1\\
   F(t)&=1-e^{-t/\tau}
 \end{align}
-
+Somit wird wieder
 \begin{equation}
-  \text{Zuffalszahl}=Y=F(t)
+  \text{Zufallszahl}[0,1]=Y=F(t)
 \end{equation}
-und bestimme $t$
-
+gesetzt und $t$ bestimmt.
 \begin{equation}
   t=-\tau \text{ln}(1-Y)
 \end{equation}
-
 \subsection{c)}
-
+Das Potenzgesetz
 \begin{equation}
   f(x)=Nx^{-n}
 \end{equation}
-$n\geq 2$
-
+mit $n\geq 2$ auf dem Intervall $[x_{min},x_{max}]$ ergibt mittels Integration die Verteilungsfunktion
 \begin{equation}
   \int f(x)\text{d}x=F(x)=-Nnx^{-n-1}+c
 \end{equation}
-
+Es wird nun die Normierung bestimmt
 \begin{align}
   \int_{x_{min}}^{x_{max}}f(x)\text{d}x&=1\\
   \Rightarrow N&=\frac{1}{n}\left(x_{min}^{-n-1}-x_{max}^{-n-1}\right)^{-1}
 \end{align}
-
+und die Randwerte betrachtet
 \begin{align}
   F(0)&=0\\
   \Rightarrow c&=\frac{1}{1-\left(\frac{x_{min}}{x_{max}}\right)^{n+1}}  \\
   F(x)&=\frac{1- \left(\frac{x_{min}}{x}\right)^{n+1}}{1-\left(\frac{x_{min}}{x_{max}}\right)^{n+1}}
 \end{align}
-
+Anschliessend setze man
 \begin{equation}
-  \text{Zuffalszahl}=Y=F(x)
+  \text{Zufallszahl}[0,1]=Y=F(x)
 \end{equation}
-und bestimme $x$
-
+und bestimme $x$.
 \begin{equation}
   x=\frac{x_{min}}{\left(1-Y\left(1-\left(\frac{x_{min}}{x_{max}}\right)^{n+1}\right)\right)^{\frac{1}{n+1}}}
 \end{equation}
-
 \subsection{d)}
-
-
+Die Cauchy-Verteilung
 \begin{equation}
   f(x)=\frac{1}{\pi(1+x^2)}
 \end{equation}
-
+auf dem Intervall $(-\infty,\infty)$ ergibt die Verteilungsfunktion
 \begin{equation}
   \int f(x)\text{d}x=F(x)=\frac{\text{arctan}(x)}{\pi}+c
 \end{equation}
-
-
+Betrachtung der Randwerte ergibt
 \begin{align}
-  F(0)&=0\\
-  \Rightarrow c&=0
+  F(-\infty)&=0\\
+  \Rightarrow c&=\frac{1}{2}
 \end{align}
-
+Setze nun wieder
 \begin{equation}
-  \text{Zuffalszahl}=Y=F(x)
+  \text{Zufallszahl}[0,1]=Y=F(x)
 \end{equation}
-und bestimme $x$
-
+und bestimme $x$.
 \begin{equation}
-  x=\text{tan}(Y\pi)
+  x=\text{tan}\left(\left(Y-\frac{1}{2}\right)\pi\right)
 \end{equation}
+\subsection{e)}
+Gegeben sind Wertepaare $(x,y_{\text{unnormiert}})$ als Bins und Counts. Mittels numerischer Verfahren kann nun das Integral über alle Bins ausgeführt werden und die Verteilung normiert werden $(x,y)$. Desweiteren kann diesen Wertepaaren nun die Werte $Y_i$, welche den numerischen Integralen bis zum Wert $x_i$ entsprechen, als weiterer Wert hinzugefügt werden. Es ergeben sich die Tripel $(x,y,Y)$. Es kann nun
+\begin{equation}
+  \text{Zufallszahl}[0,1]\geq Y
+\end{equation}
+gesetzt werden, bzw. das grösste Y, welches kleiner als die Zufallszahl ist bestimmt werden. Für die Erzeugung beliebig vieler Zufallszahlen aus der Verteilung können dann die bereits berechneten Tripel verwendet werden. Dieser Algorithmus verbraucht Speicher läuft dafür aber relativ schnell.% Die andere (hier nicht implementierte) Variante wäre es (nach der Normierung) die Integrale immer wieder bis zum erzeugten Zufallswert neu auszurechnen (langsamer, weniger Speicherverbrauch).
