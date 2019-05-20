@@ -1,2 +1,52 @@
 \section{Aufgabe 3}
 \label{sec:Aufgabe3}
+Aus der Wahrscheinlichkeitsverteilung
+\begin{equation}
+  f(x)=
+  \begin{cases}
+    1   & 0\leq x \leq 1\\
+    0   &\text{sonst}
+  \end{cases}
+\end{equation}
+kann man mittels integrieren die Wahrscheinlichkeit ermitteln eine zufällige Zahl
+im Intervall $[a,b]\subseteq [0,1)$ (ansonsten ersetzte mit $0$ oder $1$) gilt dann
+\begin{equation}
+  P(x\in [ a,b ])=\left|\int_a^b f(x)\text{d}x\right|=|b-a|
+\end{equation}
+\subsection{a)}
+Setzen wir nun $a=\frac{1}{3}$ und $b=\frac{1}{2}$ ergibt sich
+\begin{equation}
+  P\left(x\in \left[\frac{1}{3},\frac{1}{2}\right]\right)=\frac{1}{2}-\frac{1}{3}=\frac{1}{6}
+\end{equation}
+
+\subsection{b)}
+Wenn wir $a=b$($=\frac{1}{2}$) setzen ergibt sich die Wahrscheinlichkeit als
+\begin{equation}
+  P\left(x=\frac{1}{2}\right)=P\left(x\in \left[\frac{1}{2},\frac{1}{2}\right]\right)=0
+\end{equation}
+In Worten gefasst ist es für einen wahren Zufallszahlengenerator nahezu unmöglich irgendeine exakte Zahl tatsächlich zu erzeugen. Zahlen können immer nur in Intervalle fallen.
+
+\subsection{c)}
+Da ein Bit nur zwei Werte annehmen kann (und wir eine Mantissenlänge von $23$ annehmen), ergibt sich die trivial
+\begin{equation}
+  P(\text{Mantisse richtig bei gegebenem Exponent})=P(M|E)=2^{-23}
+\end{equation}
+Ebenso ergibt sich aus der Länge des Exponent trivial die Beziehung
+\begin{equation}
+  P(\text{Exponent richtig bei gegebener Mantisse})=P(E|M)=2^{-x}
+\end{equation}
+Nach kurzer Überlegung, dass pro Exponent nur eine Mantisse richtig ist, ergibt sich die Anzahl der übereinstimmenden Mantissen und Exponenten als
+\begin{equation}
+  N_{EM}=x
+\end{equation}
+und damit die gesamte Wahrscheinlichkeit, die gesuchte Zahl darzustellen als
+\begin{equation}
+  P(\text{Zahl richtig})=P(Z)=P(M|E)\cdot P(E|M)\cdot N_{EM}=2^{-(23+x)}x
+\end{equation}
+Da $\frac{1}{2}$ durch eine endliche Anzahl von Nachkommastellen dargestellt werden kann, kann sie auch von dem Zufallszahlengenerator mit der eben errechneten Wahrscheinlichkeit geliefert werden.
+
+\subsection{d)}
+Die Zahl $\frac{2}{3}$ kann nur approximiert werden und damit auch niemals exakt vom Zufallszahlengenerator erzeugt werden. Ihre Approximation des Computers kann aber erzeugt werden. Hierbei muss aber wieder beachtet werden, dass ein Computer Zahlen immer normalisiert approximiert. Das heisst, dass hier nur ein richtiger Exponent zur Erzeugung der Zahl existiert und damit $N_{EM}=1$. Dadurch ergibt sich die Wahrscheinlichkeit als
+\begin{equation}
+  P\left(\frac{2}{3}\right)=P(M|E)\cdot P(E|M)=2^{-(23+x)}
+\end{equation}
