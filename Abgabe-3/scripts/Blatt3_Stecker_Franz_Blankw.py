@@ -156,7 +156,7 @@ a=1601
 b=3456
 m=10000
 
-#b)
+#b) Plot ist noch hässlich überlappend
 plt.clf()
 plt.cla()
 for x_val in range(4):
@@ -170,9 +170,10 @@ for x_val in range(4):
         plt.hist(LKG(a,b,m,x_val,1),density=True,bins=25)
         plt.xlabel("Zufallszahl")
         plt.ylabel("Wahrscheinlichkeit")
+plt.tight_layout()
 plt.savefig("build/Wahrschkeit.pdf")
 
-#c) Plot ist noch hässlich überlappend
+#c)
 def pair(x,i):
     j = i % len(x)
     y=x[j:] + x[:j]
@@ -197,7 +198,8 @@ ax.scatter(x, y, z)
 ax.set_xlabel(r'$x_{i}$')
 ax.set_ylabel(r'$x_{i+1}$')
 ax.set_zlabel(r'$x_{i+2}$')
-plt.show()
+plt.savefig("build/3D-Scatter-Plot")
+
 
 x2=[None]
 for i in range(10000):
@@ -222,6 +224,7 @@ for i in range(4):
         plt.hist(LKG(a,b,m,x2[i],1),density=True,bins=25)
         plt.xlabel("Zufallszahl")
         plt.ylabel("Wahrscheinlichkeit")
+plt.tight_layout()
 plt.savefig("build/Wahrschkeit_uniform.pdf")
 
 
@@ -268,7 +271,7 @@ for j in x_data_dezimal:
     for i in range(len(x_neu)):
         if x_neu[i]==1/2:
             counter += 1
-    print("Für einen nicht ganzzahligen Startwert liefert der LKG ",counter,"mal den Wert 1/2")#sollte laut Lars 16 liefern tut es aber nicht ->nochmal angucken, mit Startwert x_0=0.1,0.3,0.5... kommt 1/2 einmal pro Periode vor 
+    print("Für einen nicht ganzzahligen Startwert liefert der LKG ",counter,"mal den Wert 1/2")#sollte laut Lars 16 liefern tut es aber nicht ->nochmal angucken, mit Startwert x_0=0.1,0.3,0.5... kommt 1/2 einmal pro Periode vor
 
 #Aufgabe 4
 sx0=3.5
