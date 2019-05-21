@@ -156,7 +156,7 @@ a=1601
 b=3456
 m=10000
 
-#b) Plot ist noch hässlich überlappend
+#b)
 plt.clf()
 plt.cla()
 for x_val in range(4):
@@ -200,7 +200,7 @@ ax.set_ylabel(r'$x_{i+1}$')
 ax.set_zlabel(r'$x_{i+2}$')
 plt.savefig("build/3D-Scatter-Plot")
 
-
+#d)
 x2=[None]
 for i in range(10000):
     if i<9999:
@@ -249,6 +249,7 @@ ax2.set_ylabel(r'$x_{i+1}$')
 ax2.set_zlabel(r'$x_{i+2}$')
 plt.savefig("build/3D-Scatter-Plot-Uniform.pdf")
 
+#e)
 #Ganzzahlige Überprüfung der x-Startwerte ob der LKG 1/2 liefert
 m=4
 x_data=LKG(a,b,m,x_0,1)
