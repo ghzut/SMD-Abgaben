@@ -13,6 +13,7 @@ import uncertainties.unumpy as unp
 import scipy.constants as const
 from scipy import integrate
 import pandas as pd
+from mpl_toolkits.mplot3d import Axes3D
 # BackwardsVNominal = []
 # BackwardsVStd = []
 # for value in BackwardsV:
@@ -198,33 +199,38 @@ ax.set_ylabel(r'$x_{i+1}$')
 ax.set_zlabel(r'$x_{i+2}$')
 plt.show()
 
-x=[None]
+x2=[None]
 for i in range(10000):
-    x_val=np.random.uniform()
-    x[i]=x_val
-    x+=[None]
+    if i<9999:
+        x_val=np.random.uniform()
+        x2[i]=x_val
+        x2+=[None]
+    else:
+        x_val=np.random.uniform()
+        x2[i]=x_val
+
 
 #Histogramm np.random.uniform()
 for i in range(4):
     if i < 2:
         plt.subplot(2,2,i+1)
-        plt.hist(LKG(a,b,m,x[i],1),density=True,bins=25)
+        plt.hist(LKG(a,b,m,x2[i],1),density=True,bins=25)
         plt.xlabel("Zufallszahl")
         plt.ylabel("Wahrscheinlichkeit")
     else:
         plt.subplot(2,2,i+1)
-        plt.hist(LKG(a,b,m,x[i],1),density=True,bins=25)
+        plt.hist(LKG(a,b,m,x2[i],1),density=True,bins=25)
         plt.xlabel("Zufallszahl")
         plt.ylabel("Wahrscheinlichkeit")
 plt.savefig("build/Wahrschkeit_uniform.pdf")
 
 
 #2D-Scatter np.radnom.uniform()
-y=pair(x,1)
-z=pair(x,2)
+y2=pair(x2,1)
+z2=pair(x2,2)
 plt.clf()
 plt.cla()
-plt.scatter(x, y)
+plt.scatter(x2, y2)
 plt.xlabel(r'$x_{i}$')
 plt.ylabel(r'$x_{i+1}$')
 plt.savefig("build/2D-Scatter-Plot-Uniform.pdf")
@@ -234,7 +240,7 @@ plt.cla()
 #3D-Scatter np.random.uniform()
 f2=plt.figure()
 ax2=Axes3D(f2)
-ax2.scatter(x, y, z)
+ax2.scatter(x2, y2, z2)
 ax2.set_xlabel(r'$x_{i}$')
 ax2.set_ylabel(r'$x_{i+1}$')
 ax2.set_zlabel(r'$x_{i+2}$')
@@ -262,8 +268,7 @@ for j in x_data_dezimal:
     for i in range(len(x_neu)):
         if x_neu[i]==1/2:
             counter += 1
-    print("Für einen nicht ganzzahligen Startwert liefert der LKG ",counter,"mal den Wert 1/2")#sollte laut Lars 16 liefern tut es aber nicht ->nochmal angucken, mit Startwert x_0=0.5 geht es auch nicht 
-
+    print("Für einen nicht ganzzahligen Startwert liefert der LKG ",counter,"mal den Wert 1/2")#sollte laut Lars 16 liefern tut es aber nicht ->nochmal angucken, mit Startwert x_0=0.1,0.3,0.5... kommt 1/2 einmal pro Periode vor 
 
 #Aufgabe 4
 sx0=3.5
