@@ -307,7 +307,7 @@ plt.savefig('build/Aufgabe_4_a.pdf')
 Mittel_Stich_0=np.array([np.mean(P0x),np.mean(P0y)])
 Varianz_Stich_0=np.array([np.mean((P0x-Mittel_Stich_0[0])**2),np.mean((P0y-Mittel_Stich_0[1])**2)])**(1/2)
 Vxy0=np.mean(P0x*P0y)-Mittel_Stich_0[0]*Mittel_Stich_0[1]
-Cov_Stich_0=[[Varianz_Stich_0[0]**2,Vxy0],[Vxy0,Varianz_Stich_0[1]]]
+Cov_Stich_0=[[Varianz_Stich_0[0]**2,Vxy0],[Vxy0,Varianz_Stich_0[1]**2]]
 Korrelationskoeffizient_0=Vxy0/(Varianz_Stich_0[0]*Varianz_Stich_0[1])
 print("P0")
 print(Mittel_Stich_0)
@@ -319,7 +319,7 @@ print(Korrelationskoeffizient_0)
 Mittel_Stich_1=np.array([np.mean(P1x),np.mean(P1y)])
 Varianz_Stich_1=np.array([np.mean((P1x-Mittel_Stich_1[0])**2),np.mean((P1y-Mittel_Stich_1[1])**2)])**(1/2)
 Vxy1=np.mean(P1x*P1y)-Mittel_Stich_1[0]*Mittel_Stich_1[1]
-Cov_Stich_1=[[Varianz_Stich_1[0]**2,Vxy1],[Vxy1,Varianz_Stich_1[1]]]
+Cov_Stich_1=[[Varianz_Stich_1[0]**2,Vxy1],[Vxy1,Varianz_Stich_1[1]**2]]
 Korrelationskoeffizient_1=Vxy1/(Varianz_Stich_1[0]*Varianz_Stich_1[1])
 print("P1")
 print(Mittel_Stich_1)
@@ -334,7 +334,7 @@ P_Ges_y=np.append(P0y,P1y)
 Mittel_Stich_Ges=np.array([np.mean(P_Ges_x),np.mean(P_Ges_y)])
 Varianz_Stich_Ges=np.array([np.mean((P_Ges_x-Mittel_Stich_Ges[0])**2),np.mean((P_Ges_y-Mittel_Stich_Ges[1])**2)])**(1/2)
 VxyGes=np.mean(P_Ges_x*P_Ges_y)-Mittel_Stich_Ges[0]*Mittel_Stich_Ges[1]
-Cov_Stich_Ges=[[Varianz_Stich_Ges[0]**2,VxyGes],[VxyGes,Varianz_Stich_Ges[1]]]
+Cov_Stich_Ges=[[Varianz_Stich_Ges[0]**2,VxyGes],[VxyGes,Varianz_Stich_Ges[1]**2]]
 Korrelationskoeffizient_Ges=VxyGes/(Varianz_Stich_Ges[0]*Varianz_Stich_Ges[1])
 print("P_Ges")
 print(Mittel_Stich_Ges)
