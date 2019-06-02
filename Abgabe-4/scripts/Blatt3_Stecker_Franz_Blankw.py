@@ -144,3 +144,6 @@ plt.hist(np.log10(NumberOfHits_Untergrund),bins=100)
 plt.savefig('build/Hits_Untergrund')
 #print(df1.to_string())
 #print(df2.to_string())
+
+df1.to_hdf('build/NeutrinoMC.hdf5','Signal')
+df2.to_hdf('build/NeutrinoMC.hdf5','Background')
