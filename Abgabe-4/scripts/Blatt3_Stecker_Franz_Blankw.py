@@ -1,52 +1,146 @@
-﻿from table2 import makeTable
-from table2 import makeNewTable
-from linregress import linregress
-from customFormatting import *
-from bereich import bereich
-from weightedavgandsem import weighted_avg_and_sem
-from weightedavgandsem import avg_and_sem
-import numpy as np
-from scipy import stats
-from scipy.optimize import curve_fit
+﻿import numpy as np
 import matplotlib.pyplot as plt
-import uncertainties.unumpy as unp
 import scipy.constants as const
 from scipy import integrate
 import pandas as pd
-from mpl_toolkits.mplot3d import Axes3D
-# BackwardsVNominal = []
-# BackwardsVStd = []
-# for value in BackwardsV:
-#     BackwardsVNominal.append(unp.nominal_values(value))
-#     BackwardsVStd.append(unp.std_devs(value))
-# BackwardsVNominal = np.array(BackwardsVNominal)
-# BackwardsVStd = np.array(BackwardsVStd)
+import numpy.random as rand
+rand.seed(732)
+#Aufgabe 1
+#a)
+gamma=2.7
+Ereignisse=10**5
+def Neutrinoenergie(dim=1):
+    return (1-rand.random_sample(dim))**(1/(1-gamma))
 
-# einfacher:
-# BackwardsVNominal = unp.nominal_values(BackwardsV)
-# BackwardsVStd = unp.std_devs(BackwardsV)
+df1=pd.DataFrame({'Energy':Neutrinoenergie(Ereignisse)})
 
-# makeTable([Gaenge, ForwardsVNominal, ForwardsVStd, ], r'{Gang} & \multicolumn{2}{c}{$v_\text{v}/\si[per-mode=reciprocal]{\centi\meter\per\second}$} & ', 'name', ['S[table-format=2.0]', 'S[table-format=2.3]', ' @{${}\pm{}$} S[table-format=1.3]', ], ["%2.0f", "%2.3f", "%2.3f",])
+#b)
+def P(E):                      #Wahrscheinlichkeitsdichte ein Neutrino mit Energie E zu detektieren
+    return (1-np.exp(-E/2))**3
 
-#[per-mode=reciprocal],[table-format=2.3,table-figures-uncertainty=1]
 
-# unp.uarray(np.mean(), stats.sem())
-# unp.uarray(*avg_and_sem(values)))
-# unp.uarray(*weighted_avg_and_sem(unp.nominal_values(bneuDiff), 1/unp.std_devs(bneuDiff)))
+Zufall_Akzeptanz=rand.random_sample(np.size(df1.Energy))
 
-# plt.cla()
-# plt.clf()
-# plt.plot(ForwardsVNominal*100, DeltaVForwardsNominal, 'gx', label='Daten mit Bewegungsrichtung aufs Mikrofon zu')
-# plt.plot(BackwardsVNominal*100, DeltaVBackwardsNominal, 'rx', label='Daten mit Bewegungsrichtung vom Mikrofon weg')
-# plt.ylim(0, line(t[-1], *params)+0.1)
-# plt.xlim(0, t[-1]*100)
-# plt.xlabel(r'$v/\si{\centi\meter\per\second}$')
-# plt.ylabel(r'$\Delta f / \si{\hertz}$')
-# plt.legend(loc='best')
-# plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
-# plt.savefig('build/'+'VgegenDeltaV')
+df1['AcceptanceMask']=np.greater(P(df1.Energy),Zufall_Akzeptanz)
 
-# a = unp.uarray(params[0], np.sqrt(covar[0][0]))
-# params = unp.uarray(params, np.sqrt(np.diag(covar)))
-# makeNewTable([convert((r'$c_\text{1}$',r'$c_\text{2}$',r'$T_{\text{A}1}$',r'$T_{\text{A}2}$',r'$\alpha$',r'$D_1$',r'$D_2$',r'$A_1$',r'$A_2$',r'$A_3$',r'$A_4$'),strFormat),convert(np.array([paramsGes2[0],paramsGes1[0],deltat2*10**6,deltat1*10**6,-paramsDaempfung[0]*2,4.48*10**-6 *paramsGes1[0]/2*10**3, 7.26*10**-6 *paramsGes1[0]/2*10**3, (VierteMessung-2*deltat2*10**6)[0]*10**-6 *1410 /2*10**3, unp.uarray((VierteMessung[1]-VierteMessung[0])*10**-6 *1410 /2*10**3, 0), unp.uarray((VierteMessung[2]-VierteMessung[1])*10**-6 *2500 /2*10**3, 0),unp.uarray((VierteMessung[3]-VierteMessung[2])*10**-6 *1410 /2*10**3, 0)]),unpFormat,[[r'\meter\per\second',"",True],[r'\meter\per\second',"",True],[r'\micro\second',"",True],[r'\micro\second',"",True],[r'\per\meter',"",True],[r'\milli\meter',"",True],[r'\milli\meter',"",True],[r'\milli\meter',"",True],[r'\milli\meter',r'1.3f',True],[r'\milli\meter',r'1.3f',True],[r'\milli\meter',r'2.2f',True]]),convert(np.array([2730,2730]),floatFormat,[r'\meter\per\second','1.0f',True])+convert((r'-',r'-'),strFormat)+convert(unp.uarray([57,6.05,9.9],[2.5,0,0]),unpFormat,[[r'\per\meter',"",True],[r'\milli\meter',r'1.2f',True],[r'\milli\meter',r'1.2f',True]])+convert((r'-',r'-',r'-',r'-'),strFormat),convert(np.array([(2730-paramsGes2[0])/2730*100,(2730-paramsGes1[0])/2730*100]),unpFormat,[r'\percent','',True])+convert((r'-',r'-'),strFormat)+convert(np.array([(-paramsDaempfung[0]*2-unp.uarray(57,2.5))/unp.uarray(57,2.5)*100,(4.48*10**-6 *paramsGes1[0]/2*10**3-6.05)/6.05*100, (-7.26*10**-6 *paramsGes1[0]/2*10**3+9.90)/9.90*100]),unpFormat,[r'\percent','',True])+convert((r'-',r'-',r'-',r'-'),strFormat)],r'{Wert}&{gemessen}&{Literaturwert\cite{cAcryl},\cite{alphaAcryl}}&{Abweichung}','Ergebnisse', ['c ','c',r'c','c'])
+plt.scatter(df1.Energy[np.invert(df1.AcceptanceMask)],Zufall_Akzeptanz[np.invert(df1.AcceptanceMask)], c='blue', label='Nicht detektiert', s=0.01)
+plt.scatter(df1.Energy[df1.AcceptanceMask] ,Zufall_Akzeptanz[df1.AcceptanceMask], c='green', label='Detektiert', s=0.01)
+#bins=10
+#plt.hist(df1.get('Energy').get_values()[np.invert(df1.AcceptanceMask)], bins=bins, c='blue', label='Nicht detektierte Neutrinos')
+#plt.hist(df1.get('Energy').get_values()[df1.AcceptanceMask].to_Matrix(), bins=bins, c='green', label='Detektierte Neutrinos')
+#df1.hist('Energy')
+Energie=np.linspace(df1.Energy.min(),df1.Energy.max(),1000)
+plt.plot(Energie,P(Energie), c='black')
+plt.yscale('log')
+plt.xscale('log')
+plt.xlabel(r'$E/\si{\tera\electronvolt}$')
+plt.ylabel('Likelyhood of Acceptance')
+#plt.ylabel('Anzahl')
+plt.legend(loc='best')
+plt.savefig('build/Akzeptanz')
+plt.clf()
 
+#c)
+def Normalverteilt_groessereins(mittel,sigma,dim=1):
+    arr=np.arange(dim,dtype=float)*0                           #Startwert für alle Elemente = -1
+    while(np.any(arr<1)):                          #Alles negative wird berschrieben
+        size=np.size(arr[arr<1])                   #Rechnung nur noch für weitere negative Elemente
+        u1=rand.random_sample(size)                #Polaralgorithmus
+        u2=rand.random_sample(size)
+        v1=2*u1-1
+        v2=2*u2-1
+        s=v1**2+v2**2
+        akzeptierte_s=s<1                          #Verwerfung im Polaralgorithmus
+        x1=v1[akzeptierte_s]*(-2/s[akzeptierte_s]*np.log(s[akzeptierte_s]))**(1/2)     #Normalverteilte (mittel=1, sigma=1) Zufallszahl
+        x2=v2[akzeptierte_s]*(-2/s[akzeptierte_s]*np.log(s[akzeptierte_s]))**(1/2)     #Normalverteilte (mittel=1, sigma=1) Zufallszahl
+        if(np.size(sigma)>1 and np.size(mittel)>1):
+            x1=x1*(sigma[arr<1])[akzeptierte_s] + (mittel[arr<1])[akzeptierte_s]       #Normalverteilte mit gewünschtem mittel und sigma
+            x2=x2*(sigma[arr<1])[akzeptierte_s] + (mittel[arr<1])[akzeptierte_s]       #Normalverteilte mit gewünschtem mittel und sigma
+        if(np.size(sigma)==1 and np.size(mittel)==1):
+            x1=x1*(sigma) + (mittel)                                                   #Normalverteilte mit gewünschtem mittel und sigma
+            x2=x2*(sigma) + (mittel)                                                   #Normalverteilte mit gewünschtem mittel und sigma
+        if(np.size(sigma)>1 and np.size(mittel)==1):
+            x1=x1*(sigma[arr<1])[akzeptierte_s] + (mittel)                             #Normalverteilte mit gewünschtem mittel und sigma
+            x2=x2*(sigma[arr<1])[akzeptierte_s] + (mittel)                             #Normalverteilte mit gewünschtem mittel und sigma
+        if(np.size(sigma)==1 and np.size(mittel)>1):
+            x1=x1*(sigma) + (mittel[arr<1])[akzeptierte_s]       #Normalverteilte mit gewünschtem mittel und sigma
+            x2=x2*(sigma) + (mittel[arr<1])[akzeptierte_s]       #Normalverteilte mit gewünschtem mittel und sigma
+        temp1=arr[arr<1]                           #Weise x1 zu
+        temp1[akzeptierte_s]=x1
+        arr[arr<1]=temp1
+        #((arr[arr<1])[akzeptierte_s])[x1>1]=x1[x1>1]
+        #((arr[arr<1])[akzeptierte_s])[x2>1]=x2[x2>1]
+        #print(np.shape(x1[x1>1]))
+        #print(np.shape(((arr[arr<1])[akzeptierte_s])[x1>1]))
+        #print(((arr[arr<1])[akzeptierte_s])[x1>1]+x1[x1>1])
+        #print(np.shape(((arr[arr<1])[akzeptierte_s])[x1>1]+x1[x1>1]))
+        #print(arr)
+    return arr
+
+def Hits(Ereignis):
+    return np.around(Normalverteilt_groessereins(10*Ereignis.get_values(),2*Ereignis.get_values(),np.size(Ereignis))) #Aufgerundet
+
+df1['NumberOfHits']=Hits(df1.Energy)
+
+
+#d)
+def Ortsmessung(x_real,y_real,Ereignis,x_min=0,x_max=10,y_min=0,y_max=10):
+    hits=Ereignis.get_values()
+    sigma=1/(np.log10(hits+1))
+    xy=np.arange(2*np.size(Ereignis),dtype=float).reshape(2,np.size(Ereignis))*0+x_max+y_max+1 #Rückgabewert so initialisieren, dass die Schleifen durchlaufen wird
+    x_bool=np.logical_or(xy[0]>x_max,xy[0]<x_min)            #x in [x_min,x_max] als boolean-Array
+    while(np.any(x_bool)):
+        x=xy[0]
+        x[x_bool]=rand.normal(x_real,sigma[x_bool])          #Berechne neue Zufalls-Werte
+        xy[0]=x                                              #Uberschreibe Elemente
+        x_bool=np.logical_or(xy[0]>x_max,xy[0]<x_min)        #update boolean-Array
+    y_bool=np.logical_or(xy[1]>y_max,xy[1]<y_min)
+    while(np.any(y_bool)):                                   #Analog zu oben
+        y=xy[1]
+        y[y_bool]=rand.normal(y_real,sigma[y_bool])
+        xy[1]=y
+        y_bool=np.logical_or(xy[1]>y_max,xy[1]<y_min)
+    return xy
+xy=Ortsmessung(7,3,df1.NumberOfHits)
+
+df1['x']=xy[0]
+df1['y']=xy[1]
+plt.hist2d(xy[0],xy[1],bins=100)
+plt.savefig('build/Orte_Signal.pdf')
+plt.clf()
+
+
+#e)
+def Korrelierte_Norm(x_mittel,y_mittel,sigma_x,rho,dim=1,sigma_y=None,x_min=0,x_max=10,y_min=0,y_max=10):
+    if sigma_y==None:sigma_y=sigma_x
+    x=np.arange(dim,dtype=float)*0+x_max+y_max+1
+    y=np.arange(dim,dtype=float)*0+x_max+y_max+1
+    x_bool=np.logical_or(x>x_max,x<x_min)
+    y_bool=np.logical_or(y>y_max,y<y_min)
+    ges_bool=np.logical_or(x_bool,y_bool)
+    while(np.any(ges_bool)):
+        size=np.size(ges_bool[ges_bool])
+        x1=x
+        y1=y
+        x1[ges_bool]=rand.normal(0,1,size)
+        y1[ges_bool]=rand.normal(0,1,size)
+        x[ges_bool]=(1-rho**2)**(1/2)*sigma_x*x1[ges_bool]+rho*sigma_y*y1[ges_bool]+x_mittel
+        y[ges_bool]=sigma_y*y1[ges_bool]+y_mittel
+        x_bool=np.logical_or(x>x_max,x<x_min)
+        y_bool=np.logical_or(y>y_max,y<y_min)
+        ges_bool=np.logical_or(x_bool,y_bool)
+    return np.array([x,y])
+
+Untergrund=10**7
+xy_Untergrund=Korrelierte_Norm(5,5,3,0.5,dim=Untergrund)
+NumberOfHits_Untergrund=np.around(10**(Normalverteilt_groessereins(3,1,dim=Untergrund)-1))
+df2=pd.DataFrame({'NumberOfHits':NumberOfHits_Untergrund, 'x':xy_Untergrund[0],'y':xy_Untergrund[1]})
+
+plt.hist2d(xy_Untergrund[0],xy_Untergrund[1],bins=100)
+plt.savefig('build/Orte_Untergrund')
+plt.clf()
+
+plt.hist(np.log10(NumberOfHits_Untergrund),bins=100)
+plt.savefig('build/Hits_Untergrund')
+#print(df1.to_string())
+#print(df2.to_string())
