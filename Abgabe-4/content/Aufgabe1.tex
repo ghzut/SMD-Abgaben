@@ -1,2 +1,120 @@
 \section{Aufgabe 1}
 \label{sec:Aufgabe1}
+
+\subsection*{a) Signal}
+Der Fluss der Neutrinos ist gegeben durch
+\begin{equation}
+    \Phi = \Phi_0 \left(\frac{E}{\text{TeV}}\right)^{-\gamma}
+\end{equation}
+Hierbei ist $\frac{E}{Tev}:=x$ die zufallsverteilte Variable und $\frac{\Phi}{\Phi_0}=Nx^{-\gamma}$ die unnormierte Wahrscheinlichkeitsdichte auf dem Intervall $E\in [1,\infty)$.
+Die Verteilungsfunktion ist somit gegeben als
+\begin{equation}
+    F(x)=N\frac{x^{1-\gamma}}{1-\gamma}+C
+\end{equation}
+Die Bestimmung der Normierungskonstante $N$ ergibt sich aus
+\begin{align}
+    1=F(\infty)-F(1)&=N\left(0-(1-\gamma)^{-1}\right)\\
+    \Rightarrow N&=\gamma-1
+\end{align}
+und damit
+\begin{equation}
+    F(x)=-x^{1-\gamma} + C
+\end{equation}
+Die Bestimmung der Randwertkonstante $C$ erhält man aus
+\begin{align}
+    0&=F(1)=1+C\\
+    \Rightarrow C&=-1
+\end{align}
+und damit
+\begin{equation}
+    F(x)=1-x^{1-\gamma}
+\end{equation}
+Daraus ergibt sich die Berechnung der Zufallszahl $x$ mit der gleichverteilten Zufallszahl $Y\in [0,1]$
+\begin{equation}
+    x=(1-Y)^{\frac{1}{1-\gamma}}
+\end{equation}
+Es werden im Folgenden $10^5$ Ereignisse simuliert.
+\subsection*{b) Akzeptanz}
+Für eine gegebene Energie ist die Wahrscheinlichkeit das Neutrino zu detektieren gegeben als
+\begin{equation}
+    P(E)=\left(1-e^{-\frac{E}{2}}\right)^3
+    \label{eqn:Akzeptanz}
+\end{equation}
+Rollt man für jedes Neutrino nun einen Zufallszahlengenerator und vergleich, ob die Zahl über oder unter dem Graphen von Funktion \eqref{eqn:Akzeptanz} liegt, erhält man eine Verteilung von akzeptierten und nicht akzeptierten Ereignissen.
+Diese ist in Abbildung \ref{fig:Akzeptanz} dargestellt.
+\begin{figure}
+    \centering
+    \includegraphics{build/Akzeptanz.pdf}
+    \caption{Zufällige Akzeptanzzahl für jedes Ereignis aufgetragen gegenüber der Energie}
+    \label{fig:Akzeptanz}
+\end{figure}
+
+\subsection*{c) Detektierte Hits}
+Zur Energiemessung wird eine mit der Energie korrelierte Variable ausgewertet (hier: Hits). Die Anzahl der Hits werden als Normalverteilung mit $\mu=10\frac{E}{\text{Tev}}$ und $\sigma=2\frac{E}{\text{Tev}}$ angenommen.
+Es wird trivialerweise vorausgesetzt, dass nur ganzzahlige (runden) Werte grösser 1 akzeptiert werden.
+Zur Realisierung der Normalverteilung wird hierzu die Polarmethode verwendet:
+
+Erzeuge zwei gleichverteilte Zufallszahlen $u_1,u_2\in[0,1]$ und setze
+\begin{align}
+    v_1&=2u_1-1\\
+    v_2&=2u_2-1
+\end{align}
+setze
+\begin{equation}
+    s=v_1^2+v_2^2
+\end{equation}
+und verwerfe falls
+\begin{equation}
+    s\geq 1
+\end{equation}
+Die Zahlen
+\begin{align}
+    x_1&=v_1\sqrt{-\frac{2}{s}\text{ln}s}\\
+    x_2&=v_2\sqrt{-\frac{2}{s}\text{ln}s}
+\end{align}
+sind nun zwei unabhängige, normalverteilte Zufallszahlen mit $\mu=1$ und $\sigma=1$.
+Transformiert man diese nach
+\begin{equation}
+    \tilde{x}=x\sigma + \mu
+\end{equation}
+erhält man Zufallszahlen mit den gewünschten Mittelwerten und Standardabweichungen.
+Da nur Ergebnisse grösser 1 akzeptiert werden sollen, müssen eventuell neue Zahlen gezogen werden.
+\subsection*{d) Ortsmessung}
+Ein Detektor besitzt nur eine endliche Ortsauflösung, die von der Anzahl der Hits in einem Ereignis abhängt.
+Es wird hier angenommen quadratisch mit einer Kantenlänge von 10 Längeneinheiten ist und das Signal am Punkt $(7,3)$ auf den Detektor trifft.
+Die Ortsmessung wird als Normalverteilung in beiden Koordinaten mit einer Standardabweichung des detektierten Ortes
+\begin{equation}
+    \sigma=\left(\text{log}_{10}(N+1)\right)^{-1}
+\end{equation}
+angenommen. Die Simulation ergibt dann die Verteilung in Abbildung \ref{fig:Orte_Signal}.
+\begin{figure}
+    \centering
+    \includegraphics{build/Orte_Signal.pdf}
+    \caption{Die detektierten Orte des simulierten Signals in ein 2D-Histogramm}
+    \label{fig:Orte_Signal}
+\end{figure}
+
+\subsection*{e) Untergrund}
+Die Untergrundereignisse werden als sehr viel zahlreicher angenommen. Es werden im Folgenden $10^7$ Untergrundereignisse simuliert.
+Der Zehner-Logarithmus der Anzahl der Hits pro Ereignis wird als Normalverteilung mit $\mu=2$ und $\sigma=1$ angenommen.
+Die x- und y-Koordinate sind um den Mittelpunkt $(5,5)$ des Detektors mit $\sigma=3$ normalverteilt. Es besteht eine Korrelation $\rho=0,5$ zwischen den Achsen.
+Korrelierte normalverteilte Variablen ergeben sich als
+\begin{align}
+    x&=\sqrt{1-\rho^2}\sigma x'+\rho\sigma y'+\mu\\
+    y&=\sigma y'+\mu
+\end{align}
+mit $x',y'$ als unkorrelierten normalverteilten Zufallszahlen.
+Die Simulation des Untergrunds ergeben die Ortsintensität in Abbildung \ref{fig:Orte_Untergrund} und der Zehnerlogarithmus der Anzahl der Hits in Abbildung \ref{fig:Hits_Untergrund}.
+Das Ausgefranste am linken Ende der Abbildung \ref{fig:Hits_Untergrund} liegt an der Ganzzahligkeit der Hits.
+\begin{figure}
+    \centering
+    \includegraphics{build/Orte_Untergrund.pdf}
+    \caption{Die detektierten Orte des simulierten Untergrunds in einem 2D-Histogramm}
+    \label{fig:Orte_Untergrund}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics{build/Hits_Untergrund.pdf}
+    \caption{Zehnerlogarithmus der Anzahl der Hits des simulierten Untergrunds in einem Histogramm}
+    \label{fig:Hits_Untergrund}
+\end{figure}
