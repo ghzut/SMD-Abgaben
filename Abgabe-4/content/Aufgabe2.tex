@@ -1,2 +1,42 @@
 \section{Aufgabe 2}
 \label{sec:Aufgabe2}
+\subsection*{a)}
+
+Beim Metropolis-Hastings-Algorithmus berechnet sich die Übergangswahrscheinlichkeit zwischen Zustand $i$ und $j$ der Verteilungsfunktion $f(x)$ über 
+\[
+M_.{i\rightarrow j} = \mathrm{min}\left(1,\frac{f(x_.j)}{x_.i}\frac{g_.{i\rightarrow j}}{g_.{j\rightarrow i}}\right),
+\]
+wobei $g_.{i\rightarrow j}$ und $g_.{j\rightarrow i}$ die Übergangswahrscheinlichkeiten auf der Schrittvorschlags-PDF $g(x)$ sind.
+Ist diese eine Gaußverteilung, so ist die Wahrscheinlichkeit auf Grund der Symmetrie in beide Richtungen gleich.
+Somit vereinfacht sich $M_.{i\rightarrow j}$ zu
+\[
+M_.{i\rightarrow j} = \mathrm{min}\left(1,\frac{f(x_.j)}{x_.i}\right),
+\]
+was genau der Übergangswahrscheinlichkeit des einfachen Metropolis-Algorithmus entspricht.
+
+\subsection*{b) + c)}
+In den Zeilen $163$ - $181$ wird der Metropolis-Algorithmus für eine Planck-Verteilung mit einem Startwert $x_.0 = 30$ und einer Schrittweite $s = 2$ implementiert. In Abbildung \ref{fig:MetPla} ist die Verteilung der so generierten $10^5$ Zufallszahlen und die echte Planck-Verteilung zu sehen, die sehr deckungsgleich sind.
+
+\begin{figure}
+    \centering
+    \includegraphics{build/Planck_Metropolis.pdf}
+    \caption{Vom Algorithmus erzeugte Planck-Verteilung}
+    \label{fig:MetPla}
+\end{figure}
+
+\subsection*{d)}
+
+In Abbildung \ref{fig:It} ist der Traceplot des Algorithmus zu sehen und in Abbildung \ref{fig:It2} ein näherer Ausschnitt für die ersten Iterationen zu sehen. In ersterer zeigt sich, dass sich die vom ALgorithmus generierten Zahlen zwar immer wieder weit vom Maximum entfernen, jedoch schnell zu diesem zurückkehren. In letzterer lässt sich die Burn-In-Phase erkennen. Es dauert etwa $50$ Iterationen bis die x-Werte in die Nähe des für die Verteilung interessanten Bereichs kommen, da der Startwert zu weit entfernt ist.
+
+\begin{figure}
+    \centering
+    \includegraphics{build/Iteration.pdf}
+    \caption{Trace-Plot des Planck-verteilten Metropolis-Algorithmus}
+    \label{fig:It}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics{build/Iteration_Burn_In.pdf}
+    \caption{Burn-In-Phase Trace-Plot des Planck-verteilten Metropolis-Algorithmus}
+    \label{fig:It2}
+\end{figure}
