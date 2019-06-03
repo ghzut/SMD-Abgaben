@@ -106,6 +106,8 @@ xy=Ortsmessung(7,3,df1.NumberOfHits)
 df1['x']=xy[0]
 df1['y']=xy[1]
 plt.hist2d(xy[0],xy[1],bins=100)
+plt.xlabel('x')
+plt.ylabel('y')
 plt.savefig('build/Orte_Signal.pdf')
 plt.clf()
 
@@ -137,10 +139,14 @@ NumberOfHits_Untergrund=np.around(10**(Normalverteilt_groessereins(3,1,dim=Unter
 df2=pd.DataFrame({'NumberOfHits':NumberOfHits_Untergrund, 'x':xy_Untergrund[0],'y':xy_Untergrund[1]})
 
 plt.hist2d(xy_Untergrund[0],xy_Untergrund[1],bins=100)
+plt.xlabel('x')
+plt.ylabel('y')
 plt.savefig('build/Orte_Untergrund')
 plt.clf()
 
 plt.hist(np.log10(NumberOfHits_Untergrund),bins=100)
+plt.xlabel(r'$\text{log}_{10}(N)$')
+plt.ylabel('Anzahl Ereignisse mit N Hits')
 plt.savefig('build/Hits_Untergrund')
 plt.clf()
 #print(df1.to_string())
