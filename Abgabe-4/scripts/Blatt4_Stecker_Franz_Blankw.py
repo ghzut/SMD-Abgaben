@@ -142,6 +142,7 @@ plt.clf()
 
 plt.hist(np.log10(NumberOfHits_Untergrund),bins=100)
 plt.savefig('build/Hits_Untergrund')
+plt.clf()
 #print(df1.to_string())
 #print(df2.to_string())
 
