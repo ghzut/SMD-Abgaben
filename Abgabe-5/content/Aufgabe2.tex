@@ -1,2 +1,174 @@
 \section{Aufgabe 2}
 \label{sec:Aufgabe2}
+Es werden vorerst die Verteilungen
+\begin{align}
+    P_0&\equiv P\_0\_10000\\
+    P_1&\equiv P\_1
+\end{align}
+verwendet.
+\subsection*{a) Mittelwerte}
+Die Mittelwerte der Verteilungen ergeben sich zu
+\begin{align}
+    \mu_0&=\left(\begin{array}{c}-2,13894633\cdot10^{-3}\\2,99221382\end{array}\right)\\
+    \mu_1&=\left(\begin{array}{c}6,02103083\\3,09681674\end{array}\right)
+\end{align}
+\subsection*{b) Kovarianzmatrizen}
+Die Kovarianzmatrizen ergeben sich als
+\begin{align}
+    V_0&=\left(\begin{array}{cc}
+        12,36543313 & 8,22931652\\
+        8,22931652  & 6,76968479
+    \end{array}\right)\\
+    V_1&=\left(\begin{array}{cc}
+        12,28179162 & 7,37535615\\
+        7,37535615  & 5,42946034
+    \end{array}\right)
+\end{align}
+und daraus die kombinierte Matrix
+\begin{equation}
+    V_{01}=V_0+V_1
+\end{equation}
+als
+\begin{align}
+    V_{01}&=\left(\begin{array}{cc}
+        24,64722475 & 15,60467267\\
+        15,60467267 & 12,19914513
+    \end{array}\right)
+\end{align}
+\subsection*{c) Lineare Fisher-Diskriminante}
+Mit der Relation
+\begin{equation}
+    \vec{\lambda}^*=V_{01}^{-1}\left(\vec{\mu}_0 -\vec{\mu}_1 \right)
+    \label{eqn:lambda}
+\end{equation}
+ergibt sich der Richtungsvektor $\vec{\lambda}^*$. Normiert man diesen ergibt sich der Projektionsvektor $\vec{e}_{\lambda}$
+den man als neue Achse $\vec{\lambda}$ verwenden kann mit 
+\begin{equation}
+    \vec{\lambda}=\lambda\vec{e}_{\lambda}=\lambda\left(\begin{array}{c}
+        0,61793837\\
+        -0,78622654
+    \end{array}\right)
+\end{equation}
+
+\subsection*{d) Projektion}
+Es ergibt sich die Verteilungen auf die neue Achse projiziert, wie in Abbildung \ref{fig:Projektion_1}.
+\begin{figure}
+  \includegraphics{build/Aufgabe_2_d.pdf}
+  \caption{Die beiden Populationen auf die $\vec{\lambda}$-Achse projiziert}
+  \label{fig:Projektion_1}
+\end{figure}
+\subsection*{e) Reinheit und Effizienz}
+Mit den Beziehungen
+\begin{align}
+    \text{Reinheit}&=\frac{\text{True positive}}{\text{All positives}}    \label{eqn:Reinheit}\\
+    \text{Effizienz}&=\frac{\text{True positive}}{\text{All Signals}}     \label{eqn:Effizienz}
+\end{align}
+ergeben sich die Kurven aus Abbildung \ref{fig:Reinheit_Effizienz}.
+\begin{figure}
+  \includegraphics{build/Aufgabe_2_e.pdf}
+  \caption{Reinheit und Effizienz gegen $\lambda$ geplottet}
+  \label{fig:Reinheit_Effizienz}
+\end{figure}
+
+\subsection*{f) Signal zu Untergrund}
+Wertet man das abgewandelte (um Nullen in der Rechnung zu vermeiden) Verhältnis von Signal
+\begin{equation}
+    S/B=\frac{\text{Signal} +1}{\text{Untergrund}+1}
+    \label{eqn:SB}
+\end{equation}
+ergibt sich das Maximum bei
+\begin{equation}
+    \lambda_{S/B_{max}}=-1,8924306178765526
+\end{equation}
+und der Graph aus Abbildung \ref{fig:SB}
+\begin{figure}
+  \includegraphics{build/Aufgabe_2_f.pdf}
+  \caption{Verhältnis von akzeptiertem Signal zum Untergrund}
+  \label{fig:SB}
+\end{figure}
+
+\subsection*{g) Signifikanz}
+Ähnlich abgewandelt ergibt sich die Signifikanz mittels der Formel
+\begin{equation}
+    \text{Signifikanz}=\frac{\text{Signal}}{\sqrt{\text{Signal}+\text{Untergrund}+1}}
+    \label{eqn:Signifikanz}
+\end{equation}
+und dessen Maximum bei
+\begin{equation}
+    \lambda_{Signifikanz_{max}}=-0,5134728115192226
+\end{equation}
+und der gesamte Graph in Abbildung \ref{fig:Signifikanz}.
+\begin{figure}
+  \includegraphics{build/Aufgabe_2_g.pdf}
+  \caption{Signifikanz}
+  \label{fig:Signifikanz}
+\end{figure}
+
+\subsection*{h) Schwächeres Signal}
+Mit den Werten aus $P\_0\_1000$ als $P_0$ ergeben sich die Werte wie folgt:
+\subsubsection*{a) Mittelwerte}
+\begin{align}
+    \mu_0&=\left(\begin{array}{c}-0,16662573\\2,88552445\end{array}\right)\\
+    \end{align}
+
+\subsubsection*{b) Kovarianzmatrizen}
+\begin{align}
+    V_0&=\left(\begin{array}{cc}
+        12,93190847 & 8,67742589\\
+        8,67742589  & 7,20625547
+    \end{array}\right)\\
+    V_{01}&=\left(\begin{array}{cc}
+        25,21370009 & 16,05278204\\
+        16,05278204 & 12,63571581
+    \end{array}\right)
+\end{align}
+
+\subsubsection*{c) Lineare Fisher-Diskriminante}
+\begin{equation}
+    \vec{\lambda}=\lambda\vec{e}_{\lambda}=\lambda\left(\begin{array}{c}
+        0,62262353\\
+        -0,78252153
+    \end{array}\right)
+\end{equation}
+
+\subsubsection*{d) Projektion}
+Es ergibt sich die Verteilungen auf die neue Achse projiziert, wie in Abbildung \ref{fig:Projektion_1_h}.
+\begin{figure}
+  \includegraphics{build/Aufgabe_2_hd.pdf}
+  \caption{Die beiden Populationen auf die $\vec{\lambda}$-Achse projiziert}
+  \label{fig:Projektion_1_h}
+\end{figure}
+
+\subsubsection*{e) Reinheit und Effizienz}
+Mit den Beziehungen \eqref{eqn:Reinheit} und \eqref{eqn:Effizienz}
+ergeben sich die Kurven aus Abbildung \ref{fig:Reinheit_Effizienz}.
+\begin{figure}
+  \includegraphics{build/Aufgabe_2_he.pdf}
+  \caption{Reinheit und Effizienz gegen $\lambda$ geplottet}
+  \label{fig:Reinheit_Effizienz_h}
+\end{figure}
+
+\subsubsection*{f) Signal zu Untergrund}
+Wertet man das abgewandelte (um Nullen in der Rechnung zu vermeiden) Verhältnis von Signal aus Gleichung \eqref{eqn:SB}
+ergibt sich das Maximum bei
+\begin{equation}
+    \lambda_{S/B_{max}}=-1,9063865118976335
+\end{equation}
+und der Graph aus Abbildung \ref{fig:SB_h}
+\begin{figure}
+  \includegraphics{build/Aufgabe_2_hf.pdf}
+  \caption{Verhältnis von akzeptiertem Signal zum Untergrund}
+  \label{fig:SB_h}
+\end{figure}
+
+\subsubsection*{g) Signifikanz}
+Mit der abgewandelten Signifikanz aus Formel \eqref{eqn:Signifikanz} ergibt sich das Maximum bei
+\begin{equation}
+    \lambda_{Signifikanz_{max}}=-0,9531090094725752
+\end{equation}
+und der gesamte Graph in Abbildung \ref{fig:Signifikanz_h}.
+\begin{figure}
+  \includegraphics{build/Aufgabe_2_hg.pdf}
+  \caption{Signifikanz}
+  \label{fig:Signifikanz_h}
+\end{figure}
