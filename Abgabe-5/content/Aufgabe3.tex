@@ -1,2 +1,46 @@
 \section{Aufgabe 3}
 \label{sec:Aufgabe3}
+\subsection*{a)}
+In den Zeilen $232$-$239$ der Python-Datei wird ein scatter-plot zweier Dimensionen eines 4D-Datensatzes erstellt. Dieser ist in Abbildung \ref{fig:scatter} zu sehen. 
+\begin{figure}
+\centering
+\includegraphics[width=0.9\textwidth]{build/scatter.pdf}
+\caption{Scatter-Plot der Hauptkomponenten $x_.1$ und $x_.2$ des ursprünglichen Datensatzes $x$.}
+\label{fig:scatter}
+\end{figure}
+\subsection*{b)}
+Mithilfe einer PCA können komplexe Datensätze mit vielen Merkmalen ohne großen Informationsverlust auf wenige Linearkombinationen dieser Merkmale genähert werden.
+Explizit wird dabei der Datensatz bestehend aus $N$ Datenpunkten in $d$ Dimensionen, dargestellt durch eine $N$x$d$-Matrix, auf einen $k$-dimensionalen Unterraum projiziert. Dabei gibt $k$ die Anzahl der für die Linearkombination relevanten Merkmale an.\\
+Vorgehen:
+\begin{itemize}
+\item Der Datensatz wird auf seinen Mittelwert zentriert.
+\item Die Kovarianzmatrix wird aus der Datenmatrix bestimmt und ihre Eigenwerte(EW) und Eigenvektoren(EV) berechnet.
+\item Es wird aus den zu den $k$ größten EW gehörigen EV eine $d$x$k$-Matrix gebildet, wobei die Spalten den EV entsprechen.
+\item Diese wird auf die Datenmatrix angewendet und so die projizierte $N$x$k$ gebildet.
+\end{itemize}
+\subsection*{c)}
+In den Zeilen $241$-$246$ wird die PCA durchgeführt es ergeben sich die Eigenwerte
+\begin{align*}
+e_.1 &= 17,5193\\
+e_.2 &= 0,8988\\
+e_.3 &= 0,9996\\
+e_.4 &= 0,9881
+\end{align*}
+Es zeigt sich, dass $e_.1$ wesentlich größer ist als die anderen Eigenwerte, was bedeutet, dass der zugehörige Eigenvektor am besten dazu geeignet ist die Daten zu trennen. Er wird deshalb in der Linearkombination dominieren.
+\subsection*{d)}
+Die projizierte Verteilung $x^{\prime}$ wird in den Zeilen $249$-$261$ in allen Dimensionen histogrammiert. 
+Es zeigt sich in Abbildung \ref{fig:hists} das gemäß der Erwartung anhand des großen Eigenwerts nur die 1. Hauptkomponente die Daten zu trennen vermag.
+In Abbildung \ref{fig:after_scatter} ist der zugehörige scatter-plot zu sehen.
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{build/hists.pdf}
+\caption{Histogrammierte Darstellung des transformierten Datensatzes $x^{\prime}$ in jeder Dimension.}
+\label{fig:hists}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{build/after_scatter.pdf}
+\caption{Scatter-Plot der Hauptkomponenten $x_.1^{\prime}$ und $x_.2^{\prime}$ des transformierten Datensatzes $x^{\prime}$.}
+\label{fig:after_scatter}
+\end{figure}
+%◘

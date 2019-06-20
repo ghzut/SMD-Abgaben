@@ -228,14 +228,16 @@ plt.savefig('build/Aufgabe_2_hg.pdf')
 plt.clf()
 
 #Nr.13
+#a)
 X, y = m_b(n_samples=1000, centers=2, n_features=4,
 random_state=0)
 X = X - X.mean(axis=0)
-plt.scatter(X[:,1], X[:,2], c=y, s=40, edgecolor="gr")
+plt.scatter(X[:,0], X[:,1], c=y, s=40, edgecolor="gr")
 plt.xlabel(r'$x_1$')
 plt.ylabel(r'$x_2$')
 plt.savefig('build/scatter.pdf')
 plt.clf()
+#c)
 pca = PCA(n_components = 4)
 pca.fit(X)
 X_1 = pca.transform(X)
@@ -243,80 +245,23 @@ c = pca.get_covariance()
 EW = alg.eigvals(c)
 print(EW)
 
+#d)
 plt.clf()
-#meins
-for i in range(4):
-    plt.subplot(2,2,i+1)
-    plt.hist(X[:,i], color = "k", density = True, rasterized = True, bins = 40, histtype ='step')
-    plt.hist(X_1[:,i], color = "r", density = True, rasterized = True, bins = 40, histtype ='step')
-    plt.ylabel(r'$Wahrscheinlichkeit$')
-    if(i==0):
-        plt.xlabel(r'$1. Dimension$')
-    if(i==1):
-        plt.xlabel(r'$2. Dimension$')
-    if(i==2):
-        plt.xlabel(r'$3. Dimension$')
-    if(i==3):
-        plt.xlabel(r'$4. Dimension$')
-    plt.tight_layout()
-plt.savefig('build/hists_meine.pdf')
-#Lars
-plt.clf()
-plt.subplot(2, 2, 1)
-plt.hist(X[:,0],color='r', density=True, histtype ='step', bins=40, label='1. Dimension', alpha=0.7)
-plt.ylabel('Wahrscheinlichkeit')
-plt.xlabel('1. Dimension')
-plt.tight_layout()
-plt.subplot(2, 2, 2)
-plt.hist(X[:,1],color='y', density=True, histtype ='step', bins=40, label='2. Dimension', alpha=0.7)
-plt.ylabel('Wahrscheinlichkeit')
-plt.xlabel('2. Dimension')
-plt.tight_layout()
-plt.subplot(2, 2, 3)
-plt.hist(X[:,2],color='b', density=True, histtype ='step', bins=40, label='3. Dimension', alpha=0.7)
-plt.ylabel('Wahrscheinlichkeit')
-plt.xlabel('3. Dimension')
-plt.tight_layout()
-plt.subplot(2, 2, 4)
-plt.hist(X[:,3],color='g', density=True, histtype ='step', bins=40, label='4. Dimension', alpha=0.7)
-plt.ylabel('Wahrscheinlichkeit')
-plt.xlabel('4. Dimension')
-plt.tight_layout()
-plt.subplot(2, 2, 1)
-plt.hist(X_1[:,0],color='k', density=True, histtype ='step', bins=40, label='1. Dimension', alpha=0.7)
-plt.ylabel('Wahrscheinlichkeit')
-plt.xlabel('1. Dimension')
-plt.tight_layout()
-plt.subplot(2, 2, 2)
-plt.hist(X_1[:,1],color='k', density=True, histtype ='step', bins=40, label='2. Dimension', alpha=0.7)
-plt.ylabel('Wahrscheinlichkeit')
-plt.xlabel('2. Dimension')
-plt.tight_layout()
-plt.subplot(2, 2, 3)
-plt.hist(X_1[:,2],color='k', density=True, histtype ='step', bins=40, label='3. Dimension', alpha=0.7)
-plt.ylabel('Wahrscheinlichkeit')
-plt.xlabel('3. Dimension')
-plt.tight_layout()
-plt.subplot(2, 2, 4)
-plt.hist(X_1[:,3],color='k', density=True, histtype ='step', bins=40, label='4. Dimension', alpha=0.7)
-plt.ylabel('Wahrscheinlichkeit')
-plt.xlabel('4. Dimension')
-plt.tight_layout()
-plt.savefig('build/hists_Lars.pdf')
-
-
-#Jan Lukas
-x1, x2, x3, x4 = zip(*X_1)
-x_array = [x1, x2, x3, x4]
 i=0
-for count in x_array:
-    i += 1
-    xfirst = count * y
-    xfirst = xfirst[xfirst != 0]
-    xsec = count * (1-y)
-    xsec = xsec[xsec != 0]
-
+for j in range(4):
+    i+=1
+    before = X_1[:,j][y != 0]
+    after = X_1[:,j][y == 0]
     plt.subplot(2,2,i)
-    plt.hist(xfirst, density = True, bins = 40, histtype ='step', color = 'k')
-    plt.hist(xsec, density = True, bins = 40, histtype ='step', color = 'r')
-plt.savefig('build/hists_Jan_Lukas.pdf')
+    plt.hist(before, normed = True, bins = 40, histtype ='step', color = 'k')
+    plt.hist(after, normed = True, bins = 40, histtype ='step', color = 'y')
+    plt.ylabel(r'$Wahrscheinlichkeit$')
+    plt.xlabel(r'$x_{%i}^{\prime}$' %i)
+    plt.tight_layout()
+plt.savefig('build/hists.pdf')
+
+plt.clf()
+plt.scatter(X_1[:,0], X_1[:,1], c=y, s=40, edgecolor="gr")
+plt.xlabel(r'$x_1$')
+plt.ylabel(r'$x_2$')
+plt.savefig('build/after_scatter.pdf')
