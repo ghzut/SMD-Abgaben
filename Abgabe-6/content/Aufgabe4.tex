@@ -1,2 +1,65 @@
-\section{Aufgabe 4}
-\label{sec:Aufgabe4}
+\section{Aufgabe 17}
+\label{sec:Aufgabe17}
+
+\subsection*{a)}
+Für den Datensatz aus Tabelle \ref{tab:data} wird ein binärer Entscheidungsbaum aufgestellt. Bei den Attributen $Wind$ und $Soccer$, werden die Werte $0$ und $1$ als $False$ bzw. $True$ interpretiert.
+Die Entropie der Wurzel des Baumes bestimmt sich über die Formel
+\begin{equation}
+H(Soccer)= S = -\sum_.i p_.i\cdot log_.2(p_.i)
+\end{equation}
+mit den Wahrscheinlichkeiten
+\begin{align*}
+p_.{Soccer = True} &= \frac{9}{14}\\
+p_.{Soccer = False} &= \frac{5}{14}
+\end{align*}
+zu $S\approx 0,9403$
+
+\begin{table}
+	\centering
+	\caption{Datensatz zur Erzeugung eines binären Entscheidungsbaumes, ob Fußball gespielt werden sollte oder nicht.}
+	\input{content/tables/tabData.tex}
+	\label{tab:data}
+\end{table}
+
+\subsection*{b)}
+Der Informationsgewinn bei einem Schnitt des Attributes $Wind$ berechnet sich nach der Formel
+\begin{align}
+IG(Wind,Soccer) &= H(Soccer) - H(Soccer|Wind)\\
+&= S + p_.{Wind = True} H(Soccer|Wind = True )+ p_.{Wind = False} H(Soccer|Wind = False)\text{.}
+\end{align}	
+Mit den Wahrscheinlichkeiten
+\begin{align*}
+p_.{Wind = True} &= \frac{3}{7}\\
+p_.{Wind = False} &= \frac{4}{7}\\
+p_.{Soccer = True|Wind = True} &= \frac{1}{2}\\
+p_.{Soccer = True|Wind = False} &= \frac{3}{4}\\
+p_.{Soccer = False|Wind = True} &= \frac{1}{2}\\
+p_.{Soccer = False|Wind = False} &= \frac{1}{4}
+\end{align*}
+ergibt sich so $IG(Wind,Soccer)\approx 0,0481$
+
+\subsection*{c)}
+Im Python-Script werden die Plots für den Informationsgewinn bei verschiedenen Schnitten der Attribute erzeugt, die in den Abbildungen \ref{fig:Temp} bis \ref{fig:weather} zu sehen sind.
+Für das Attribut $Weather$ wurde noch ein weiterer Schnitt betrachtet, bei dem der Wert $1$, also normales Wetter, von den beiden anderen Möglichkeiten getrennt wurde.
+\begin{figure}
+\begin{minipage}{0.4\textwidth}
+\includegraphics[width=0.6\textwidth]{build/temp.pdf}
+\caption{Informationsgewinn bei verschiedenen Schnitten für die Temperatur.}\label{fig:temp}
+\includegraphics[width=0.6\textwidth]{build/humidity.pdf}
+\caption{Informationsgewinn bei verschiedenen Schnitten für die Luftfeuchtugkeit.}\label{fig:hum}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\includegraphics[width=0.8\textwidth]{build/weather.pdf}
+\caption{Informationsgewinn bei verschiedenen Schnitten für das Wetter.}\label{fig:weather}
+\end{minipage}
+\end{figure}
+
+\subsection*{d)}
+\noindent An der Ausgabe
+\begin{figure}
+\centering
+\includegraphics[width = 0.9\textwidth]{content/tables/out.pdf}
+\end{figure}
+\noindent lässt sich erkennen, dass die bestmögliche Trennung der Daten durch das Wetter und mit dem eben beschriebenen Schnitt generiert wird.
+
+%Æ♣♥•☻◘♠
