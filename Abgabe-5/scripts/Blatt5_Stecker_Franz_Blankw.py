@@ -99,9 +99,21 @@ def precision(l,Signal,Underground,left=True):          #Reinheit return NaN whe
         else:Prec=np.append(Prec,np.size(Signal[Signal<l[i]])/x)
     return Prec
 
+def accuracy(l, Signal, Underground, left=True):
+    if left==False:l=-l
+    x=(np.size(Signal)+np.size(Underground))
+    acc=np.zeros(1,dtype=float)
+    if x==0:acc[0]='NaN'
+    else:acc[0]=(np.size(Signal[Signal<l[0]])+np.size(Underground[Underground>=l[0]]))/x
+    for i in range(1,np.size(l)):
+        if x==0:acc=np.append(acc,'NaN')
+        else:acc=np.append(acc,(np.size(Signal[Signal<l[i]])+np.size(Underground[Underground>=l[i]]))/x)
+    return acc
+
 lambda_cut=np.linspace(np.min(P_0_proj),np.max(P_1_proj),1000)
 plt.plot(lambda_cut,recall(lambda_cut,P_0_proj),label='Effizienz')
 plt.plot(lambda_cut,precision(lambda_cut,P_0_proj,P_1_proj),label='Reinheit')
+plt.plot(lambda_cut,accuracy(lambda_cut,P_0_proj,P_1_proj),label='Genauigkeit')
 plt.xlabel(r'$\lambda$')
 plt.legend(loc='best')
 plt.savefig('build/Aufgabe_2_e.pdf')

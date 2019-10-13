@@ -1,2 +1,44 @@
-\section{Aufgabe 3}
+\section{Aufgabe 16}
 \label{sec:Aufgabe3}
+\subsection*{a)}
+Aus der bedingten Wahrscheinlichkeit folgt:
+
+\begin{align*}
+p(F|W) &= \frac{P(F\cap\ W)}{P(W)}\\
+ &= \frac{\frac{P(F\,\cap\, W)}{P(F)}\cdot P(F)}{P(W)}
+ &= \frac{P(W|F)\cdot P(F)}{P(W)}
+\end{align*}
+
+\subsection*{b)}
+Die Wahrscheinlichkeit, dass Fußball gespielt wird, beträgt
+\[
+p(F) = \frac{36}{56} = \frac{9}{14} \text{.}
+\]
+Die Wahrscheinlichkeiten, dass Fußball gespielt wird und die gegebenen Wetterbedingungen herrschen, betragen:
+\begin{align*}
+p_.{Wind = stark, F} &= \frac{3}{9} &= \frac{1}{3}\\
+p_.{Feucht = hoch, F} &= \frac{3}{9} &= \frac{1}{3}\\
+p_.{Temp = kalt, F} &= \frac{3}{9} &= \frac{1}{3}\\
+p_.{Ausb = sonnig, F} &= \frac{2}{9}
+\end{align*}
+Die Wahrscheinlichkeiten, dass diese Wetterbedingungen eintreten beträgt:
+\begin{align*}
+p_.{Wind = stark} &= \frac{6}{14}\\
+p_.{Feucht = hoch} &= \frac{1}{2}\\
+p_.{Temp = kalt} &= \frac{3}{7}\\
+p_.{Ausb = sonnig} &= \frac{3}{14}
+\end{align*}
+Die Normierung $p(W)$ ist das Produkt der Wahrscheinlichkeiten, dass die heutigen Bedingungen eintreten, also 
+\[
+p(W) = \frac{54}{2744} = \frac{27}{1372}
+\]
+Damit ergibt sich
+\[
+p(F|W) = \frac{\frac{2}{243}}{\frac{27}{1372}}\frac{9}{14}= \frac{196}{729}\approx 26,886\si{\percent}
+\]
+
+\subsection*{c)}
+Da bei der Berechnung der Gesamtwahrscheinlichkeit mit diesem Ansatz alle Wahrscheinlichkeiten für das Eintreten der Wetterbedingungen multipliziert werden, in diesem Datensatz die Wahrscheinlichkeit $p(Themperatur = heiß) = 0$ ist, ist auch die Gwesamtwahrscheinlichkeit $0$.
+Ein größerer Datensatz könnte das Problem beheben oder man nähert die Wahrscheinlichkeit in dem man die Temperatur außer Acht lässt.
+
+%♥☻

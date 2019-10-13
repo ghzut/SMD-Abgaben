@@ -23,10 +23,10 @@ zu $S\approx 0,9403$
 
 \subsection*{b)}
 Der Informationsgewinn bei einem Schnitt des Attributes $Wind$ berechnet sich nach der Formel
-\begin{align}
+\begin{align*}
 IG(Wind,Soccer) &= H(Soccer) - H(Soccer|Wind)\\
 &= S + p_.{Wind = True} H(Soccer|Wind = True )+ p_.{Wind = False} H(Soccer|Wind = False)\text{.}
-\end{align}	
+\end{align*}	
 Mit den Wahrscheinlichkeiten
 \begin{align*}
 p_.{Wind = True} &= \frac{3}{7}\\
@@ -39,19 +39,18 @@ p_.{Soccer = False|Wind = False} &= \frac{1}{4}
 ergibt sich so $IG(Wind,Soccer)\approx 0,0481$
 
 \subsection*{c)}
-Im Python-Script werden die Plots für den Informationsgewinn bei verschiedenen Schnitten der Attribute erzeugt, die in den Abbildungen \ref{fig:Temp} bis \ref{fig:weather} zu sehen sind.
+Im Python-Script werden die Plots für den Informationsgewinn bei verschiedenen Schnitten der Attribute erzeugt, die in den Abbildungen \ref{fig:temp} bis \ref{fig:weather} zu sehen sind.
 Für das Attribut $Weather$ wurde noch ein weiterer Schnitt betrachtet, bei dem der Wert $1$, also normales Wetter, von den beiden anderen Möglichkeiten getrennt wurde.
 \begin{figure}
-\begin{minipage}{0.4\textwidth}
-\includegraphics[width=0.6\textwidth]{build/temp.pdf}
+\includegraphics[width=0.8\textwidth]{build/temp.pdf}
 \caption{Informationsgewinn bei verschiedenen Schnitten für die Temperatur.}\label{fig:temp}
-\includegraphics[width=0.6\textwidth]{build/humidity.pdf}
+\includegraphics[width=0.8\textwidth]{build/humidity.pdf}
 \caption{Informationsgewinn bei verschiedenen Schnitten für die Luftfeuchtugkeit.}\label{fig:hum}
-\end{minipage}
-\begin{minipage}{0.4\textwidth}
+\end{figure}
+\newpage
+\begin{figure}
 \includegraphics[width=0.8\textwidth]{build/weather.pdf}
 \caption{Informationsgewinn bei verschiedenen Schnitten für das Wetter.}\label{fig:weather}
-\end{minipage}
 \end{figure}
 
 \subsection*{d)}
