@@ -1,0 +1,32 @@
+\section*{Aufgabe 1: Fehlerfortpflanzung}
+\label{sec:Aufgabe1}
+\subsubsection*{Analytisch}
+\label{ssub:Analytisch}
+Ohne Korrelation
+\begin{align}
+    \sigma_y&=\sqrt{\sum_{i=1}^n\left(\frac{\partial y}{\partial x_i}\sigma_{x_i}\right)^2}\nonumber\\
+            &=\sqrt{\left(1\cdot\sigma_{a_0}\right)^2+\left(x\sigma_{a_1}\right)^2}\nonumber\\
+            &=0,2\sqrt{1+x^2}
+\end{align}
+
+Mit Korrelation
+\begin{align}
+    \sigma_y&=\sqrt{\sum_{i=1}^n\left(\frac{\partial y}{\partial x_i}\sigma_{x_i}\right)^2+2\sum_{i=1}^{n-1}\sum_{k=i+1}^{n}\left(\frac{\partial y}{\partial x_i}\right)\left(\frac{\partial y}{\partial x_k}\right)\cdot cov(x_i,x_k)}\nonumber\\
+            &=\sqrt{0,04+0,04x^2+2 x (-0,8)\cdot 0,04}\nonumber\\
+            &=0,2\sqrt{1+x^2-1,6x}
+\end{align}
+
+\subsection{Numerisch}
+\label{sub:Numerisch}
+\begin{figure}
+    \centering
+    \includegraphics{build/Aufgabe_21_b_1.pdf}
+    \caption{Scatterplot der Parameter $a_0$ und $a_1$}
+    \label{fig:A_1_b_1}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics{build/Aufgabe_21_b_2.pdf}
+    \caption{Plot der Unsicherheit von $y$ in Abhängigkeit von $x$}
+    \label{fig:A_1_b_2}
+\end{figure}
