@@ -1,2 +1,97 @@
-\section{Aufgabe 2}
+\section*{Aufgabe 2: Teilchenspuren}
 \label{sec:Aufgabe2}
+Es seien zwei Detektoren entlang der $z$-Achse (an den Positionen $z_1$ und $z_2$ respektiv), die Messungen entlang der $x$-Achse machen ($x_1$ und $x_2$ respektiv).
+Hierbei existiert keinen Ablenkung zwischen den zwei Detektoren und die Messunsicherheiten sind bekannt ($\sigma_{x_1}$ und $\sigma_{x_2}$ respektiv) und ohne Korrelation.
+
+\subsection*{Geradengleichung}
+\label{sub:Geradengleichung}
+Die Geradengleichung
+\begin{equation}
+    x=az+b\label{eqn:Geradengleichung}
+\end{equation}
+wird trivialerweise durch
+\begin{align}
+    a&=\frac{x_1-x_2}{z_1-z_2}\nonumber\\
+    b&=\frac{x_2 z_1 - x_1 z_2}{z_1-z_2}
+\end{align}
+eindeutig gelöst.
+Dargestellt über die Transformationsmatrix ist die Lösung
+\begin{equation}
+    \left(
+        \begin{array}{r}
+            a\\
+            b
+        \end{array}
+    \right)
+    = B \left(
+            \begin{array}{r}
+                x_1\\
+                x_2
+            \end{array}
+        \right)
+    \left(
+        \begin{array}{rr}
+            (z_1-z_2)^{-1}          & -(z_1-z_2)^{-1}\\
+            \frac{-z_2}{z_1-z_2}    & \frac{z_1}{z_1-z_2}
+        \end{array}
+    \right)
+    \left(
+        \begin{array}{r}
+        x_1\\
+        x_2
+        \end{array}
+    \right)
+\end{equation}
+mit der Kovarianzmatrix
+\begin{equation}
+    V(x)=
+    \left(
+        \begin{array}{rr}
+            \sigma_{x_1}^2 & 0\\
+            0 & \sigma_{x_2}^2
+        \end{array}
+    \right)
+\end{equation}
+Hieraus ergibt sich mit der Beziehung
+\begin{equation}
+    V(a,b)=BV(x)B^T
+\end{equation}
+die Kovarianzmatrix für die Parameter $a$ und $b$
+\begin{equation}
+    V(a,b)=
+    \left(
+        \begin{array}{rr}
+            \frac{\sigma_{x_1}^2+\sigma_{x_2}^2}{(z_1-z_2)^2} & -\frac{\sigma_{x_1}^2z_2+\sigma_{x_2}^2z_1}{(z_1-z_2)^2} \\
+            -\frac{\sigma_{x_1}^2z_2+\sigma_{x_2}^2z_1}{(z_1-z_2)^2} & \frac{\sigma_{x_1}^2z_2^2+\sigma_{x_2}^2z_1^2}{(z_1-z_2)^2}
+        \end{array}
+    \right)
+    = 
+    \left(
+        \begin{array}{rr}
+            \sigma_a^2 & \text{cov}(a,b)\\
+            \text{cov}(a,b) & \sigma_b^2
+        \end{array}
+    \right)
+\end{equation}
+und der Korrelationsparamter
+\begin{equation}
+    \rho = -\frac{\sigma_{x_1}^2z_2+\sigma_{x_2}^2z_1}{\sqrt{z_2^2\left(\sigma_{x_1}^4+\sigma_{x_1}^2\sigma_{x_2}^2 \right) + z_1^2\left(\sigma_{x_2}^4+\sigma_{x_1}^2\sigma_{x_2}^2 \right)}}
+\end{equation}
+
+\subsection*{Vorhersage}
+\label{sub:Vorhersage}
+Den Erwartungswert für eine Messung an einem dritten Detektor ($z_3$ und $x_3$ respektiv) setzten wir die Werte in die Gleichung \eqref{eqn:Geradengleichung} ein
+\begin{equation}
+    x_3=\frac{(x_1-x_2)z_3+x_2 z_1 - x_1 z_2}{z_1-z_2}
+\end{equation}
+Für die Berechnung des Fehlers benutzten wir wieder die Gleichung \eqref{eqn:mit_korr} und erhalten
+\begin{equation}
+    \sigma_{x_3}=\sqrt{z_3^2\sigma_a^2+\sigma_b^2+2 z_3 \text{cov}(a,b)}
+\end{equation}
+\subsection*{Weglassen der Korrelation}
+\label{sub:Weglassen der Korrelation}
+Wenn die Korrelation von $a$ und $b$ nicht berücksichtigt wird, ergibt sich stattdessen
+\begin{equation}
+    \sigma_{x_3}=\sqrt{z_3^2\sigma_a^2+\sigma_b^2}
+\end{equation}
+Da cov$(a,b) < 0$ ist, produziert diese Fehlerformel größere Fehler als die korrekte.
