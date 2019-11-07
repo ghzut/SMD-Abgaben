@@ -1,2 +1,39 @@
-\section{Aufgabe 3}
+\section*{Aufgabe 3: Stichprobenvarianz}
 \label{sec:Aufgabe3}
+
+\subsection*{Arithmetisches Mittel}
+\label{sub:Arithmetisches Mittel}
+Wird der Erwartungswert von
+\begin{equation}
+    \bar{x}=\frac{\sum_{i=1}^nx_i}{n}
+\end{equation}
+gebildet, ergibt sich
+\begin{equation}
+    \text{E}(\bar{x})=\text{E}\left(\frac{\sum_{i=1}^nx_i}{n}\right)=\frac{\sum_{i=1}^n\text{E}(x_i)}{n}=\frac{n\mu}{n}=\mu
+\end{equation}
+Das arithmetische Mittel ist somit erwartungstreu.
+
+\subsection*{Varianz}
+\label{sub:Varianz}
+Die Varianz von arithmetischen Mittel ist definiert als
+\begin{align}
+    \text{E}\left((\bar{x}-\mu)^2 \right)&=\text{Var}(\bar{x})=\text{Var}\left(\bar{x}=\frac{\sum_{i=1}^nx_i}{n}\right)\\
+    &=\bar{x}=\frac{\text{Var}\left(\sum_{i=1}^nx_i\right)}{n^2}=\bar{x}=\frac{\sum_{i=1}^n\text{Var}(x_i)}{n^2}\\
+    &=\frac{n\sigma^2}{n^2}=\frac{\sigma^2}{n}
+\end{align}
+Sie ist somit erwartungstreu.
+
+\subsection*{Schätzer 0-ter Art}
+\label{sub:Schätzer 0-ter Art}
+Von der Schätzfunktion für $\sigma^2$
+\begin{equation}
+    S_0^2=\frac{\sum_{i=1}^n(x_i-\mu)^2}{n}
+\end{equation}
+wird der Erwartungswert gebildet:
+\begin{align}
+    \text{E}(S_0^2)&=\frac{\text{E}\left(\sum_{i=1}^nx_i^2-2x_i\mu +\mu^2\right)}{n}\\
+    &=\frac{\sum_{i=1}^n\text{E}(x_i^2)-2\text{E}(x_i)\mu +\mu^2}{n}\\
+    &=\frac{n(\sigma^2+\mu^2)-2n\mu^2 +n\mu^2}{n}\\
+    &=\sigma^2
+\end{align}
+$S_0$ ist somit erwartungstreu.
