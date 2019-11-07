@@ -25,7 +25,7 @@ a_=a(dimension)
 plt.scatter(a_[0,:] , a_[1,:])
 plt.xlabel(r'$a_0$')
 plt.ylabel(r'$a_1$')
-plt.savefig("build/Aufgabe_21_b_1")
+plt.savefig("build/Aufgabe_21_b_1.pdf")
 plt.clf()
 
 def exakt(x):
@@ -41,6 +41,15 @@ plt.legend(loc="best")
 
 plt.savefig("build/Aufgabe_21_b_2.pdf")
 plt.clf()
+
+
+x=np.array([-3,0,3])
+for x_i in x:
+    y = a_[:, 0] + a_[:, 1] * x_i
+    print("Numerisch:")
+    print('x = ', x_i, ':\t y = ', np.mean(y), '+/-', np.std(y))
+    print("Exakt:")
+    print('x = ', x_i, ':\t y = ', 1+x_i, '+/-', exakt(x_i))
 
 #Aufgabe 22
 

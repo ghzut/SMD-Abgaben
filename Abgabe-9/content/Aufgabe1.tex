@@ -1,32 +1,62 @@
 \section*{Aufgabe 1: Fehlerfortpflanzung}
 \label{sec:Aufgabe1}
-\subsubsection*{Analytisch}
-\label{ssub:Analytisch}
-Ohne Korrelation
+Betrachtet wird die Ausgleichsgerade
+\begin{equation}
+    y=a_0+a_1x
+\end{equation}
+mit den Parametern
+\begin{align}
+    a_0&=1,0\pm 0,2\nonumber\\
+    a_1&=1,0\pm 0,2\nonumber\\
+    \rho = -0,8
+\end{align}
+\subsection*{Analytisch}
+\label{sub:Analytisch}
+Wird nun die Fehlerfortpflanzung auf $y$ ohne Korrelation errechnet ergibt sich Gleichung \eqref{eqn:ohne_korr}
 \begin{align}
     \sigma_y&=\sqrt{\sum_{i=1}^n\left(\frac{\partial y}{\partial x_i}\sigma_{x_i}\right)^2}\nonumber\\
             &=\sqrt{\left(1\cdot\sigma_{a_0}\right)^2+\left(x\sigma_{a_1}\right)^2}\nonumber\\
             &=0,2\sqrt{1+x^2}
+            \label{eqn:ohne_korr}
 \end{align}
-
-Mit Korrelation
+Mit Korrelation ergibt sich dann Gleichung \eqref{eqn:mit_korr}
 \begin{align}
     \sigma_y&=\sqrt{\sum_{i=1}^n\left(\frac{\partial y}{\partial x_i}\sigma_{x_i}\right)^2+2\sum_{i=1}^{n-1}\sum_{k=i+1}^{n}\left(\frac{\partial y}{\partial x_i}\right)\left(\frac{\partial y}{\partial x_k}\right)\cdot cov(x_i,x_k)}\nonumber\\
             &=\sqrt{0,04+0,04x^2+2 x (-0,8)\cdot 0,04}\nonumber\\
             &=0,2\sqrt{1+x^2-1,6x}
+            \label{eqn:mit_korr}
 \end{align}
 
-\subsection{Numerisch}
+\subsection*{Numerisch}
 \label{sub:Numerisch}
+Die Parameter können auch numerisch simuliert werden. Mit entsprechendem seed ergibt sich dann der Scatterplot \ref{fig:A_1_b_1}
 \begin{figure}
     \centering
     \includegraphics{build/Aufgabe_21_b_1.pdf}
     \caption{Scatterplot der Parameter $a_0$ und $a_1$}
     \label{fig:A_1_b_1}
 \end{figure}
+Mittels dieser simulierten Parametern kann dann die Unsicherheit von $y$ in Abhängigkeit von $x$, wie in Abbildung \ref{fig:A_1_b_2}, berechnen lassen.
 \begin{figure}
     \centering
     \includegraphics{build/Aufgabe_21_b_2.pdf}
     \caption{Plot der Unsicherheit von $y$ in Abhängigkeit von $x$}
     \label{fig:A_1_b_2}
 \end{figure}
+Anhand dieses Plot ist bereits erkennbar, dass die numerisch berechnete Unsicherheit für Werte weiter weg von $x=0$ sich immer stärker von der exakt berechneten unterscheidet.
+
+\subsection*{Auswertung an speziellen X}
+\label{sub:Auswertung an speziellen X}
+Werden aber Funktionswert mit Unsicherheit zusammen ausgewertet, ergibt sich, dass, auch wenn nicht identisch mit den exakten Werten,
+die numerischen Werte mit ihren Fehlerintervallen sich mit den Fehlerintervalle der exakten Werte überlappt.
+\begin{align}
+    x  &=  -3 :\nonumber\\
+        y_{\text{Numerisch}}    &=  -1,67 +/- 0,63\nonumber\\
+        y_{\text{Exakt}}        &=  -2 +/- 0,77\nonumber\\
+    x  &=  0 :\nonumber\\
+        y_{\text{Numerisch}}    &=  1,07 +/- 0,14\nonumber\\
+        y_{\text{Exakt}}        &=  1 +/- 0,2\nonumber\\
+    x  &=  3 :\nonumber\\
+        y_{\text{Numerisch}}    &=  3,82 +/- 0,35\nonumber\\
+        y_{\text{Exakt}}        &=  4 +/- 0,47\nonumber\\
+\end{align}
