@@ -1,0 +1,25 @@
+\section*{Aufgabe 19}
+\label{sec:Aufgabe1}
+\subsection*{a)}
+
+Die Kosten- oder Lossfunktion beschreibt, wie gut das Ergebnis einer verwendeten Klassifikation im Vergleich zur Wahrheit ist. Hohe Werte bedeuten eine schlechte Klassifikation, während niedrige wünschenswert sind.
+Daher ist es das Ziel diese Funktion zu minimieren.
+
+\subsection*{b)}
+
+Die Minimierung der Lossfunktion erfolgt durch Bildung des Gradienten dieser, um die bestmöglichen Gewichte zu bestimmen. Bei einer linearen Klassifikation wird beispielsweise dieser Gradient mit einer Schrittweite multipliziert und vom bestehenden Gewicht abgezogen. Dabei sind sowohl die Schrittweite, als auch die sinnvolle Initialisierung wichtig, in möglichst wenig Schritten gute Ergebnisse zu erzielen.
+
+\subsection*{c)}
+
+Eine Aktivierungsfunktion wird verwendet, um Problemstellungen zu lösen, bei denen Klassifikationen nötig sind, die komplexer als linear sind. Können außerdem entsprechend der zu erwartenden Outputwerte gewählt werden. Mögliche Beispiele:\\
+Sigmoid: $\sigma(x) = \frac{1}{e^{-x}+1} (\rightarrow \sigma\in [0,1])$;\\
+$g(x) = \tanh(x) (\rightarrow g\in [-1,1])$;\\
+RelU: $g(x) = \mathrm{max}(0,x) (\rightarrow g\in [0,\inf))$
+
+\subsection*{d)}
+Ein Neuron ist ein Knotenpunkt einer \glqq hidden layer\grqq eines DNN, der mit jedem Punkt der vorangegangenen, sowie der nachfolgenden Ebene verbunden ist.
+
+\subsection*{e)}
+Bilderkennung: Bei der Bilderkennung geht es um das vergleichen neuer Bilder mit vorhandenem Klassifikationsmaterial. Durch leichte Veränderungen (Helligkeit, Spiegelung, Schärfe...) lässt sich ein Trainings- und Testdatensatz zudem stark vergrößern.\\
+Teilchenidentifizierung und -rekonstruktion in Beschleunigerexperimenten: Anhand der gemessenen Eigenschaften der Teilchen sind Rückschlüsse auf die ursprünglichen Teilchen möglich. Ein DNN kann viele gemessene Input-Parameter zu einer Wahrscheinlichkeit für die Art des Teilchens zusammenfassen.\\
+Strukturen in großen Datenmengen finden, um die Suche nach neuer Physik zu unterstützen: Durch eine hohe Anzahl an Freiheitsgraden in den DNNs können komplexe Strukturen in erhobenen Messdaten gefunden werden.
