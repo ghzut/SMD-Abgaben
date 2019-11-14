@@ -1,9 +1,32 @@
 \section*{Aufgabe 1: \gamma-Astronomie}
 \label{sec:Aufgabe1}
-\subsection*{Erwartungswert}
+\subsection*{a) Erwartungswert}
 \label{sub:Erwartungswert}
 \begin{align}
     \left<N_{on}\right> &=\left<N_{signal}\right>+\left<N_{underground}\right>\nonumber\\
                         &=s + \frac{t_{on}}{t_{off}} \left<N_{off}\right>\nonumber\\
                         &=s+\alpha b
+\end{align}
+
+\subsection*{b) Verteilungen}
+\label{sub:Verteilungen}
+\begin{align}
+    P_{off}(N)&=P_{b}(N)\nonumber\\
+              &=\frac{b^N}{N!}e^{-b}
+\end{align}
+
+\begin{align}
+    P_{on}(N)&=P_{\alpha b+s}(N)\nonumber\\
+                       &=\frac{(\alpha b+s)^N}{N!}e^{-\alpha b-s}
+\end{align}
+
+\subsection*{c) Likelihood-Funktion}
+\label{sub:Likelihood-Funktion}
+\begin{align}
+    L(b,s)=\prod_{i=1}^n \frac{(\alpha b+s)^{N_i}}{{N_i}!}e^{-\alpha b-s}
+\end{align}
+\begin{align}
+    \mathcal{L}(b,s)&=\log(L)=\sum_{i=1}^n \log\left(\frac{(\alpha b+s)^{N_i}}{{N_i}!}e^{-\alpha b-s}\right)\nonumber\\
+                    &=\sum_{i=1}^n \log\left(\frac{(\alpha b+s)^{N_i}}{{N_i}!}\right)-\alpha b-s\nonumber\\
+                    &=n (-\alpha b-s)+ \sum_{i=1}^n \log\left(\frac{(\alpha b+s)^{N_i}}{{N_i}!}\right)
 \end{align}
