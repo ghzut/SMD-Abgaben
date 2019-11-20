@@ -23,10 +23,39 @@
 \subsection*{c) Likelihood-Funktion}
 \label{sub:Likelihood-Funktion}
 \begin{align}
-    L(b,s)=\prod_{i=1}^n \frac{(\alpha b+s)^{N_i}}{{N_i}!}e^{-\alpha b-s}
+    L_{off} (b)=\prod_{i=1}^n \frac{b^{N_i}}{{N_i}!}e^{-b}
 \end{align}
 \begin{align}
-    \mathcal{L}(b,s)&=\log(L)=\sum_{i=1}^n \log\left(\frac{(\alpha b+s)^{N_i}}{{N_i}!}e^{-\alpha b-s}\right)\nonumber\\
+    \mathcal{L}_{off}(b)&=\log(L)=\sum_{i=1}^n \log\left(\frac{(b)^{N_i}}{{N_i}!}e^{-b}\right)\nonumber\\
+                    &=\sum_{i=1}^n \log\left(\frac{(b)^{N_i}}{{N_i}!}\right)-b\nonumber\\
+                    &=n b+ \sum_{i=1}^n N_i\log\left(b\right) -\log(N_i!)
+\end{align}
+\begin{align}
+    L_{on} (b,s)=\prod_{i=1}^n \frac{(\alpha b+s)^{N_i}}{{N_i}!}e^{-\alpha b-s}
+\end{align}
+\begin{align}
+    \mathcal{L}_{on}(b,s)&=\log(L)=\sum_{i=1}^n \log\left(\frac{(\alpha b+s)^{N_i}}{{N_i}!}e^{-\alpha b-s}\right)\nonumber\\
                     &=\sum_{i=1}^n \log\left(\frac{(\alpha b+s)^{N_i}}{{N_i}!}\right)-\alpha b-s\nonumber\\
-                    &=n (-\alpha b-s)+ \sum_{i=1}^n \log\left(\frac{(\alpha b+s)^{N_i}}{{N_i}!}\right)
+                    &=n (-\alpha b-s)+ \sum_{i=1}^n N_i\log\left(\alpha b+s\right) -\log(N_i!)
+\end{align}
+
+\subsection*{d) Maximierung von L}
+\label{sub:Maximierung von L}
+Zur Maximierung von L setzten wir den Gradienten von L auf $0$
+\begin{align}
+    0=\nabla \mathcal{L}&=\left(\begin{matrix}
+        \left(-n+\sum_{i=1}^n N_i b^{-1}\right)\alpha\\
+        -n +\sum_{i=1}^n N_i b^{-1}
+    \end{matrix}\right)\nonumber\\
+    \rightarrow 0&=-n+\sum_{i=1}^n N_ib^{-1}\nonumber\\
+                b&=\sum_{i=1}^n N_i n^{-1}=\overline{N_{off}}
+\end{align}
+
+\begin{align}
+    0=\nabla \mathcal{L}&=\left(\begin{matrix}
+        \left(-n+\sum_{i=1}^n N_i(\alpha b + s)^{-1}\right)\alpha\\
+        -n +\sum_{i=1}^n N_i (\alpha b +s)^{-1}
+    \end{matrix}\right)\nonumber\\
+    \rightarrow 0&=-n+\sum_{i=1}^n N_i(\alpha b + s)^{-1}\nonumber\\
+                s&=\sum_{i=1}^n N_i n^{-1}-\alpha b=\overline{N_{on}}-\alpha b
 \end{align}
