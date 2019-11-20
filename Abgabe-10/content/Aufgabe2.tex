@@ -1,2 +1,23 @@
-\section*{Aufgabe 2}
+\section*{Aufgabe 2: Maximum-Likelihood}
 \label{sec:Aufgabe2}
+
+\subsection*{a) Schätzer}
+\label{sub:Schätzer}
+Ein Schätzer für den Parameter $b$ der Gleichverteilung
+\begin{equation}
+    f(x)=\begin{cases}
+        b^{-1} &0\leq x \leq b\\
+        0&\text{sonst}
+    \end{cases}
+\end{equation}
+ist
+\begin{equation}
+    b=\text{max}(x_i)
+    \label{eqn:Schätzer}
+\end{equation}
+
+\subsection*{b) Erwartungstreue}
+\label{sub:Erwartungstreue}
+Für $n\rightarrow \inf$ ist zu erwarten, dass jeder mögliche Wert gewürfelt wird.
+Das bedeutet insbesondere, dass $x=b$ gewürfelt wird.
+Da $x=b$ der höchstmögliche Wert ist, ist die Gleichung \eqref{eqn:Schätzer} ein erwartungstreuer Schätzer.
