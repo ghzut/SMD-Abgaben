@@ -14,6 +14,19 @@ import numpy.random as rand
 
 
 #Aufgabe 29
+L_1 = np.array([0.13,1.5,0.5])
+L_2 = np.array([2.0,0.5,0.05])
+L_3 = np.array([0.07,0.5,1.3])
+prior = np.array([0.8,0.1,0.1])
+
+def posterior(L):
+    return L*prior/np.sum(L*prior)
+
+print("Aufgabe 29:")
+print("Pion, Kaon, Proton")
+print(posterior(L_1))
+print(posterior(L_2))
+print(posterior(L_3))
 
 #Aufgabe 30
 

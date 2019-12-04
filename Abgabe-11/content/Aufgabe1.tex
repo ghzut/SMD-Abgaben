@@ -1,50 +1,41 @@
 \section*{Aufgabe 1: Teilchenidentifikation}
 \label{sec:Aufgabe1}
-Aus dem Likelihood-Quotienten-Test
-\begin{equation}
-    \Lambda(X):=\frac{\sup_{\Theta\in\Theta_0}L(X|\Theta)}{\sup_{\Theta\in\Theta_1}L(X|\Theta)}
-\end{equation}
-lässt sich für unseren Fall eine Wahrscheinlichkeit herleiten (unter der Annahme, dass nur die gegebenen Teilchen auftreten können):
-\begin{equation}
-    P_{Likelihood}(X)=\frac{\Lambda(X)}{\sum_{i\in\Theta}\Lambda(i)}
-\end{equation}
-Mithilfe der $Prior$-Information
+Unter der Annahme, dass unsere Likelihood $L$ gegeben ist,
+kann mithilfe der $Prior$-Information
 \begin{align}
     P_{Prior}(X)=\begin{cases}
         10\%, & X\in[\pi,p] \\
         80\%, & X = K\\
     \end{cases}
 \end{align}
-lässt sich dann auch eine Abschätzung von Fehlern 1. und 2. Art machen.
-\begin{align}
-    P_{\text{1. Art}}(X)&=P_{Likelihood}(i\neq X)P_{Prior}(X)\nonumber\\
-    P_{\text{2. Art}}(X)&=P_{Likelihood}(X)P_{Prior}(i\neq X)
-\end{align}
-Diese werden wir im Folgenden jedoch nicht benötigen.
-
+dann die posterior-Wahrscheinlichkeit mit der Beziehung
+\begin{equation}
+    P_{posterior}\sim LP_{prior}
+\end{equation}
+hergeleitet werden.
 \subsection*{a)}
 \begin{equation}
     P_{Likelihood}(X)=\begin{cases}
-        2,53\%   & X=\pi\\
-        87,72\%  & X=K\\
-        9,75\%   & X=p\\
+        34,21\%   & X=\pi\\
+        49,34\%   & X=K\\
+        16,45\%   & X=p\\
     \end{cases}
 \end{equation}
 
 \subsection*{b)}
 \begin{equation}
     P_{Likelihood}(X)=\begin{cases}
-        93,57\%   & X=\pi\\
-        5,85\%    & X=K\\
-        0,58\%    & X=p\\
+        96,68\%   & X=\pi\\
+        3,02\%    & X=K\\
+        0,30\%    & X=p\\
     \end{cases}
 \end{equation}
 
 \subsection*{c)}
 \begin{equation}
     P_{Likelihood}(X)=\begin{cases}
-        1,77\%   & X=\pi\\
-        12,67\%  & X=K\\
-        85,57\%  & X=p\\
+        23,73\%  & X=\pi\\
+        21,19\%  & X=K\\
+        55,08\%  & X=p\\
     \end{cases}
 \end{equation}
