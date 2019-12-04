@@ -1,2 +1,81 @@
-\section*{Aufgabe 3}
+\section*{Aufgabe 3: Ballon-Experiment}
 \label{sec:Aufgabe3}
+\subsection*{a) Konstanter Fluss}
+\begin{equation}
+    P(N,T,\mu)=\frac{\mu^N}{N!}e^{-\mu}
+\end{equation}
+
+\begin{equation}
+    L({N},\mu)=\prod_{i=1}^n \frac{\mu^{N_i}}{N_i!}e^{-\mu}
+\end{equation}
+
+\begin{equation}
+    \mathcal{L}=\sum_{i=1}^n N_i\log(\mu)-\log(N_i!)-\mu
+\end{equation}
+
+\begin{align}
+    0=\frac{\partial \mathcal{L}}{\partial \mu}&=
+                \sum_{i=1}^n \left(\frac{N_i}{\mu}-1\right)\nonumber\\
+    \mu&=\sum_{i=1}^n \frac{N_i}{n}=\overline{N}\nonumber\\
+       &=4218,0
+\end{align}
+
+%\begin{align}
+%    L&=\prod_{i=1}^n \frac{\overline{N}^{N_i}}{N_i!}e^{-\overline{N}}\nonumber\\
+%     &=
+%\end{align}
+
+\subsection*{b) Lineares Modell}
+
+\begin{equation}
+    P(N,T,N_0,A)=\frac{(N_0+AT)^N}{N!}e^{-(N_0+AT)}
+\end{equation}
+
+\begin{equation}
+    L({N},{T},N_0,A)=\prod_{i=1}^n \frac{(N_0+AT_i)^{N_i}}{N_i!}e^{-(N_0+AT_i)}
+\end{equation}
+
+\begin{equation}
+    \mathcal{L}=\sum_{i=1}^n N_i\log(N_0+AT_i)-\log(N_i!)-(N_0+AT_i)
+\end{equation}
+
+%\begin{align}
+%    \frac{\partial\mathcal{L}}{\partial N_0} &= \sum_{i=1}^n \frac{N_i}{N_0+AT_i}-1\\
+%    \frac{\partial\mathcal{L}}{\partial A}   &= \sum_{i=1}^n \frac{N_iT_i}{N_0+AT_i}-T_i\\
+%\end{align}
+\begin{align}
+    N_0 &= 4131,33\\
+    A   &= 21,67
+\end{align}
+
+\begin{figure}
+    \centering
+    \includegraphics{build/Ballon.pdf}
+    \caption{Konstantes und lineares Modell an den Messdaten}
+    \label{fig:Ballon}
+\end{figure}
+\subsection*{c) Signifikanz}
+\begin{equation}
+    \Lambda=\frac{L_{konstant}}{L_{linear}}=\prod_{i=1}^n \left(\frac{\mu}{N_0+AT_i}\right)^{N_i} e^{-\mu+N_0+AT_i}
+\end{equation}
+\begin{align}
+    -2\log(\Lambda)=3,118
+\end{align}
+
+\subsection*{d) Weiterer Datenpunkt}
+\begin{equation}
+    \mu=4241,0
+\end{equation}
+\begin{align}
+    N_0 &= 4140,1\\
+    A   &= 29,22
+\end{align}
+\begin{figure}
+    \centering
+    \includegraphics{build/Ballon_2.pdf}
+    \caption{Konstantes und lineares Modell an erweiterten Messdaten}
+    \label{fig:Ballon_2}
+\end{figure}
+\begin{equation}
+    -2\log(\Lambda)=9,976
+\end{equation}
