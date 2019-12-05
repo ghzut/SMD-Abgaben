@@ -1,18 +1,19 @@
 \section*{Aufgabe 3: Ballon-Experiment}
 \label{sec:Aufgabe3}
 \subsection*{a) Konstanter Fluss}
+Die Anzahl der gemessenen Ereignisse folgt einer Poisson-Verteilung mit dem Erwartungswert $\mu$
 \begin{equation}
     P(N,T,\mu)=\frac{\mu^N}{N!}e^{-\mu}
 \end{equation}
-
+Die Likelihood von $\mu$ gegeben unserer Menge an Messungen $\{N\}$ folgt als
 \begin{equation}
-    L({N},\mu)=\prod_{i=1}^n \frac{\mu^{N_i}}{N_i!}e^{-\mu}
+    L(\{N\},\mu)=\prod_{i=1}^n \frac{\mu^{N_i}}{N_i!}e^{-\mu}
 \end{equation}
-
+Wenn diese nun logarithmiert wird ergibt sich
 \begin{equation}
     \mathcal{L}=\sum_{i=1}^n N_i\log(\mu)-\log(N_i!)-\mu
 \end{equation}
-
+Um diese zu maximieren muss ihre Ableitung gleich null gesetzt werden und man erhält als Ergebnis
 \begin{align}
     0=\frac{\partial \mathcal{L}}{\partial \mu}&=
                 \sum_{i=1}^n \left(\frac{N_i}{\mu}-1\right)\nonumber\\
@@ -26,19 +27,20 @@
 %\end{align}
 
 \subsection*{b) Lineares Modell}
-
+Wird nun statt eines konstaten Flusses ein linear ansteigender Fluss angenommen wird der Parameter $\mu$ durch $N_0+AT$ ersetzt ($T$ ist hierbei der Tag an welchem gemessen wurde)
+und ergibt sich die neue Wahrscheinlichkeitsverteilung
 \begin{equation}
     P(N,T,N_0,A)=\frac{(N_0+AT)^N}{N!}e^{-(N_0+AT)}
 \end{equation}
-
+sowie die Likelihood
 \begin{equation}
-    L({N},{T},N_0,A)=\prod_{i=1}^n \frac{(N_0+AT_i)^{N_i}}{N_i!}e^{-(N_0+AT_i)}
+    L(\{N\},\{T\},N_0,A)=\prod_{i=1}^n \frac{(N_0+AT_i)^{N_i}}{N_i!}e^{-(N_0+AT_i)}
 \end{equation}
-
+, als  auch die Log-Likelihood
 \begin{equation}
     \mathcal{L}=\sum_{i=1}^n N_i\log(N_0+AT_i)-\log(N_i!)-(N_0+AT_i)
 \end{equation}
-
+Wird diese numerisch maximiert (siehe python-script) ergeben sich die Parameter
 %\begin{align}
 %    \frac{\partial\mathcal{L}}{\partial N_0} &= \sum_{i=1}^n \frac{N_i}{N_0+AT_i}-1\\
 %    \frac{\partial\mathcal{L}}{\partial A}   &= \sum_{i=1}^n \frac{N_iT_i}{N_0+AT_i}-T_i\\
@@ -47,7 +49,7 @@
     N_0 &= 4131,33\\
     A   &= 21,67
 \end{align}
-
+Beide Parametrisierungen sind in Abbildung \ref{fig:Ballon} dargestellt.
 \begin{figure}
     \centering
     \includegraphics{build/Ballon.pdf}
@@ -55,27 +57,35 @@
     \label{fig:Ballon}
 \end{figure}
 \subsection*{c) Signifikanz}
+Es kann nun der Likelihood-Quotient
 \begin{equation}
     \Lambda=\frac{L_{konstant}}{L_{linear}}=\prod_{i=1}^n \left(\frac{\mu}{N_0+AT_i}\right)^{N_i} e^{-\mu+N_0+AT_i}
 \end{equation}
+gebildet werden und daraus die $\chi^2$-verteilte Grösse
 \begin{align}
     -2\log(\Lambda)=3,118
 \end{align}
+berechnet werden. Der Vergleich mit einer Tabelle ergibt eine Signifikanz von etwa $5\%$.
 
 \subsection*{d) Weiterer Datenpunkt}
+Wird nun der zusätzliche Datenpunkt eingefügt ergben sich die Parameter
 \begin{equation}
     \mu=4241,0
 \end{equation}
+und
 \begin{align}
     N_0 &= 4140,1\\
     A   &= 29,22
 \end{align}
+, sowie die Abbildung \ref{fig:Ballon_2}.
 \begin{figure}
     \centering
     \includegraphics{build/Ballon_2.pdf}
     \caption{Konstantes und lineares Modell an erweiterten Messdaten}
     \label{fig:Ballon_2}
 \end{figure}
+Es ergibt sich des weiteren
 \begin{equation}
     -2\log(\Lambda)=9,976
 \end{equation}
+, was einer Signifikanz von knapp $0,1\%$ entspricht.
