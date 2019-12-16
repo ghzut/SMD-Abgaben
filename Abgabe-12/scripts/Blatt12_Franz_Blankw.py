@@ -12,3 +12,6 @@ import numpy.random as rand
 #from sklearn.datasets import make_blobs as m_b
 #from sklearn.decomposition import PCA
 
+#Aufgabe 35
+
+#Aufgabe 36

@@ -14,14 +14,44 @@
 
 \subsection*{b)}
 \begin{equation}
-    \mathbf{A}^{-1} = \frac{1}{2x-1} \left(\begin{matrix}
+    \mathbf{A}^{-1} = \frac{1}{2\epsilon-1} \left(\begin{matrix}
                     \epsilon - 1 & \epsilon\\
                     \epsilon     & \epsilon - 1
                  \end{matrix}\right)
 \end{equation}
 \begin{equation}
-    \mathbf{f} = \frac{1}{2x-1} \left(\begin{matrix}
+    \mathbf{f} = \frac{1}{2\epsilon-1} \left(\begin{matrix}
                     \epsilon - 1 & \epsilon\\
                     \epsilon     & \epsilon - 1
                  \end{matrix}\right) \mathbf{g}
 \end{equation}
+
+\subsection*{c)}
+\begin{align}
+    \mathbf{V}[\mathbf{f}]
+        &=  \mathbf{A^{-1}V}[\mathbf{g}]\mathbf{\left(A^{-1}\right)^T}\nonumber\\
+        &=  \frac{1}{2\epsilon-1} \left(\begin{matrix}
+                    \epsilon - 1 & \epsilon\\
+                    \epsilon     & \epsilon - 1
+                 \end{matrix}\right)
+            \left(\begin{matrix}
+                \sigma_{g_1}^2 & 0\\
+                0 & \sigma_{g_2}^2
+            \end{matrix} \right)
+            \frac{1}{2\epsilon-1} \left(\begin{matrix}
+                    \epsilon - 1 & \epsilon\\
+                    \epsilon     & \epsilon - 1
+                 \end{matrix}\right)\nonumber\\
+        &=  \frac{1}{(2\epsilon-1)^2} \left(\begin{matrix}
+                \epsilon -1 & \epsilon\\
+                \epsilon & \epsilon -1
+            \end{matrix} \right)
+            \left(\begin{matrix}
+                (\epsilon-1)\sigma_{g_1}^2 & \epsilon \sigma_{g_1}^2\\
+                \epsilon \sigma_{g_2}^2 & (\epsilon-1)\sigma_{g_2}^2
+            \end{matrix} \right)\nonumber\\
+        &=  \frac{1}{(2\epsilon-1)^2} \left(\begin{matrix}
+                (\epsilon-1)^2\sigma_{g_1}^2 + \epsilon^2 \sigma_{g_2}^2 & \epsilon (\epsilon-1) (\sigma_{g_2}^2+\sigma_{g_1}^2)\\
+                \epsilon (\epsilon-1) (\sigma_{g_2}^2+\sigma_{g_1}^2) & (\epsilon-1)^2\sigma_{g_2}^2 + \epsilon^2 \sigma_{g_1}^2
+            \end{matrix} \right)
+\end{align}
