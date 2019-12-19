@@ -1,2 +1,49 @@
-\section*{Aufgabe 32}
+\section*{Aufgabe 32: Entfaltung mit einer quadratischen Matrix}
 \label{sec:Aufgabe4}
+\subsection*{a)}
+Die Matrix ${A}$ beschreibt einen direkten, in $n$ Bins gebinnten, Messprozess,
+bei dem die einzelnen Messungen mit einer Wahrscheinlichkeit $\epsilon$ im falschen Bin landen können.
+
+\subsection*{b)}
+Werden nun die wahren Werte von ${f}$ mit der Matrix ${A}$ gefaltet, ergeben sich die Erwartungswerte der Messung
+\begin{align}
+    {g} = &[260,16,\; 459,01,\; 645,6,\; 749,66,\; 794,8,\;  798,79,\; 775,09,\; 733,93,\; 682,62,\; 625,54,\nonumber\\
+        &566,46,\; 508,46,\; 452,92,\; 400,69,\; 352,38,\; 308,69,\; 269,15,\; 233,92,\; 202,46,\; 179,67]
+\end{align}
+
+\subsection*{c)}
+\begin{equation}
+    U^{-1} g = D U^{-1} f
+\end{equation}
+mit $c=U^{-1} g$ und $b=U^{-1} f$ ergibt sich dann die Faltungsgleichung
+\begin{equation}
+    c = D b
+\end{equation}
+Da D diagonal ist werden alle Einträge unabhängig transformiert
+\begin{align}
+    c_i &= \lambda_i b_i\\
+    b_i &= \frac{c_i}{\lambda_i}
+\end{align}
+und alle Einträge, die mit einem zu kleinen Eigenwert transformiert werden, können abgeschnitten werden.
+
+\subsection*{d)}
+Es werden nun eine Messungen von $g$ mittels einer Poisson-Verteilung simuliert.
+Diese werden dann nach $b$ transformiert und auf ihre Standardabweichung normiert und sind in Abbildung \ref{fig:A36d} geplottet.
+Die Werte, die betragsmässig unter $1$ liegen haben eine grössere Standardabweichung als ihr eigentlicher Wert.
+Sie sind somit nicht wirklich zu gebrauchen, da ihre Unsicherheit viel zu gross ist.
+\begin{figure}
+    \centering
+    \includegraphics{build/A36d.pdf}
+    \caption{Auf ihre Standardabweichung normierten Koeffizienten der gemessenen $b_j$ gegenüber ihrem Index $j$ in logarithmischer Darstellung}
+    \label{fig:A36d}
+\end{figure}
+
+\subsection*{e)}
+Werden nun die Koeffizienten $b_j$ wieder auf $f$ transformiert, in Abbildung \ref{fig:A36e}, ist eine Oszillation der Messung um den wahren Wert zu erkennen.
+Wird nun regularisiert (hier: alle $b_j$ ab $j=10$ auf $0$ gesetzt), kann dieser Effekt unterdrückt werden.
+\begin{figure}
+    \centering
+    \includegraphics{build/A36e.pdf}
+    \caption{Die regularisierten und nicht-regularisierten $f_{mess}$-Punkte (Zum Vergleich die wahre Verteilung $f_{wahr}$)}
+    \label{fig:A36e}
+\end{figure}
