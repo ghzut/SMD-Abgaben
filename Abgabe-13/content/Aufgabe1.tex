@@ -1,2 +1,44 @@
-\section*{Aufgabe 1: Teilchenidentifikation}
+\section*{Aufgabe 37: Entfaltung: Implementierung}
 \label{sec:Aufgabe1}
+
+\subsection*{c)}
+
+\begin{equation}
+    f = A^{-1}\mu_g
+\end{equation}
+
+\begin{align}
+    \mathcal{L} &= \prod_{i=1}^n \frac{\mu_{g,i}^{g_i}}{g_i!}e^{-\mu_{g,i}}\nonumber\\
+                &= \prod_{i=1}^n \frac{\left(Af\right)_i^{g_i}}{g_i!}e^{-\left(Af\right)_i}
+\end{align}
+
+\begin{align}
+    -\log\left(\mathcal{L}\right) &= \sum_{i=1}^n -g_i \log\left(Af\right)_i + \left(Af\right)_i + \log\left(g_i!\right)
+\end{align}
+
+\begin{equation}
+    \left(Af\right)_i = \sum_{j=1}^m A_{ij}f_j
+\end{equation}
+
+\begin{equation}
+    -\log\left(\mathcal{L}\right) = \sum_{i=1}^n -g_i \log\left(\sum_{j=1}^m A_{ij}f_j\right) + \sum_{j=1}^m A_{ij}f_j + \log\left(g_i!\right)
+\end{equation}
+\subsection*{d)}
+
+\begin{equation}
+    -\log\left(\mathcal{L}\right) = \sum_{i=1}^n -g_i \log\left(\sum_{j=1}^m A_{ij}f_j\right) + \sum_{j=1}^m A_{ij}f_j + \log\left(g_i!\right) + \frac{\tau}{2}||\Gamma f||^2
+\end{equation}
+
+\begin{align}
+    \left(\left(\nabla\left(-\log\left(\mathcal{L}\right)\right)\right)\left(f\right)\right)_k &= \frac{\partial \left(-\log\left(\mathcal{L}\right)\right)}{\partial f_k}\nonumber\\
+                                        &= \sum_{i=1}^n -g_i \left(\sum_{j=1}^m A_{ij}f_j\right)^{-1}\sum_{j=1}^m A_{ij}\delta_{jk} + \sum_{j=1}^m A_{ij}\delta_{jk} + \frac{\tau}{2} \alpha^2 2f_i \delta_{ik}\nonumber\nonumber\\
+                                        &= \tau \alpha^2 f_k + \sum_{i=1}^n -g_i \left(\sum_{j=1}^m A_{ij}f_j\right)^{-1} A_{ik} + A_{ik} \nonumber\\
+                                        &= \tau \alpha^2 f_k + \sum_{i=1}^n A_{ik} \left(1-\frac{g_i}{\sum_{j=1}^m A_{ij}f_j}\right)
+\end{align}
+
+\begin{align}
+    \left(H[-\log\left(\mathcal{L}\right)]\left(f\right)\right)_{kl} &= \frac{\partial^2 \left(-\log\left(\mathcal{L}\right)\right)}{\partial f_k \partial f_l}\nonumber\\
+                                    &= \frac{\partial \left(\tau \alpha^2 f_k + \sum_{i=1}^n A_{ik} \left(1-\frac{g_i}{\sum_{j=1}^m A_{ij}f_j}\right)\right)}{\partial f_l}\nonumber\\
+                                    &= \tau \alpha^2 \delta_{kl} + \sum_{i=1}^n \frac{A_{ik}g_i}{\left(\sum_{j=1}^m A_{ij}f_j\right)^2}\sum_{j=1}^m A_{ij}\delta_{jl}\nonumber\\
+                                    &= \tau \alpha^2 \delta_{kl} + \sum_{i=1}^n \frac{A_{ik}g_iA_{il}}{\left(\sum_{j=1}^m A_{ij}f_j\right)^2}
+\end{align}
