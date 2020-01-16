@@ -1,12 +1,30 @@
 \section*{Aufgabe 37: Entfaltung: Implementierung}
 \label{sec:Aufgabe1}
 
-\subsection*{c)}
+\subsection*{a)}
+\begin{figure}
+    \centering
+    \includegraphics{build/Attribute.pdf}
+    \caption{Alle ausgelesenen Attribute gegen der Energie}
+    \label{fig:Attribute}
+\end{figure}
+Aus Abbildung \ref{fig:Attribute} ist klar erkennbar, dass $Size$ am besten mit der Energie korreliert.
 
+\subsection*{b)}
+\begin{figure}
+    \centering
+    \includegraphics{build/A.pdf}
+    \caption{Die Migrationsmatrix $A$}
+    \label{fig:A}
+\end{figure}
+
+
+\subsection*{c)}
+Mittels des Zusammenhangs
 \begin{equation}
     f = A^{-1}\mu_g
 \end{equation}
-
+kann die Likelihood-Funktion (und deren Logarithmus) aufgestellt werden.
 \begin{align}
     \mathcal{L} &= \prod_{i=1}^n \frac{\mu_{g,i}^{g_i}}{g_i!}e^{-\mu_{g,i}}\nonumber\\
                 &= \prod_{i=1}^n \frac{\left(Af\right)_i^{g_i}}{g_i!}e^{-\left(Af\right)_i}
@@ -15,20 +33,21 @@
 \begin{align}
     -\log\left(\mathcal{L}\right) &= \sum_{i=1}^n -g_i \log\left(Af\right)_i + \left(Af\right)_i + \log\left(g_i!\right)
 \end{align}
-
+Mit der Gleichung
 \begin{equation}
     \left(Af\right)_i = \sum_{j=1}^m A_{ij}f_j
 \end{equation}
-
+kann es vollständig durch die einzelnen Komponenten $f$'s ausgedrückt werden.
 \begin{equation}
     -\log\left(\mathcal{L}\right) = \sum_{i=1}^n -g_i \log\left(\sum_{j=1}^m A_{ij}f_j\right) + \sum_{j=1}^m A_{ij}f_j + \log\left(g_i!\right)
 \end{equation}
-\subsection*{d)}
 
+\subsection*{d)}
+Fügt man nun den Term $\frac{\tau}{2}||\Gamma f||^2$ (hier wurde $\Gamma=\mathbf{1}_{m\times m}$ gewählt) erhält man
 \begin{equation}
     -\log\left(\mathcal{L}\right) = \sum_{i=1}^n -g_i \log\left(\sum_{j=1}^m A_{ij}f_j\right) + \sum_{j=1}^m A_{ij}f_j + \log\left(g_i!\right) + \frac{\tau}{2}||\Gamma f||^2
 \end{equation}
-
+Hieraus können nun die folgenden Ableitungen gebildet werden.
 \begin{align}
     \left(\left(\nabla\left(-\log\left(\mathcal{L}\right)\right)\right)\left(f\right)\right)_k &= \frac{\partial \left(-\log\left(\mathcal{L}\right)\right)}{\partial f_k}\nonumber\\
                                         &= \sum_{i=1}^n -g_i \left(\sum_{j=1}^m A_{ij}f_j\right)^{-1}\sum_{j=1}^m A_{ij}\delta_{jk} + \sum_{j=1}^m A_{ij}\delta_{jk} + \frac{\tau}{2} \alpha^2 2f_i \delta_{ik}\nonumber\nonumber\\
@@ -42,3 +61,11 @@
                                     &= \tau \alpha^2 \delta_{kl} + \sum_{i=1}^n \frac{A_{ik}g_i}{\left(\sum_{j=1}^m A_{ij}f_j\right)^2}\sum_{j=1}^m A_{ij}\delta_{jl}\nonumber\\
                                     &= \tau \alpha^2 \delta_{kl} + \sum_{i=1}^n \frac{A_{ik}g_iA_{il}}{\left(\sum_{j=1}^m A_{ij}f_j\right)^2}
 \end{align}
+
+\subsection*{f)}
+\begin{figure}
+    \centering
+    \includegraphics{build/entfaltet.pdf}
+    \caption{Die Entfaltung des Testdatensatzes in Abhängigkeit für mehrere Regularisierungsfaktoren $\tau$}
+    \label{fig:test}
+\end{figure}
